@@ -1,0 +1,291 @@
+﻿
+@{
+    ViewData["Title"] = "Course_List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style{
+    <style>
+        .calendat-19 {
+            position: relative;
+            padding-top: 30px;
+            padding-right:30px;
+            padding-left:30px;
+            padding-bottom:20px;
+            background-color: rgb(255,255,255);
+            width: 1200px;
+            height: 650px;
+            border-bottom-right-radius: 30px;
+            border-bottom-left-radius: 30px;
+        }
+        .calendatHeader-19 {
+            width: 1200px;
+            height: 50px;
+            border-top-left-radius: 30px;
+            border-top-right-radius:30px;
+            background-color: #FFA500;
+        }
+        .fc-timegrid-slot-lane:hover {
+            background-color: #FCFCFC;
+        }
+        body .fc {
+            font-size: 20px;
+        }
+        .CourseDetail label{
+            font-size:20px;
+            color:black;
+            font-weight:bold;
+        }
+        .CourseDetail p {
+            font-size: 16px;
+            color: black;
+        }
+/*        #hinet {
+            list-style-type:disc;
+        }*/
+/*        #hinet li{
+            float: right;
+        }*/
+    </style>
+}
+
+
+<!-- Class Timetable Section Begin -->
+<section class="contact-section  spad-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div style="float:right">
+                    <a id="CreateClass" style="color:white;font-size:20px;" class="btn btn-primary">+新增班級</a>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:20px;">
+            <div class="col-12">
+                <div class="calendatHeader-19">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="calendat-19">
+                    <div id='calendar'></div>
+                    <div id="dialogLessonDetail" class="CourseDetail" title="課程詳細">
+                        <label>班級名稱:</label><p id="courseName" styl></p>
+                        <label>教室:</label><p id="ClassRoomName"></p>
+                        <label>學生:</label> <label style="color:blue">●打卡完成　</label><label style="color:red">●請假　</label>
+                        <div id="partialDetail"></div>
+                    </div>
+                    <div id="dialogLesson" title="安排班級時間">
+                        <form name="LessonForm">
+                            <div class="form-group">
+                                <label class="control-label">班級名稱</label>
+                                <select id="ClassSelect" style="width:300px;height:40px" name="ClassId"></select>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">時間</label><br />
+                                <input id="courseTime" name="courseTime" readonly="readonly">
+                            </div>
+                            <div class="p-t-20 pull-right" style="float:right">
+                                <input type="button" value="確定" id="AddLesson" class="btn btn-warning" style="font-weight:900" />
+                            </div>
+                        </form>
+                    </div>
+                    <div id="dialog" title="新增班級">
+                        <form name="ClassForm">
+                            <div class="form-group" style="font-size:20px;">
+                                <label class="control-label">課程分類</label><br />
+                                <select id="detailSelect" class="form-select" name="CourseDetail"></select>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">班級名稱</label>
+                                <input id="ClassName" class="form-control" style="width: 300px; height: 40px; border: 1px solid #6C6C6C " name="ClassName" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">課程方案</label>
+                                <select id="planSelect" style="width:300px;height:40px" name="CoursePlan"></select>
+                            </div>
+                            <div class="p-t-20 pull-right" style="float:right">
+                                <input type="button" id="demoCourse" value="Demo" class="btn btn-warning" style="font-weight:900" />
+                                <input type="button" value="確定" id="OK" class="btn btn-warning" style="font-weight:900" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Class Timetable Section End -->
+@section Scripts{
+    <link href="~/js/CoachCourse/jquery-ui.min.css" rel="stylesheet" />
+    <script src="~/js/CoachCourse/jquery-ui.min.js"></script>
+
+    <script src="~/js/CoachCourse/main.js"></script>
+    <link href="~/js/CoachCourse/main.css" rel="stylesheet" />
+    <script src="~/js/CoachCourse/locales-all.js"></script>
+    <script>
+        $(function () {
+            $("#dialogLesson").hide();
+            $("#dialog").hide();
+            $("#dialogLessonDetail").hide();
+        });
+
+
+        var initial = "listWeek";
+        const ClassSelect = document.querySelector("#ClassSelect");
+        const detailSelect = document.querySelector('#detailSelect');
+        const planSelect = document.querySelector('#planSelect');
+        async function Load() {
+            const detailResponse = await fetch('@Url.Content("~/BackApi/detailSelect?CourseCategoryId=4")')
+            const detailDatas = await detailResponse.json()
+            //console.log(detailDatas)
+            renderdetailSelect(detailDatas)
+
+            const classResponse = await fetch('@Url.Content("~/api/selectClass/4")')
+            const classDatas = await classResponse.json()
+            renderClassSelect(classDatas)
+
+            //planSelect
+            const planResponse = await fetch('@Url.Content("~/BackApi/planSelect")')
+            const planDatas = await planResponse.json()
+            renderplanSelect(planDatas)
+        }
+        Load();
+
+        function renderdetailSelect(datas) {
+            detailSelect.options.length = 0;
+            const opt0 = new Option('　請選擇')
+            detailSelect.options.add(opt0)
+
+            datas.forEach((item) => {
+                const opt = new Option(`　${item.courseDetailName}`, item.courseDetailId)
+                detailSelect.options.add(opt)
+            })
+        }
+
+        function renderClassSelect(datas) {
+            ClassSelect.options.length = 0;
+            const opt0 = new Option('　請選擇')
+            ClassSelect.options.add(opt0)
+
+            datas.forEach((item) => {
+                const opt = new Option(item.courseClassName, item.courseClassId)
+                ClassSelect.options.add(opt)
+            })
+        }
+
+        function renderplanSelect(datas) {
+
+            const opt0 = new Option('　請選擇')
+            planSelect.options.add(opt0)
+
+            datas.forEach((item) => {
+                const opt = new Option(`　${item.discountPlan1}`, item.discountPlanId)
+                planSelect.options.add(opt)
+            })
+        }
+
+        document.addEventListener('DOMContentLoaded', LoadCalendat);
+
+        function LoadCalendat() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: initial,
+                locale: 'zh-tw',
+                height: 582,
+                slotMinTime: "08:00:00",
+                slotMaxTime: "23:00:00",
+                slotDuration: '01:00:00',
+                slotLabelFormat: {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                },
+                allDaySlot: false,
+                navLinks: true,
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'timeGridWeek,timeGridDay,listWeek'
+                },
+                views: {
+                    timeGrid: {
+                        displayEventTime: false,
+                    }
+                },
+                eventClick: async function (info) {
+                    $("#dialogLessonDetail").dialog({
+                        height: 300,
+                        width: 400
+                    });
+                    let response = await fetch('@Url.Content("~/Api/CourseRoom?LessonId=")' + info.event.id);
+                    let RoomName = await response.text();
+                    $("#courseName").text(info.event.title);
+                    $("#ClassRoomName").text(RoomName);
+                    $("#partialDetail").load('@Url.Content("~/Coach/CouseList?LessonId=")' + info.event.id);
+                },
+                dateClick: function (info) {
+                    $("#dialogLesson").dialog({
+                        height: 500,
+                        width:400
+                    });
+                    var time = info.dateStr;
+                    var a = time.indexOf("+");
+
+                    $("#courseTime").val(time.substring(0, a));
+                },
+                eventBackgroundColor: '#FFA500',
+                eventTextColor: '#000000',
+                events: '@Url.Content("~/api/selectAllClass")'
+            });
+            calendar.render();
+        };
+
+        $("#CreateClass").click(function () {
+            $("#dialog").dialog({
+                        height: 400,
+                        width:400
+                    });
+        })
+        $("#OK").click(function () {
+            const formData = new FormData(document.ClassForm)
+            fetch('@Url.Content("~/api/InsertClass")', {
+                        method: 'POST',
+                        body: formData
+                    }).then(async function (response) {
+                        if (response.ok) {
+                            alert("新增成功");
+                            await Load();
+                        }
+                        else {
+                            alert("失敗");
+                        }
+                    })
+            $("#dialog").dialog("destroy");
+        })
+        $("#AddLesson").click(function () {
+            const formData = new FormData(document.LessonForm);
+            fetch('@Url.Content("~/api/InsertLesson")', {
+                method: 'POST',
+                body: formData
+            }).then(async function (response) {
+                if (response.ok) {
+                    alert("新增成功");
+                    initial = "timeGridWeek";
+                    LoadCalendat();
+                }
+                else {
+                    alert("失敗");
+                }
+            })
+            $("#dialogLesson").dialog("destroy");
+        })
+        $("#demoCourse").click(function () {
+            $("#detailSelect").val("9");
+            $("#ClassName").val("基礎重訓D班");
+            $("#planSelect").val("1");
+        })
+    </script>
+}

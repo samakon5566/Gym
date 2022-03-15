@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewData["Title"] = "一對一課程介紹_3飲食控制";
+}
+<style>
+
+    .div_all {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .div_window {
+        width: 70%;
+        height: 1440px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: start;
+    }
+
+    .div_section {
+        margin-top: 100px;
+        width: 100%;
+        height: 500px;
+        display: flex;
+    }
+
+    .div_introduce1 {
+        width: 70%;
+        height: 500px;
+    }
+
+    .div_pic {
+        width: 30%;
+        height: 100%;
+        justify-content: center;
+        padding: 0 10px 0 0;
+    }
+
+    .introduce_img1 {
+        padding: 20% 0;
+    }
+
+    .introduce1_title {
+        text-align: center;
+        color: white;
+        font-size: 48px;
+        border-bottom: 2px outset #ffd800;
+        margin: 0 3em;
+        padding-bottom: 15px;
+    }
+
+    .introduce {
+        color: white;
+        font-size: 24px;
+        margin: 1em 10% 10% 2em;
+        line-height: 48px;
+    }
+
+        .introduce > li:hover {
+            font-size: 36px;
+            color: orange;
+        }
+    /*---------------------------------------------*/
+</style>
+
+<section class="outer-frame">
+    <div class="div-container-out">
+        <div class="div-container">
+            <h2 class="topheader-title">飲　食　控　制</h2>
+            <img src="~/img/16img/Diet.jpg" />
+        </div>
+    </div>
+</section>
+
+<section class="web-path">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="breadcrumb-text">
+                <div class="bt-option">
+                    <a asp-controller="BackHome" asp-action="List">主頁</a>
+                    <a asp-controller="OneCourse" asp-action="一對一課程介紹">一對一課程介紹</a>
+                    <span>飲食控制</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="div_all">
+    <div class="div_window">
+        <div class="div_section">
+            <div class="div_pic">
+                <img class="introduce_img1" src="~/img/16img/Diet2.jpg" />
+            </div>
+            <div class="div_introduce1">
+                <h6 class="introduce1_title">飲　食</h6>
+                <h3 class="introduce">　　健身運動在台灣漸漸普及後，很多人勤跑健身房後，身體變壯、結實了，但是看起來還是肉肉的。七分飲食三分運動，不管健身的目的是增肌減脂還是維持身體健康，飲食是達成目標的關鍵，健身新手最常犯的錯誤就是：只運動卻不控制飲食，尤其是剛接觸健身的女生，不是亂吃就是吃太少，這樣的做法可能越運動越胖，但也不是不吃垃圾食物如油炸、甜食等就會瘦下來，飲食種類不均衡一樣越減越胖。</h3>
+            </div>
+        </div>
+        <div class="div_section">
+            <div class="div_introduce1">
+                <h6 class="introduce1_title">教　練　諮　詢</h6>
+                <h3 class="introduce">　　一對一教練可以提供飲食上的建議，像有的人不吃油炸、甜食、餅乾等等垃圾食物，也有適當的健身運動，但減肥還是失敗！所謂健康飲食不是不吃發胖食物就是健康，像有的人一餐只吃水果或是一碗麵加青菜，熱量極低！如果沒有多元攝取不同飲食，身體基礎代謝比食物攝取熱量高，在熱量不足夠的時候就會分解肌肉作為能量，結果就是脂肪越來越多、越來越胖！但是過度的飲食還是會讓食物轉化成脂肪囤積在身體裡！國民健康署的每日攝取指標就寫出六大類食物：全穀雜糧、肉魚蛋豆、蔬菜、乳品、水果及油脂，可以在三餐分配份量。</h3>
+            </div>
+            <div class="div_pic">
+                <img class="introduce_img1" src="~/img/16img/Diet3.jpg" />
+            </div>
+        </div>
+    </div>
+
+</div>
+

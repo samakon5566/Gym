@@ -1,0 +1,17 @@
+﻿@model List<prjGymEndTerm.ViewModels.CLittleBell>
+
+
+
+        @foreach (var item in Model)
+        {
+            <a href="@Url.Action(item.Action, "Backstage", new { id = item.ID })" class="list-group-item list-group-item-action " >
+                <div class="notification-list-user-img"><i class="fas fa-bullhorn"></i></div>
+                <div class="notification-info">
+                    <div class="notification-list-user-block">
+                        <span class="notification-list-user-name">@item.Category</span>
+                        <div class="notification-date">@item.Time</div>
+                    </div>
+                </div>
+            </a>
+        }
+

@@ -1,0 +1,101 @@
+﻿/*ChoseUs Section*/
+
+
+.Why-choose-frame {
+    /*margin:20% 0;*/
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 1500px;
+    background-blend-mode:multiply;
+    background: url(../img/gym-main-pic.jpg);
+    background-color: rgba(0, 0, 0, .6);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.Why-choose-container{
+    background-color:transparent;
+    height:100%;
+    width:70%;
+    padding:1%;
+    position:relative;
+}
+
+.Why-choose-container h1{
+    text-align:center;
+    margin-bottom:5%;
+    color:orange;
+}
+
+.Why-choose-container .middle-line{
+    height:75%;
+    border:1px solid white;
+    width:0;
+    position:absolute;
+    left:50%;
+    z-index:0;
+    
+}
+
+.Why-choose-inner-container {
+    margin: 0 auto 16% auto;
+    position:relative;
+    font-size: 150px;
+    background-color: rgba(255,255,255);
+    border-radius: 40%;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+}
+
+.Why-choose-container .introduce{
+    justify-self: flex-start;
+    position: absolute;
+    width: 30%;
+    margin: 0 30px;
+    padding: 1%;
+    border-radius: 15px;
+    background-color: rgb(128,128,128,.4);
+}
+
+.Why-choose-container h3{
+    text-align:center;
+    padding:5px;
+    font-weight:bold;
+}
+
+.Why-choose-container p {
+    font-weight: 900;
+    font-size: large;
+    line-height: 22px;
+}
+
+.Why-choose-container .introduce-2 {
+    right:20px;
+}
+
+/*Class Section*/
+
+.ts-item .index-class-name{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.index-class-name .index-class-title{
+    text-align:center;
+    font-size:30px;
+    font-weight:bold;
+    position:absolute;
+    top:10px;
+    color:orange;
+}
+
+/*gallery*/
+
+.gallery-section .gallery-title {
+    color:white;
+    font-size:5em;
+    text-align:center;
+}
+    

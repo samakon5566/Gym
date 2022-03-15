@@ -1,0 +1,274 @@
+﻿@model prjGymEndTerm.ViewModels.CLoginViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+
+<style>
+    CCoachTitle {
+        /*text-align: center;*/
+        text-decoration: underline
+    }
+
+    .backCBody {
+        padding: 50px 0 0 200px
+    }
+
+    .control-label {
+        font-size: 20px;
+        font-weight: 900
+    }
+
+    body {
+        background-color: #efeff6
+    }
+
+    .page-breadcrumb {
+        margin-bottom: 30px;
+    }
+
+    .breadcrumb-item {
+        font-size: 15px
+    }
+
+    #remindDiv p {
+        display: inline;
+    }
+</style>
+
+
+<div class="backCBody">
+
+
+
+    <h1 class="CCoachTitle" style="font-weight:800"><i class="fas fa-edit"></i> 修改基本資料</h1>
+
+    <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb" style="border-top: 1px solid #ADADAD ">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href=@Url.Action("List", "BackHome") class="breadcrumb-link">首頁</a></li>
+                <li class="breadcrumb-item active" aria-current="page">修改基本資料</li>
+            </ol>
+        </nav>
+    </div>
+
+
+    <div class="tab-regular">
+        <ul class="nav nav-tabs " id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active show font-weight-bolder " id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">基本資料</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link font-weight-bolder " id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">變更密碼</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" name="LogInId" value="@Model.LogInId" />
+
+                            <div class="form-group">
+                                <label asp-for="LogInName" class="control-label"></label>
+                                <input asp-for="LogInName" class="form-control" />
+                                <span asp-validation-for="LogInName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInGender" class="control-label"></label>
+                                <input asp-for="LogInGender" class="form-control" />
+                                <span asp-validation-for="LogInGender" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInBrithDay" class="control-label"></label>
+                                <input asp-for="LogInBrithDay" class="form-control" type="date" />
+                                <span asp-validation-for="LogInBrithDay" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInPhone" class="control-label"></label>
+                                <input asp-for="LogInPhone" class="form-control" />
+                                <span asp-validation-for="LogInPhone" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInEmail" class="control-label"></label>
+                                <input asp-for="LogInEmail" class="form-control" />
+                                <span asp-validation-for="LogInEmail" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="修改並儲存" class="btn btn-primary m-t-20" style="font-weight: 900" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+                <div class="row" style="width:3000px">
+                    <div class="col-md-4">
+                        <form asp-action="EditPassword">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" name="LogInId" value="@Model.LogInId" />
+                            <table>
+                                <tr>
+                                    <td style="vertical-align:text-top;">
+                                        <div class="form-group" style="display:inline">
+                                            <label class="control-label " style="display:block">舊密碼</label>
+                                            <input type="password" class="form-control m-b-10" id="oldPassword" style="width:265px;display:inline" /><p class="w-25 m-l-20 " style="display:inline;background-color: #FFB5B5 " id="pasP1"></p>
+
+                                            <label class="control-label " style="display:none" id="label1">請輸入新密碼</label>
+                                            <input type="password" class="form-control m-b-10" id="password1" style="width:265px;display:none" />
+                                            <label class="control-label " style="display:none" id="label2">確認新密碼</label>
+                                            <input type="password" class="form-control" id="password2" style="width:265px;display:none" /><p class="w-25 m-l-20" style="display:inline;background-color: #FFB5B5 " id="pasP2"></p>
+
+                                        </div>
+                                    </td>
+                                    <td style="width:500px;padding-left:60px">
+                                        <div id="remindDiv" style="border: 1px solid #efeff6; width: 420px; padding: 20px;margin-top:20px;display:none">
+
+                                            <p style="background-color: #FFEEDD;font-weight:900 ">為了您的帳戶安全，密碼需執行強化密碼設定原則。</p><br />
+                                            <p>密碼條件為：</p><br /><br />
+                                            <p>1. 不得低於6碼</p><br />
+                                            <p>2. 包含英文、數字的組合</p><br />
+                                            <p> 3. 不得使用特殊字元</p><br />
+                                            <p> 4. 不能與舊的密碼相同</p><br />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+
+                            <div class="form-group">
+                                <input type="button" value="確定" class="btn btn-primary m-t-20" style="font-weight: 900" id="passwordBtn" />
+                                <input type="button" value="修改並儲存" class="btn btn-primary m-t-20" style="font-weight: 900;display:none" id="submitBtn" />
+                                <input type="button" value="DEMO1" class="btn btn-primary m-t-20" style="font-weight: 900;display:none" id="DEMO1" />
+                                <input type="button" value="DEMO2" class="btn btn-primary m-t-20" style="font-weight: 900;display:none" id="DEMO2" />
+                                <input type="button" value="DEMO3" class="btn btn-primary m-t-20" style="font-weight: 900;display:none" id="DEMO3" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+    const passwordBtn = document.querySelector('#passwordBtn')
+    const submitBtn = document.querySelector('#submitBtn')
+
+    //舊密碼確認按鈕(判斷與登入者密碼是否相同)
+    passwordBtn.addEventListener('click', async function () {
+
+        const oldPassword = $('#oldPassword').val()
+
+        const oldPasswordResponse = await fetch('@Url.Content("~/BackApi/odlPassword?password=")' + oldPassword)
+        const oldPasswordData = await oldPasswordResponse.json()
+        //console.log(oldPasswordResponse)
+
+        //提醒語
+        $('#pasP1')[0].innerHTML = oldPasswordData
+
+        //密碼相同把新密碼輸入欄位與送出按鈕顯示
+        if (oldPasswordData =="密碼正確")
+        {
+            $("#label1").css("display", "block")
+            $("#password1").css("display", "block")
+            $("#label2").css("display", "block")
+            $("#password2").css("display", "inline")
+            $("#passwordBtn").css("display", "none")
+            $("#submitBtn").css("display", "block")
+            $("#DEMO1").css("display", "inline")
+            $("#DEMO2").css("display", "inline")
+            $("#DEMO3").css("display", "inline")
+            $("#remindDiv").css("display", "block")
+
+        }
+
+        //DEMO
+        $("#DEMO1").click(function () {
+            $("#password1").val("abc12");
+            $("#password2").val("abc12");
+        })
+
+        $("#DEMO2").click(function () {
+            $("#password1").val("abc12345");
+            $("#password2").val("abc123");
+        })
+
+        $("#DEMO3").click(function () {
+            $("#password1").val("TlVq0105");
+            $("#password2").val("TlVq0105");
+        })
+
+        //修改密碼按鈕(判斷密碼輸入值)
+        submitBtn.addEventListener('click', async function () {
+
+            const password1 = $('#password1').val()
+            const password2 = $('#password2').val()
+
+            const PasswordChangeResponse = await fetch('@Url.Content("~/BackApi/passwordChange?password1=")' + password1 + '&password2=' + password2)
+            const PasswordChangeData = await PasswordChangeResponse.json()
+
+            //$('#pasP2')[0].innerHTML = PasswordChangeData
+
+            //空字串為成功修改資料庫
+            if (PasswordChangeData != "")
+            {
+                //SweetAlert
+                swal("修改失敗", PasswordChangeData, "error", { button: "關閉" });
+
+                //document.getElementById("demo2").addEventListener("click", function () {
+                //    swal("修改失敗", PasswordChangeData , "error", { button: "關閉" });
+                //});
+
+                //// 創建事件物件
+                //var evt = document.createEvent("HTMLEvents");
+                //// 初始化
+                //evt.initEvent("click", false, false);
+                ////賦予事件
+                //document.querySelector("#demo2").dispatchEvent(evt)
+            }
+            else
+            {
+                //SweetAlert
+
+                swal("修改成功", "下次登入請使用新密碼", "success")
+                    .then(() => { window.location.href = '@Url.Content("~/BackHome/List")' });
+
+                @*document.getElementById("demo2").addEventListener("click", function () {
+                    swal("修改成功", "下次登入請使用新密碼", "success")
+                        .then(() => { window.location.href = '@Url.Content("~/BackHome/List")' });
+                });
+
+                // 創建事件物件
+                var evt = document.createEvent("HTMLEvents");
+                // 初始化
+                evt.initEvent("click", false, false);
+                //賦予事件
+                document.querySelector("#demo2").dispatchEvent(evt)*@
+            }
+        })
+
+
+    })
+
+
+    </script>
+}

@@ -1,0 +1,84 @@
+﻿@model prjGymEndTerm.ViewModels.CEquipmentRestorationViewModel
+
+@{
+    ViewData["Title"] = "backRestorationEdit";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+
+<h1>backRestorationEdit</h1>
+
+<h4>CEquipmentRestorationViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="backRestorationEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RestorationId" class="control-label"></label>
+                <input asp-for="RestorationId" class="form-control" />
+                <span asp-validation-for="RestorationId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentId" class="control-label"></label>
+                <input asp-for="EquipmentId" class="form-control" />
+                <span asp-validation-for="EquipmentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentStayServiceDay" class="control-label"></label>
+                <input asp-for="EquipmentStayServiceDay" class="form-control" />
+                <span asp-validation-for="EquipmentStayServiceDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentServiceDay" class="control-label"></label>
+                <input asp-for="EquipmentServiceDay" class="form-control" />
+                <span asp-validation-for="EquipmentServiceDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentCategoryId" class="control-label"></label>
+                <input asp-for="EquipmentCategoryId" class="form-control" />
+                <span asp-validation-for="EquipmentCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentDay" class="control-label"></label>
+                <input asp-for="EquipmentDay" class="form-control" />
+                <span asp-validation-for="EquipmentDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentCycle" class="control-label"></label>
+                <input asp-for="EquipmentCycle" class="form-control" />
+                <span asp-validation-for="EquipmentCycle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompanyName" class="control-label"></label>
+                <input asp-for="CompanyName" class="form-control" />
+                <span asp-validation-for="CompanyName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentCategoryName" class="control-label"></label>
+                <input asp-for="EquipmentCategoryName" class="form-control" />
+                <span asp-validation-for="EquipmentCategoryName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentPicture" class="control-label"></label>
+                <input asp-for="EquipmentPicture" class="form-control" />
+                <span asp-validation-for="EquipmentPicture" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClassroomName" class="control-label"></label>
+                <input asp-for="ClassroomName" class="form-control" />
+                <span asp-validation-for="ClassroomName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

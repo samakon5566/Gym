@@ -1,0 +1,60 @@
+﻿@model List<prjGymEndTerm.ViewModels.CoachArea.CCoachVideoListViewModel>
+
+
+<table class="table table-dark table-hover" id="myTable">
+    <thead align="center">
+        <tr>
+            @*<th>
+                @Html.DisplayNameFor(model => model[0].VideoId):
+            </th>*@
+            <th style="width:80px">
+                @Html.DisplayNameFor(model => model[0].VideoCategory)
+            </th>
+            <th  style="width:115px">
+                @Html.DisplayNameFor(model => model[0].VideoTitle)
+            </th>
+            <th style="width:300px">
+                @Html.DisplayNameFor(model => model[0].VideoContent)
+            </th>
+            <th style="width:300px">
+                @Html.DisplayNameFor(model => model[0].VideoUrl)
+            </th>
+            <th style="width:80px">
+                @Html.DisplayNameFor(model => model[0].VideoUploadTime)
+            </th>
+        </tr>
+    </thead>
+    <tbody align="center">
+        @{
+            int count = 0;
+            foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.VideoId)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VideoCategory)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VideoTitle)
+                    </td>
+                    <td align="left">
+                        @Html.DisplayFor(modelItem => item.VideoContent)
+                    </td>
+                    <td>
+                        <iframe src=@Html.DisplayFor(modelItem => item.VideoUrl) title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.VideoUploadTime)*@
+                        @{
+                            String date = item.VideoUploadTime.Date.ToString("yyyy/MM/dd");
+                        }
+                        @date
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

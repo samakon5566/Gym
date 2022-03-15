@@ -1,0 +1,134 @@
+﻿@model prjGymEndTerm.Models.Equipment
+
+@{
+    ViewData["Title"] = "backEquipmentCreate";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+@section Styles {
+    <style>
+        CCoachTitle {
+            /*text-align: center;*/
+            text-decoration: underline
+        }
+
+        .backCBody {
+            padding: 50px 0 0 200px
+        }
+
+        .control-label {
+            font-size: 20px;
+            font-weight: 900
+        }
+
+        body {
+            background-color: #efeff6
+        }
+        .page-breadcrumb {
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb-item {
+            font-size: 15px
+        }
+    </style>
+    }
+
+    <body>
+        <div class="backCBody">
+            <h1 class="CCoachTitle" style="font-weight:800"><i class="fas fa-wrench"></i>   新增設備</h1>
+
+            <div class="page-breadcrumb">
+                <nav aria-label="breadcrumb" style="border-top: 1px solid #ADADAD ">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href=@Url.Action("List", "BackHome") class="breadcrumb-link">首頁</a></li>
+                        <li class="breadcrumb-item"><a href=@Url.Action("backEquipmentList", "Backstage") class="breadcrumb-link">設備明細</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">新增設備</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="backEquipmentCreate" id="demoForm">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="EquipmentCategoryId" class="control-label" style="font-weight: 900;display:block">設備種類</label>
+                            <select id="selectCategory" asp-for="EquipmentCategoryId" asp-items="@(IEnumerable<SelectListItem>)ViewBag.categoryItems" class="form-select form-control-lg" style="width: 500px"></select>
+                            <span asp-validation-for="EquipmentCategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EquipmentCycle" class="control-label" style="font-weight: 900;">維修週期(年)</label>
+                            <input asp-for="EquipmentCycle" class="form-control form-control-lg" style="width:500px;border:1px solid black" />
+                            <span asp-validation-for="EquipmentCycle" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EquipmentCompanyId" class="control-label" style="font-weight: 900">公司名稱</label>
+                            <select id="selectCompany" asp-for="EquipmentCompanyId" asp-items="@(IEnumerable<SelectListItem>)ViewBag.companyItems" class="form-select form-control-lg" style="width: 500px"></select>
+                            <span asp-validation-for="EquipmentCompanyId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EquipmentClassroomId" class="control-label" style="font-weight: 900">所屬教室</label>
+                            <select asp-for="EquipmentClassroomId" class="form-select form-control-lg" aria-label="Default select example" style="width:500px">
+                                <option selected>請選擇</option>
+                                <option value="1">拳擊教室</option>
+                                <option value="2">飛輪教室</option>
+                                <option value="3">重訓教室</option>
+                                <option value="4">有氧教室</option>
+                                <option value="5">瑜珈教室</option>
+                                <option value="6">TRX教室</option>
+                            </select>
+
+                            <span asp-validation-for="EquipmentClassroomId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EquipmentDay" class="control-label" style="font-weight: 900">進貨時間</label>
+                            <input asp-for="EquipmentDay" class="form-control form-control-lg" style="width: 500px;border:1px solid black;height:48px" type="date" />
+                            <span asp-validation-for="EquipmentDay" class="text-danger"></span>
+                        </div>
+                        <div class="form-group m-t-40">
+                            <input type="submit" value="+ 新增" class="btn btn-warning" style="font-weight:900" />
+                            <input type="button" value="DEMO" class="btn btn-warning m-l-25" style="font-weight:900" id="demoBtn" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script>
+            $("#selectCategory").prepend("<option selected>請選擇</option>")
+            $("#selectCompany").prepend("<option selected>請選擇</option>")
+
+        </script>
+
+<script>
+
+    //DEMO
+    $("#demoBtn").click(function () {
+        $("#demoForm select").eq(0).val("6");
+        $("#demoForm input").eq(0).val("2");
+        $("#demoForm select").eq(1).val("1");
+        $("#demoForm select").eq(2).val("3");
+    })
+
+    //當天日期
+    $(document).ready(function () {
+        var date = new Date();
+
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+
+        var today = year + "-" + month + "-" + day;
+
+        $("#demoForm input").eq(1).val(today);
+    });
+           
+</script>
+    }

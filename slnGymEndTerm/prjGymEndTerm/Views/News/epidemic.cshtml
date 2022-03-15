@@ -1,0 +1,162 @@
+﻿@model List<prjGymEndTerm.ViewModels.News_ViewModels.CNewsViewModel>
+@{
+    ViewData["Title"] = "epidemic";
+}
+<style>
+
+    .carousel-inner {
+        margin: 0 auto;
+    }
+</style>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active" style="text-align: center">
+            <img src="~/img/news/25.jpg" alt="123456789" height="300">
+        </div>
+        <div class="carousel-item" style="text-align: center">
+            <img src="~/img/news/7.jpg" alt="AAAAAAAAA" height="300">
+        </div>
+        <div class="carousel-item" style="text-align: center">
+            <img src="~/img/news/3.jpg" alt="BBBBBBBBB" height="300">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev" style="text-align: center; display: block;">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next" style="text-align: center; display: block;">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<section class="blog-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    @*<span>What we do?</span>*@
+                    <h2>會員公告</h2>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 p-0">
+                    @{
+                        int count = 0;
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            if (count < 6)
+                            {
+                                string s = "exampleModal" + count;
+
+                                string ids = "#" + s;
+                                <div class="modal fade" id=@s tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content" style="background-color:black;">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel" style="color:white;">@Html.DisplayFor(modelItem => item.NewsTitle)</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img src="~/img/news/@Html.DisplayFor(modelItem => item.NewsFigure)" alt="">
+                                            </div>
+                                            <div class="modal-footer; text-align:center;">
+                                                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>*@
+
+                                                <div style="color: white; text-align: center;">@Html.DisplayFor(modelItem => item.NewsContent)</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="blog-item">
+                                    <div class="bi-pic">
+                                        <button style="background-color: transparent; border: 0px; " type="button" class="btn btn-primary" data-toggle="modal" data-target=@ids>
+                                            <img src="~/img/news/@Html.DisplayFor(modelItem => item.NewsFigure)">
+                                        </button>
+                                    </div>
+                                    <div class="bi-text">
+                                        <h5>
+                                            <a>
+                                                @Html.DisplayFor(modelItem => item.NewsTitle)
+                                            </a>
+                                        </h5>
+                                        <ul>
+                                            @*<li> @Html.DisplayFor(modelItem => item.NewsTime)</li>*@
+                                            <li>@Convert.ToDateTime(item.NewsTime).ToString("yyyy/MM/dd")</li>
+                                            <li> @Html.DisplayFor(modelItem => item.PostName)</li>
+                                        </ul>
+                                        <p>
+                                            @Html.DisplayFor(modelItem => item.NewsContent)
+                                        </p>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                    <div class="blog-pagination">
+                        <a href="./announcement">1</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8 p-0">
+                    <div class="sidebar-option">
+                        <div class="so-categories">
+                            <h5 class="title">分類</h5>
+                            <ul>
+                                <li><a href="./announcement">公告</a></li>
+                                <li><a href="./epidemic">疫情</a></li>
+                                <li><a href="./personalTraining">個人教練</a></li>
+                                <li><a href="./menu">菜單</a></li>
+                            </ul>
+                        </div>
+                        <div class="so-latest">
+                            <h5 class="title">重要公告</h5>
+                            <div class="latest-large set-bg">
+                                <div class="ll-text">
+                                    <h5><a>因課程調度本周飛輪課程暫停一次!!</a></h5>
+                                    <ul>
+                                        <li>Aug 6, 2021</li>
+                                        @*<li>23 Comment</li>*@
+                                    </ul>
+                                    <h5><a>因課程調度本周格鬥有氧暫停一次!!</a></h5>
+                                    <ul>
+                                        <li>Oct 27, 2021</li>
+                                        @*<li>20 Comment</li>*@
+                                    </ul>
+                                    <h5><a>會員優惠活動詳情請洽教練或櫃檯!!</a></h5>
+                                    <ul>
+                                        <li>Sep 20, 2021</li>
+                                        @*<li>16 Comment</li>*@
+                                    </ul>
+                                </div>
+
+                            </div>
+                            @*<div class="so-tags">
+                                <h5 class="title">Popular tags</h5>
+                                <a href="#">公告</a>
+                                <a href="#">防疫</a>
+                                <a href="#">課程</a>
+                                <a href="#">個人教練</a>
+                                <a href="#">菜單</a>
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Section End -->

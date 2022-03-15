@@ -1,0 +1,195 @@
+﻿@model List<prjGymEndTerm.ViewModels.CCourseDetailViewmodel>
+
+<style>
+    .coachTitle {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        font-weight: 800;
+        /*margin:0 0 0 500px*/
+    }
+
+    #myTable {
+        margin: 15px 0;
+        /*border: 1px solid #D0D0D0;*/
+        /*padding:10px 0 0 0*/
+    }
+    /*    tr {
+        border-bottom: 2px solid gray;
+    }*/
+    th {
+        text-align: center;
+        width: 100px;
+        /*background-color: #FBFBFF;*/
+        height: 40px
+    }
+
+    .page-breadcrumb {
+        margin: 60px 0 15px 0;
+    }
+
+    .breadcrumb-item {
+        font-size: 15px
+    }
+
+    td {
+        text-align: center;
+    }
+
+    .table {
+        width: 1300px;
+        border: 1px solid #D0D0D0;
+        background-color: #FCFCFC
+    }
+
+    .backTh {
+        width: 100px
+    }
+
+    .backCBody {
+        padding: 50px 0 0 20px;
+        width: 1400px
+    }
+
+    .frame {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .form {
+        display: inline;
+        position: absolute;
+        right: 0;
+    }
+
+    body {
+        background-color: #efeff6
+    }
+
+    .divnone {
+        height: 40px
+    }
+
+    .addbtn {
+        margin: 10px 10px 0 0
+    }
+
+    .thCount {
+        width: 7%
+    }
+
+    .thbtn {
+        width: 15%
+    }
+
+    .th10 {
+        width: 10%
+    }
+
+    .th12 {
+        width: 12%
+    }
+
+    .th6 {
+        width: 6%
+    }
+
+    .th8 {
+        width: 8%
+    }
+
+    #myTable th {
+        background-color: #4F4F4F;
+        color: white;
+        height: 90%
+    }
+
+    #myTable a {
+        font-size: 12px
+    }
+</style>
+
+<script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
+<script src='//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js'></script>
+<link href='//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css' rel='stylesheet' />
+
+
+<div >
+    <p style="display: inline; font-size: 16px;  color: #71748d">條件篩選：</p>
+    <div id="selectDiv2" style="display: inline; font-size: 16px;">
+    </div>
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                <th class="th6">序號</th>
+                <th class="thCount">
+                    @Html.DisplayNameFor(model => model[0].CourseCategoryName)
+                </th>
+                <th class="th10">
+                    @Html.DisplayNameFor(model => model[0].CourseDetailName)
+                </th>
+                <th class="th10">
+                    @Html.DisplayNameFor(model => model[0].CourseDetailPicture)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].CourseDetailIntroduce)
+                </th>
+                <th class="th8">
+                    @Html.DisplayNameFor(model => model[0].CourseDetailTime)
+                </th>
+                <th class="thCount">
+                    @Html.DisplayNameFor(model => model[0].CourseDetailCal)
+                </th>
+                <th class="th6">
+                    @Html.DisplayNameFor(model => model[0].CourseDetailMoney)
+                </th>
+
+                <th class="th10">資料異動</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int count = 0;
+                foreach (var item in Model)
+                {
+                    count++;
+                    <tr>
+                        <td class="th6">
+                            @count
+                        </td>
+                        <td class="thCount">
+                            @Html.DisplayFor(modelItem => item.CourseCategoryName)
+                        </td>
+                        <td class="th10">
+                            @Html.DisplayFor(modelItem => item.CourseDetailName)
+                        </td>
+                        <td>
+                            <p>
+                                <img src="~/img/CourseDetail/@item.CourseDetailPicture" width="100" height="100" />
+                            </p>
+                        </td>
+                        <td style="font-size:14px">
+                            @Html.DisplayFor(modelItem => item.CourseDetailIntroduce)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CourseDetailTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CourseDetailCal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CourseDetailMoney)
+                        </td>
+
+                        <td>
+                            <a class="btn btn-success rounded-pill" href="@Url.Action("backCourseDetailEdit", "Backstage", new { id = item.CourseDetailId })"><i class="fas fa-pencil-alt"></i></a>
+                            <a class="btn btn-danger rounded-pill" href="@Url.Action("backCourseDetailDelete", "Backstage", new { id = item.CourseDetailId })" onclick="return confirm ('確定要刪除嗎?')"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+

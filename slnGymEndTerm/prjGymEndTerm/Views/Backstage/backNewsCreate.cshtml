@@ -1,0 +1,181 @@
+﻿@*@model prjGymEndTerm.Models.News*@
+@model prjGymEndTerm.ViewModels.CNewsViewModel
+
+@{
+    ViewData["Title"] = "backNewsCreate";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+<style>
+    CCoachTitle {
+        /*text-align: center;*/
+        text-decoration: underline
+    }
+
+    .backCBody {
+        padding: 50px 0 0 200px
+    }
+
+    body {
+        background-color: #efeff6
+    }
+    .page-breadcrumb {
+        margin-bottom:30px
+    }
+    .breadcrumb-item {
+        font-size: 15px
+    }
+</style>
+<script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
+
+    <div class="backCBody">
+        <h1 class="CCoachTitle" style="font-weight:800"><i class="fas fa-bullhorn"></i>  新增公告</h1>
+
+        <div class="page-breadcrumb">
+            <nav aria-label="breadcrumb" style="border-top: 1px solid #ADADAD ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href=@Url.Action("List", "BackHome") class="breadcrumb-link">首頁</a></li>
+                    <li class="breadcrumb-item"><a href=@Url.Action("backNewsList", "Backstage") class="breadcrumb-link">公告管理</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">新增公告</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="row" style="margin:auto 20px">
+            <form asp-action="backNewsCreate" enctype="multipart/form-data" id="demoForm">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label asp-for="NewsTypeId" class="control-label" style="font-weight: 900;display:block">類型</label>
+
+                                <select asp-for="NewsTypeId" class="form-select" aria-label="Default select example" style="width:400px;height:40px">
+                                    <option selected>請選擇</option>
+                                    <option value="1">熱門活動</option>
+                                    <option value="2">優惠方案</option>
+                                    <option value="5">會員公告</option>
+                                </select>
+
+                                <span asp-validation-for="NewsTypeId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="NewsTitle" class="control-label" style="font-weight: 900">主題</label>
+                                <input asp-for="NewsTitle" class="form-control" style="width:400px;border: 1px solid #5B5B5B " />
+                                <span asp-validation-for="NewsTitle" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="NewsTime" class="control-label" style="font-weight: 900">發布時間</label>
+                                <input asp-for="NewsTime" class="form-control" style="width: 400px; border: 1px solid #5B5B5B" type="date" />
+                                <span asp-validation-for="NewsTime" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="NewsManagerName" class="control-label" style="font-weight: 900">員工</label>
+                                <input asp-for="NewsManagerName" class="form-control" style="width: 400px; border: 1px solid #5B5B5B" value="@ViewBag.name" readonly="readonly" />
+                                <span asp-validation-for="NewsManagerName" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td style="vertical-align: bottom">
+                            <div class="form-group" style="padding-left: 50px; ">
+                                <label asp-for="NewsFigure" class="control-label" style="font-weight: 900">圖片</label>
+                                <div>
+                                    <img id="preview_img" src="#" style="width:400px; height:220px;margin-bottom:20px" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <input asp-for="NewsFigure" name="NewsFigure" class="form-control" type="file" onchange="openFile(event)" id="formFile" style="width:400px;height:45px">
+                                </div>
+
+                                <span asp-validation-for="NewsFigure" class="text-danger"></span>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w-100">
+                        </td>
+                    </tr>
+                </table>
+                <div class="form-group">
+                    <label asp-for="NewsContent" class="control-label" style="font-weight: 900">內容</label>
+                    <textarea name="editor1" asp-for="NewsContent" id="textarea" ></textarea>
+                    <textarea asp-for="NewsContent" class="form-control" hidden></textarea>
+                    <span asp-validation-for="NewsContent" class="text-danger"></span>
+                </div>
+                <div class="form-group p-t-20 " style="float:right">
+                    <input type="button" id="demoBtn" value="Demo" class="btn btn-warning" style="font-weight:900" />
+                    <input type="submit" value="+ 新增" class="btn btn-warning " style="font-weight:900" id="btn"/>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script>CKEDITOR.replace("editor1");</script>
+
+    <script>
+
+        function openFile(event) {
+            var input = event.target; //取得上傳檔案
+            var reader = new FileReader(); //建立FileReader物件
+
+            reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
+
+            reader.onload = function () { //FileReader取得上傳檔案後執行以下內容
+                var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
+                $('#preview_img').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
+            };
+        }
+
+        //當天日期
+        $(document).ready(function () {
+            var date = new Date();
+
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+
+            var today = year + "-" + month + "-" + day;
+
+            $("#demoForm input").eq(1).val(today);
+        });
+
+
+        $("#btn").mouseenter(function () {
+
+            var content = CKEDITOR.instances.textarea.getData();
+            content = content.replace("<p>", "");
+            content = content.replace("</p>", "");
+
+            $("#textareaMVC").val(content);
+        })
+
+        //Demo
+        $("#demoBtn").click(function ()
+        {
+            $("#demoForm select").eq(0).val("1");
+            $("#demoForm input").eq(0).val("FitnessHouse 飛輪週來了!!! 各大教練陸續開班~~");
+            CKEDITOR.instances.textarea.insertHtml("一堂飛輪課即能消耗一個炸雞腿便當的熱量，且能幫助心肺訓練、增強肌耐力、減少體重對髖、膝、踝關節的衝擊，搭配流行音樂的旋律，讓你運動更加有趣!!!");
+
+            var content = CKEDITOR.instances.textarea.getData();
+            content = content.replace("<p>", "");
+            content = content.replace("</p>", "");
+            content.replace(/ /g, "");
+
+            $("#demoForm textarea").eq(1).val(content);
+
+        })
+
+
+
+
+    </script>
+}

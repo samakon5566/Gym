@@ -1,0 +1,269 @@
+﻿@model List<prjGymEndTerm.ViewModels.CEquipmentViewModel>
+
+@{
+    ViewData["Title"] = "backEquipmentList";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+
+<style>
+    .coachTitle {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        font-weight: 800;
+        /*margin:0 0 0 500px*/
+    }
+
+    #myTable {
+        margin: 15px 0;
+        /*border: 1px solid #D0D0D0;*/
+        /*padding:10px 0 0 0*/
+    }
+    /*    tr {
+        border-bottom: 2px solid gray;
+    }*/
+    th {
+        text-align: center;
+        width: 100px;
+        /*background-color: #FBFBFF;*/
+        height: 40px
+    }
+
+    .page-breadcrumb {
+        margin: 60px 0 15px 0;
+    }
+
+    .breadcrumb-item {
+        font-size: 15px
+    }
+
+    td {
+        text-align: center;
+    }
+
+    .table {
+        width: 1300px;
+        border: 1px solid #D0D0D0;
+        background-color: #FCFCFC
+    }
+
+    .backTh {
+        width: 100px
+    }
+
+    .backCBody {
+        padding: 50px 0 0 80px;
+        width: 1280px
+    }
+
+    .frame {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .form {
+        display: inline;
+        position: absolute;
+        right: 0;
+    }
+
+    body {
+        background-color: #efeff6
+    }
+
+    .divnone {
+        height: 40px
+    }
+
+    .addbtn {
+        margin: 10px 0 0 0
+    }
+
+    .thCount {
+        width: 7%
+    }
+
+    .thbtn {
+        width: 15%
+    }
+
+    .th10 {
+        width: 10%
+    }
+
+    #myTable th {
+        background-color: #4F4F4F;
+        color: white;
+        height: 90%
+    }
+
+    #myTable a {
+        font-size: 12px
+    }
+</style>
+
+<script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
+<script src='//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js'></script>
+<link href='//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css' rel='stylesheet' />
+
+
+<div class="backCBody">
+    <div class="frame">
+        <h1 class="coachTitle">設備明細</h1>
+        @using (Html.BeginForm(FormMethod.Post, new { @class = "form" }))
+        {
+            <a asp-action="backEquipmentCreate" class="btn btn-warning rounded-pill addbtn"><i class="fab fa-fort-awesome-alt"></i> 設備進貨</a>
+        }
+
+    </div>
+
+    <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb" style="border-top: 1px solid #ADADAD ">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href=@Url.Action("List", "BackHome") class="breadcrumb-link">首頁</a></li>
+                <li class="breadcrumb-item active" aria-current="page">設備明細</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4" style=" padding: 5px 0;">
+
+                    <div id="beforeSelect" class="m-b-10">
+                        <p style="display: inline; font-size: 16px; color: #71748d ">條件篩選：</p>
+                        <div id="selectDiv" style="display: inline; font-size: 16px;"></div>
+                    </div>
+
+                    <table id="myTable" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th hidden></th>
+                                <th class="thCount">序號</th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model[0].EquipmentId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model[0].EquipmentCategoryId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model[0].EquipmentCycle)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model[0].EquipmentCompanyId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model[0].EquipmentClassroomId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model[0].EquipmentDay)
+                                </th>
+                                <th class="th10">資料異動</th>
+                                <th hidden>進貨日期(年)</th>
+                                <th hidden>進貨日期(月)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int count = 0;
+                                foreach (var item in Model)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td hidden>@Html.DisplayFor(modelItem => item.EquipmentId)</td>
+                                        <td>
+                                            @count
+                                        </td>
+                                        <td>
+                                            No.@Html.DisplayFor(modelItem => item.EquipmentId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EquipmentCategoryName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EquipmentCycle)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CompanyName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ClassroomName)
+                                        </td>
+                                        <td>
+                                            @Convert.ToDateTime(item.EquipmentDay).ToString("yyyy/MM/dd")
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-success rounded-pill" href="@Url.Action("backEquipmentEdit", "Backstage", new { id = item.EquipmentId })"><i class="fas fa-pencil-alt"></i></a>
+                                            <a class="btn btn-danger rounded-pill" href="@Url.Action("backEquipmentDelete", "Backstage", new { id = item.EquipmentId })" onclick="return confirm ('設備移除會將相關維修紀錄一併刪除，確定要刪除嗎?')"><i class="fas fa-trash-alt"></i></a>
+                                        </td>
+                                        <td hidden>@item.EquipmentDay.Year 年</td>
+                                        <td hidden>@item.EquipmentDay.Month 月</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    $('#myTable').DataTable({
+        language: {
+            "emptyTable": "無資料...",
+            "processing": "處理中...",
+            "loadingRecords": "載入中...",
+            "lengthMenu": "每頁 _MENU_ 筆資料",
+            "zeroRecords": "無搜尋結果",
+            "info": "_START_ 至 _END_ / 共 _TOTAL_ 筆",
+            "infoEmpty": "尚無資料",
+            "infoFiltered": "(從 _MAX_ 筆資料過濾)",
+            "infoPostFix": "",
+            "search": "搜尋:",
+            "paginate": {
+                "first": "首頁",
+                "last": "末頁",
+                "next": "下一頁",
+                "previous": "上一頁"
+            },
+            "aria": {
+                "sortAscending": ": 升冪",
+                "sortDescending": ": 降冪"
+            }
+        }
+    });
+
+    var table = $('#myTable').DataTable();
+    table.columns([3, 5,6  , 9 , 10]).flatten().each(function (colIdx) {
+        // Create the select list and search operation
+        var theadname = $("#myTable th").eq([colIdx]).text(); //used this specify table name and head
+        var select = $('<select class="m-l-10" style="width:10%"><option value="">' + theadname + '</option></select>')
+            .appendTo('#selectDiv')
+            .on('change', function () {
+                table
+                    .column(colIdx)
+                    .search($(this).val())
+                    .draw();
+            });
+
+        // Get the search data for the first column and add to the select list
+        table
+            .column(colIdx)
+            .cache('search')
+            .sort()
+            .unique()
+            .each(function (d) {
+                select.append($('<option value="' + d + '">' + d + '</option>'));
+            });
+    });
+
+</script>
+
+

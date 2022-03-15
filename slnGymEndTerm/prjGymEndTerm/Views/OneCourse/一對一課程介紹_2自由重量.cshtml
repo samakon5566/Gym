@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewData["Title"] = "一對一課程介紹_2自由重量";
+}
+<style>
+    .div_all {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .div_window {
+        width: 70%;
+        height: 1880px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: start;
+    }
+
+    .div_section {
+        margin-top: 100px;
+        width: 100%;
+        height: 600px;
+        display: flex;
+    }
+
+    .div_introduce1 {
+        width: 70%;
+        height: auto;
+    }
+
+    .div_pic {
+        width: 30%;
+        height: 100%;
+        justify-content: center;
+        padding: 0 10px 0 0;
+    }
+
+    .introduce_img1 {
+        padding: 20% 0;
+    }
+
+    .introduce1_title {
+        text-align: center;
+        color: white;
+        font-size: 48px;
+        border-bottom: 2px outset #ffd800;
+        margin: 0 3em;
+        padding-bottom: 15px;
+    }
+
+    .introduce {
+        color: white;
+        font-size: 16px;
+        margin: 1em 10% 10% 2em;
+        line-height: 48px;
+    }
+
+        .introduce > li:hover {
+            font-size: 20px;
+            color: orange;
+        }
+    /*---------------------------------------------*/
+</style>
+
+<section class="outer-frame">
+    <div class="div-container-out">
+        <div class="div-container">
+            <h2 class="topheader-title">自　由　重　量</h2>
+            <img src="~/img/16img/onecourse1.jpg" />
+        </div>
+    </div>
+</section>
+<section class="web-path">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="breadcrumb-text">
+                <div class="bt-option">
+                    <a asp-controller="BackHome" asp-action="List">主頁</a>
+                    <a asp-controller="OneCourse" asp-action="一對一課程介紹">一對一課程介紹</a>
+                    <span>自由重量</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@*------------------導覽------------------*@
+<div class="div_all">
+    <div class="div_window">
+        <div class="div_section">
+            <div class="div_pic">
+                <img class="introduce_img1" src="~/img/16img/onecourse9.jpg" />
+            </div>
+            <div class="div_introduce1">
+                <h6 class="introduce1_title">定　義</h6>
+                <h3 class="introduce">　　當我們第一次在不穩定的條件下做力量訓練時，比如做啞鈴臥推，這會引起很多來自拮抗（對抗）和協同（穩定）肌肉的同時參與。如臥推訓練，胸肌是原動肌，它主動收縮完成動作，部分上背肌群為拮抗肌，在動作過程拉長拉伸，肱三頭肌和三角肌前束為協同肌群，負責穩定和支持胸肌發力。一開始，肌群間配合不當，拮抗肌群會阻礙我們舉起重量，而協同肌群會幫助原動肌發力和維持平衡，在這種矛盾的發力模式下，你會發現即使你有力氣也很難完成自由重量的訓練。當我們做啞鈴臥推一段時間後，肌肉的相互協調會減少了拮抗肌的參與，同時增加我們的協同肌的參與，慢慢的就有了力量的提高。</h3>
+            </div>
+        </div>
+        <div class="div_section">
+            <div class="div_introduce1">
+                <h6 class="introduce1_title">教　練　諮　詢</h6>
+                <h3 class="introduce">　　相較於機械訓練，自由重量對新手來說更難駕馭，沒有固定的運動軌跡讓訓練時更依賴身體活動度以及平衡，在新手來說自由重量訓練更容易早成運動傷害以及代償。一對一教練課程在這時候就是你最好的幫手了，新手不能使用但依賴教練的經驗跟專業，就算新手也能使用自由重量，一對一上課模式降低運動時造成的代償及傷害，讓自由重量變成達成理想體態的武器。</h3>
+            </div>
+            <div class="div_pic">
+                <img class="introduce_img1" src="~/img/16img/wo1.jpg" />
+            </div>
+        </div>
+        <div class="div_section">
+            <div class="div_pic">
+                <img class="introduce_img1" src="~/img/16img/home-about.jpg" />
+            </div>
+            <div class="div_introduce1">
+                <h6 class="introduce1_title">優　點</h6>
+                <ul class="introduce">
+                    <li><i class="far fa-thumbs-up"></i>　自由重量可以自由調整適合自己的負重程度。</li>
+                    <li><i class="far fa-thumbs-up"></i>　自由重量可以依照自己的健身課表，動作多變化。</li>
+                    <li><i class="far fa-thumbs-up"></i>　加強訓練時穩定性。</li>
+                    <li><i class="far fa-thumbs-up"></i>　給予身體較多不同的刺激。</li>
+                    <li><i class="far fa-thumbs-up"></i>　可以透過輕重量，慢慢開始摸索肌肉感覺。</li>
+                    <li><i class="far fa-thumbs-up"></i>　訓練的特定肌群部位，操作過程符合力線方向(固定的移動軌道)。</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>

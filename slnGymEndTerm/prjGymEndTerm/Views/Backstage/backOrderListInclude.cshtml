@@ -1,0 +1,84 @@
+﻿@model IEnumerable<prjGymEndTerm.ViewModels.COrderIncludeViewModel>
+
+@{
+    ViewData["Title"] = "backOrderListInclude";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+
+<h1>backOrderListInclude</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LogInName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusContent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReasonContent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseClassName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderReasonMoney)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderReviseTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LogInName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusContent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReasonContent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseClassName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderReasonMoney)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderReviseTime)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

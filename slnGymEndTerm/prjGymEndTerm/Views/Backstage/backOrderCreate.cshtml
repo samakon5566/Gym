@@ -1,0 +1,332 @@
+﻿@model prjGymEndTerm.Models.OrderCourse
+
+@{
+    ViewData["Title"] = "backOrderCreate";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<style>
+    CCoachTitle {
+        /*text-align: center;*/
+        text-decoration: underline
+    }
+
+    .backCBody {
+        padding: 50px 0 0 300px
+    }
+
+    .control-label {
+        font-size: 20px;
+        font-weight: 900
+    }
+
+    body {
+        background-color: #efeff6
+    }
+
+    .page-breadcrumb {
+        margin-bottom: 30px;
+    }
+
+    .breadcrumb-item {
+        font-size: 15px
+    }
+
+    .paylabel {
+        width: 25%
+    }
+</style>
+
+
+<div class="backCBody">
+
+    <h1 class="CCoachTitle" style="font-weight:800"><i class="far fa-file-alt"></i> 新增訂單</h1>
+
+    <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb" style="border-top: 1px solid #ADADAD ">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href=@Url.Action("List", "BackHome") class="breadcrumb-link">首頁</a></li>
+                <li class="breadcrumb-item"><a href=@Url.Action("backOrderList", "Backstage") class="breadcrumb-link">訂單管理</a></li>
+                <li class="breadcrumb-item active" aria-current="page">新增訂單</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row" style="margin:auto 10px;">
+        <form asp-action="backOrderCreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="OrderMemberId" class="control-label" style="font-weight: 900;">會員帳號</label>
+                <div>
+                    <input class="form-control" style="border: 1px solid #6C6C6C; width: 500px; height: 40px; display: inline" id="accountInput" />
+                    <input asp-for="OrderMemberId" id="OrderMemberIdInput" hidden />
+                    <p id="membercheck" class="p-l-20" style="display:inline;font-weight:700"></p>
+                </div>
+                <span asp-validation-for="OrderMemberId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group p-t-10">
+                <label class="control-label " style="display: block; font-weight: 900">課程種類　</label>
+                <select name="CourseCategoryName" id="categorySelect" class="form-select" aria-label="Default select example" style="width:500px;height:40px"></select>
+            </div>
+            <div class="form-group" style="padding-top:10px">
+                <label class="control-label" style="display: block; font-weight: 900">課程分類　</label>
+                <select name="CourseDetailName" id="detailSelect" class="form-select" style="width:500px;height:40px"></select>
+            </div>
+            <div class="form-group" style="padding-top:10px">
+                <div class="m-b-10">
+                    <label class="control-label" style="display: block; font-weight: 900;display:inline">課程班名　</label><p id="people" style="display: inline; background-color: #FFB5B5 "></p>
+                </div>
+                <select asp-for="OrderClassId" id="classSelect" class="form-select" style="width:500px;height:40px;display:inline"></select>
+
+                <a class="btn btn-info   m-l-20" data-toggle="modal" data-target="#exampleModal" style="color: white" id="lessonBtn">課程資訊</a>
+
+            </div>
+
+            <div class="form-group" style="padding-top:10px">
+                <label class="control-label" style="display: block; font-weight: 900">課程費用　</label>
+                <input id="moneyInput" class="form-control" style="width:500px;height:40px" disabled>
+            </div>
+
+            <div class="form-group" style="width:65%">
+                <label asp-for="OrderPaymentId" class="control-label" style="display:block">付款方式</label>
+
+                <input value="1" asp-for="OrderPaymentId" type="radio" class="btn-check" id="success-outlined" autocomplete="off" checked>
+                <label class="btn btn-outline-success paylabel" for="success-outlined" style="font-weight: 900;">信用卡</label>
+
+                <input value="2" asp-for="OrderPaymentId" type="radio" class="btn-check" id="danger-outlined" autocomplete="off">
+                <label class="btn btn-outline-danger m-l-10 paylabel" for="danger-outlined" style="font-weight: 900; ">現金</label>
+
+                <input value="3" asp-for="OrderPaymentId" type="radio" class="btn-check" id="primary-outlined" autocomplete="off">
+                <label class="btn btn-outline-primary m-l-10 paylabel" for="primary-outlined" style="font-weight: 900; ">超商代碼</label>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="OrderStatusId" class="form-control" value="3" hidden />
+                <input asp-for="OrderTime" class="form-control" value="@DateTime.Now" type="hidden" />
+            </div>
+
+            <div class="form-group m-t-20">
+                <input type="submit" value="+ 新增" class="btn btn-warning" style="font-weight:900" id="btn" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="lessonLoad">
+
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a href="#" class="btn btn-secondary w-50 " data-dismiss="modal">OK</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+
+        const categorySelect = document.querySelector('#categorySelect')
+        const detailSelect = document.querySelector('#detailSelect')
+        const classSelect = document.querySelector('#classSelect')
+        const accountInput = document.querySelector('#accountInput')
+
+
+        async function Load() {
+
+            //categorySelect
+            const categoryResponse = await fetch('@Url.Content("~/BackApi/categorySelect")')
+            const categoryDatas = await categoryResponse.json()
+            //console.log(categoryDatas)
+            renderCategorySelect(categoryDatas)
+
+
+            //detailSelect
+            const categoryIndex = categorySelect.selectedIndex
+            const category = categorySelect.options[categoryIndex].value
+
+            const detailResponse = await fetch('@Url.Content("~/BackApi/detailSelect?CourseCategoryId=")' + category)
+            const detailDatas = await detailResponse.json()
+            //console.log(detailDatas)
+            renderdetailSelect(detailDatas)
+
+
+            //classSelect
+            const detailIndex = detailSelect.selectedIndex
+            const detail = detailSelect.options[detailIndex].value
+            //console.log(detail)
+
+            const classResponse = await fetch('@Url.Content("~/BackApi/classSelect?CourseDetailId=")' + detail)
+            const classDatas = await classResponse.json()
+            //console.log(classDatas)
+            renderclassSelect(classDatas)
+
+        }
+
+        Load()
+
+        function renderCategorySelect(datas) {
+
+            const opt0 = new Option('　請選擇')
+            categorySelect.options.add(opt0)
+
+            datas.forEach((item) => {
+                //console.log(item.courseCategoryName)
+                const opt = new Option(`　${item.courseCategoryName}`, item.courseCategoryId)
+                categorySelect.options.add(opt)
+            })
+        }
+
+        function renderdetailSelect(datas) {
+
+            detailSelect.options.length = 0;
+            const opt0 = new Option('　請選擇')
+            detailSelect.options.add(opt0)
+
+            datas.forEach((item) => {
+                //console.log(item)
+                const opt = new Option(`　${item.courseDetailName}`, item.courseDetailId)
+                detailSelect.options.add(opt)
+            })
+        }
+
+        function renderclassSelect(datas) {
+
+            classSelect.options.length = 0;
+            const opt0 = new Option('　請選擇')
+            classSelect.options.add(opt0)
+
+            datas.forEach((item) => {
+                console.log(item)
+                const opt = new Option(`　${item.courseClassName}`, item.courseClassId)
+                classSelect.options.add(opt)
+            })
+        }
+
+
+
+        //categorySelect-change
+        categorySelect.addEventListener('change', async function () {
+
+            clean();
+
+            //detailSelect
+            const index = categorySelect.selectedIndex
+            const category = categorySelect.options[index].value
+            //console.log(category)
+            const detailResponse = await fetch('@Url.Content("~/BackApi/detailSelect?CourseCategoryId=")' + category)
+            const detailDatas = await detailResponse.json()
+            renderdetailSelect(detailDatas)
+
+            //classSelect
+            const detailIndex = detailSelect.selectedIndex
+            const detail = detailSelect.options[detailIndex].value
+            const classResponse = await fetch('@Url.Content("~/BackApi/classSelect?CourseDetailId=")' + detail)
+            const classDatas = await classResponse.json()
+            renderclassSelect(classDatas)
+
+        })
+
+
+        //detailSelect-change
+    detailSelect.addEventListener('change', async function () {
+
+        clean();
+
+            const detailIndex = detailSelect.selectedIndex
+            const detail = detailSelect.options[detailIndex].value
+            const classResponse = await fetch('@Url.Content("~/BackApi/classSelect?CourseDetailId=")' + detail)
+            const classDatas = await classResponse.json()
+            renderclassSelect(classDatas)
+        })
+
+
+          //classSelect-change
+        classSelect.addEventListener('change', async function () {
+            const classIndex = classSelect.selectedIndex
+            const classId = classSelect.options[classIndex].value
+            const moneyResponse = await fetch('@Url.Content("~/BackApi/moneyInput?OrderClassId=")' + classId)
+            const moneyData = await moneyResponse.json()
+
+            $('#moneyInput').val(moneyData)
+
+            //判斷課程是否已額滿
+
+            clean();
+
+            const classpeople = await fetch('@Url.Content("~/BackApi/classpeople?OrderClassId=")' + classId)
+            const peopleData = await classpeople.json()
+
+            $('#people')[0].innerHTML = peopleData
+
+            if (peopleData == "◆ 課程已額滿 ◆")
+            {
+                $("#btn").attr("disabled", true);
+            }
+
+        })
+
+    //提示清除+按鈕正常使用
+    function clean() {
+        $("#btn").attr("disabled", false);  //按鈕可以按
+        $('#people')[0].innerHTML = ""  //沒有提示語
+    }
+
+        //accountInput
+        accountInput.addEventListener('blur', async function () {
+
+            const account = $('#accountInput').val()
+            const accountResponse = await fetch('@Url.Content("~/BackApi/accountInput?account=")' + account)
+            const accountData = await accountResponse.json()
+            //console.log(accountData)
+
+            if (accountData == '查無此帳號')
+            {
+                $('#membercheck')[0].innerHTML = accountData
+            }
+            else
+            {
+                accountData.forEach((item) =>
+                {
+                    $('#OrderMemberIdInput').val(item.logInId) // id丟給OrderMemberId
+                    $('#membercheck')[0].innerHTML = "會員姓名：" + item.logInName
+                })
+
+
+            }
+
+        })
+
+        accountInput.addEventListener('focus', function () {
+
+            $('#membercheck')[0].innerHTML = ""
+        })
+    </script>
+
+    <script>
+        //課程資訊
+        $('#lessonBtn').on('click',function () {
+
+            const classIndex = classSelect.selectedIndex
+            const classId = classSelect.options[classIndex].value
+
+            $('#lessonLoad').load('@Url.Content("~/BackApi/backOrderLessonBtn?classId=")' + classId)
+
+        })
+
+
+    </script>
+}

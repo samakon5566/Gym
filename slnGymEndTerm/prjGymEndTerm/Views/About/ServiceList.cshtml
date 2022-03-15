@@ -1,0 +1,89 @@
+﻿@model prjGymEndTerm.Models.CustomerLetter
+@{
+    ViewData["Title"] = "ServiceList";
+}
+<style>
+    label {
+        color: white
+    }
+
+    .card-body {
+        color: white
+    }
+
+</style>
+
+<section class="outer-frame">
+    <div class="div-container-out">
+        <div class="div-container">
+            <h2 class="topheader-title object-fit: cove">服務表單</h2>
+            <img src="~/img/new service.jpg" />
+        </div>
+    </div>
+</section>
+<br />
+<br />
+<main id="main" style="        background-color: #151515">
+    <div class="primary-main" data-wow-delay=".5s" style="padding:50px">
+        <div class="primary-main-inner container">
+            <div class="contact-head">
+                <h2 class="title" style="color:white;">客服諮詢</h2>
+                <!--<p class="text">感謝您的諮詢，請填寫正確資訊，我們將盡快與您聯絡</p>-->
+                <p class="text">感謝您的諮詢！<br />請填寫正確資訊，我們將盡快與您聯絡</p>
+                <br />
+            </div>
+            <div>
+                <div class="chart-calculate-form">
+                    <form method="post" id="service-from">
+                        <div>
+                            <div class="control">
+                                <input type="text" placeholder="姓名" id="name" asp-for="LetterName" style="border: 1px solid #8E8E8E; font-size: 20px; border-radius: 5px"  required pattern="[\u4e00-\u9fa5]{2,4}">
+                            </div>
+                            <div class="control">
+                                <input type="text" placeholder="電話" id="phone"   asp-for="LetterPhone" style="border: 1px solid #8E8E8E; font-size: 20px;border-radius:5px"  required   pattern="^(\(\d{3,4}-)|\d{3.4}-)?\d{7,8}$">
+                            </div>
+                            <div class="control">
+                                <input type="email" placeholder="電子郵件" id="email"  asp-for="LetterEmail"  le style="border: 1px solid #8E8E8E; font-size: 20px; border-radius: 5px"  required>
+                            </div>
+                            <div class="control">
+                                <textarea class="form-control" placeholder="反映內容" asp-for="LetterContent" rows="8" style="border: 1px solid #8E8E8E; background-color: #151515; font-size: 20px; color: white;"></textarea>
+                            </div>
+                            <div class="col-lg-8" style="display:flex;margin:auto;padding:10px;">
+                                <button type="submit" id="submit-btn" style="background-color: #FFA500; color: #151515; width: 30%; margin:20px 0 0 auto;font-size:15px;">送出</button>
+                                <input type="button" value="Demo" name="demo" id="ServiceDemo" class="col-lg-3" style="height:50px;background-color:#FFA500;color:black;margin:20px 200px 0 auto;font-size:15px;" />
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+    <script>
+        $("#ServiceDemo").click(function () {
+            $("#service-from input").eq(0).val("林露西");
+            $("#service-from input").eq(1).val("0952698566");
+            $("#service-from input").eq(2).val("a102362000@gmail.com");
+            $("#service-from textarea").eq(0).val("您好，我想詢問關於你們收費方式及課程相關問題，請專人儘快與我聯絡，謝謝");
+        });
+
+        $("#submit-btn").click(function () {
+            alert('信件已送出，感謝您的填寫，我們將請專人盡快與您聯絡');
+        });
+
+
+
+    </script>
+
+
+
+}
+
+
+

@@ -1,0 +1,95 @@
+﻿@model List<prjGymEndTerm.ViewModels.CLoginViewModel>
+@{
+    ViewData["Title"] = "edit";
+    
+}
+
+<h1>edit</h1>
+
+<table class="table table-dark table-striped ">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].LogInAccount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].LogInPassword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].LogInName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].LogInIdNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].LogInGender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].LogInBrithDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].LogInPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].LogInEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].LogInHeight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].LogInWeight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].LogInRegisterTime)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LogInAccount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LogInPassword)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LogInName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LogInIdNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LogInGender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LogInBrithDay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LogInPhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LogInEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LogInHeight)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LogInWeight)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LogInRegisterTime)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("修改資料", "Edit", new { id = item.LogInId })
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

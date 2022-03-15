@@ -1,0 +1,301 @@
+﻿@model int
+@{
+    ViewData["Title"] = "授課教練介紹";
+}
+
+@section Style{
+
+
+<style>
+    #out-filterblock{
+        overflow:hidden;
+        display:flex;
+        width:100%;
+        height:0px;
+        justify-content:center;
+        background-color:#fff;
+        transition:1s;
+    }
+    body {
+        background: rgb(0 0 0) url(../img/16img/background/pg-0319.jpg);
+        background-attachment: fixed;
+        background-size: contain;
+        background-position: bottom;
+    }
+    .drop {
+        height: 100%;
+        width: 100%;
+        margin: 2% auto;
+        display: flex;
+        background-color: rgba(0,0,0,.2);
+        align-content: space-around;
+        justify-content: space-around;
+        grid-template-columns: repeat(auto-fit, minmax(100x,1fr));
+        flex-wrap: wrap;
+    }
+
+        .drop div {
+            width: 120px;
+        }
+    #out-filterblock {
+        overflow: hidden;
+        display: flex;
+        width: 100%;
+        height: 0px;
+        justify-content: center;
+        background-color: transparent;
+        transition: 1s;
+        border-radius: 30px;
+        backdrop-filter: blur(50px);
+    }
+
+    .coach-outer-frame img {
+        object-fit: cover;
+        height: 225px;
+        width: 225px;
+        box-shadow: 0px 0px 10px 10px rgb(255 254 252 / 50%);
+    }
+
+    .courselesson-filter-box {
+        margin: 5%;
+        width: 90%;
+        display: flex;
+        justify-content: space-around;
+    }
+    .pd-45 {
+        padding-right: 100px;
+    }
+</style>
+}
+@*授課教練介紹標頭*@
+<section class="outer-frame">
+    <div class="div-container-out">
+        <div class="div-container">
+            <h2 class="topheader-title">授　課　教　練　介　紹</h2>
+            <img src="~/img/topheader/TH-GC-Coach.jpg" />
+        </div>
+    </div>
+</section>
+<div class="coach-secondary">
+</div>
+<div class="div-16Coach-all">
+    <div class="div-16Coach-window">
+        <button id="orderfilter" class="btn-16class-result"><i class="fas fa-filter"></i>教練篩選編輯</button>
+        <div class="div-16Coach-result"><span>共<span id="count"></span>/<span>@Model</span>筆</span>,<span id="filt">篩選:無,</span><span id="orderby">排序:無</span></div>
+    </div>
+</div>
+@*下拉區塊*@
+<div class="div-16Coach-filter-out" id="out-filterblock">
+    <div class="div-16Coach-filter2">
+        <div class="filterblock div-16Coach-filter-filter71 pd-45 bord-right-16">
+            <div type="button" class="btn-secondary cate btn" data-type="1">有氧</div>
+            <div type="button" class="btn-secondary cate btn" data-type="2">拳擊</div>
+            <div type="button" class="btn-secondary cate btn" data-type="3">瑜珈</div>
+            <div type="button" class="btn-secondary cate btn" data-type="4">重量訓練</div>
+            <div type="button" class="btn-secondary cate btn" data-type="5">飛輪</div>
+            <div type="button" class="btn-secondary cate btn" data-type="6">TRX</div>
+        </div>
+        <div class="filterblock div-16Coach-filter-filter71 pd-45 bord-right-16">
+            <div type="button" class="btn-secondary btn order" data-para="exp">年資</div>
+            <div type="button" class="btn-success btn order" data-para="score">評分</div>
+            <div type="button" class="btn-warning btn order" data-para="comment">評論多寡</div>
+            <div type="button" class="btn-danger btn order" data-para="order">授課數量</div>
+        </div>
+        <div class="div-16Coach-filter-filter40">
+            <div class="drop">
+            </div>
+        </div>  
+        <div class="div-16Coach-filter-filter201">
+            <button id="search" class="btn-16Coach-filter2">搜尋</button>
+            <div style="font-size:20px;color:red;top:20px;position:absolute;"><i class="fas fa-star-of-life">附註:排序最多一個,課程種類最多兩種</i></div>
+        </div>
+    </div>
+</div>
+
+
+@*授課教練一覽*@
+<section>
+    <div class="coach-outer-all">
+        <div class="coach-outer-frame">
+        </div>
+    </div>
+</section>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">所有評論</h5>
+                <a class="close" data-dismiss="modal"><i class="fas fa-times"></i></a>
+            </div>
+            <div class="modal-body">
+                @*<div class="each-comment">
+                        <div class="member-figure">
+                            <i class="fas fa-portrait"></i>
+                        </div>
+                        <div class="member-name">
+                            <p>
+                                柯冠宇
+                            </p>
+                            <h6>
+                                2021/12/05
+                            </h6>
+                        </div>
+                        <div class="comment-content">
+                            <p>
+                                教練的辛苦,我看的到!
+                            </p>
+                        </div>
+                    </div>*@
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal">關閉</a>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div style="height:@ViewBag.count12;width:100%;background-color:black;">
+
+</div>*@
+
+@section Scripts{
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/Coach.js"></script>
+    <script>
+        //$(".coach-menu .filter").click(function(){
+        //    $(this).closest(".coach-menu").toggleClass("active");
+        //});
+
+        ///教練卡片製作
+        loadcard();
+        
+        $("#search").click(function () {
+            var flag = "";
+            var flag2 = new Array;
+            $(".drop .order").each(function (index, value) {        
+                flag = $(".drop .order").attr('data-para'); //無法正常讀取
+            })
+            $(".drop .cate").each(function (index, value) {
+                flag2[index] = $(value).attr('data-type');  
+            }) 
+            loadcard(flag,flag2)
+        })
+
+        function loadcard (flag,flag2){
+                $(".coach-outer-frame").empty();
+                var datacount = 0;
+                var url = '@Url.Content("~/GroupCourse/CoachFilter?")';
+                $.ajax({
+                    url: url,
+                    type: "get",
+                    contentType: "json",
+                    data: { "flag": flag, "flag2": flag2 },
+                    traditional: true,
+                    success: function (data) {                        
+                        var frag = document.createDocumentFragment();
+                        datacount = data.length;                        
+                        $("#count").text(datacount)//目前先寫死
+                    $.each(data, function (index, value) {
+                    const figure = $("<img>").prop("src", "/img/loginfigure/" + value.coachfigure);
+                    const id = $("<p/>").addClass("coachid").text(value.coachid).prop("hidden", "hidden");
+                    const name = $("<p/>").text(value.coachname);
+                    const gradecontainer = $("<div/>").addClass("grade").text(ArrayAvg(value.coachscore));
+                    const comment = $("<i/>").addClass("fas fa-comments").text(ArraySum(value.coachcomment));
+                    const commentcontainer = $("<div/>").addClass("comment").append(comment);
+                    const skill = $("<i/>").addClass("fas fa-list");
+                    const skillcontainer = $("<div/>").addClass("specialization").append(skill);
+                    const righttop = $("<div/>").addClass("business-card-right-top").append([id,name, gradecontainer, commentcontainer, skillcontainer])
+                    if (value.coachbackground == null)
+                        value.coachbackground = "目前沒有該人員介紹";
+                    const background = $("<p/>").text(value.coachbackground);
+                    const bottom = $("<div/>").addClass("business-card-bottom").append(background);
+                    const innercontainer = $("<div/>").addClass("coach-inner-container").append([figure,righttop, bottom]);
+                    const modal = $("<a/>").prop("href", "#exampleModal").attr("data-toggle", "modal").append(innercontainer);
+                    var skilldata = data[index].coachskill;
+                    $.each(skilldata, function (index, value) {
+                        if (index != skilldata.length - 1)
+                            skill.append(value + "、");
+                        else
+                            skill.append(value)
+                    })
+                    $(frag).append(modal);
+                    })
+                $(".coach-outer-frame").append(frag);
+                $(".coach-inner-container").click(function () {
+
+                CoachId = $(this).find(".coachid").text();
+                //Ajax 非同步呼叫頁面
+                const url = `@Url.Action("CoachComment", "GroupCourse")/${CoachId}`;
+                $.getJSON(url, function (data) {
+                    $(".modal-body").empty();
+                    var frag = document.createDocumentFragment()
+                    $.each(data, function (index,value) {                        
+                        Figureblock = $("<div/>").addClass("member-figure");
+                        //頭像
+                        if(value.memberfigure!=null)
+                        {
+                            imgfigure = $("<img/>").attr("src", `/img/loginfigure/${value.memberfigure}`);
+                            Figureblock.append(imgfigure);
+                        }
+                        else{
+                            Nofigure = $("<i/>").addClass("fas fa-portrait");
+                            Figureblock.append(Nofigure);
+                        }
+                                                                                              
+                        //if (value.memberfigure == null)
+                            //nofigure = $("<i/>").addClass("fas fa-portrait");
+                        //else
+                        //    figure = $("<img/>").
+                        //評論會員資訊
+                        MemberName =   $("<p/>").text(value.membername);
+                        MemberRecord = $("<h6/>").text(value.memberRecord.replaceAll("T"," "));
+                        infoblock = $("<div/>").addClass("member-name");
+                        infoblock.append([MemberName, MemberRecord]);
+                        //會員評論
+                        MemberComment = $("<p/>").text(isnullhowtofix(value.membercomment));
+                        commentblock = $("<div/>").addClass("comment-content");
+                        commentblock.append(MemberComment);
+                        //每筆框架
+                        eachblock = $("<div/>").addClass("each-comment");
+                        eachblock.append([Figureblock, infoblock, commentblock]);
+                        $(frag).append(eachblock);
+                    })
+
+                    $(".modal-body").append(frag);
+                })
+            })
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }                    
+                })
+
+        }
+
+        function ArrayAvg(myArray) {
+            var i = 0, summ = 0, ArrayLen = myArray.length;
+            while (i < ArrayLen) {
+                summ = summ + myArray[i++];
+            }
+            if (ArrayLen != 0)
+                return (summ / ArrayLen).toFixed(1) + "分";
+            else
+                return "目前沒有任何評分";
+        }
+        function ArraySum(myArray) {
+            var i = 0, summ = 0, ArrayLen = myArray.length;
+            while (i < ArrayLen) {
+                summ = summ + myArray[i++];
+            }
+            return summ + "則評論";
+        }
+        function isnullhowtofix(data) {
+            if (data == null)
+                return "無";
+            else
+                return data;
+        }
+    </script>
+}
+

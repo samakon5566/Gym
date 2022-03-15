@@ -1,0 +1,250 @@
+﻿@model IEnumerable<prjGymEndTerm.ViewModels.CSorceViewModel>
+
+@{
+    ViewData["Title"] = "backScoreList";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+
+<style>
+    .coachTitle {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        font-weight: 800;
+        /*margin:0 0 0 500px*/
+    }
+
+    #myTable {
+        margin: 15px 0;
+        /*border: 1px solid #D0D0D0;*/
+        /*padding:10px 0 0 0*/
+    }
+    /*    tr {
+        border-bottom: 2px solid gray;
+    }*/
+    th {
+        text-align: center;
+        width: 100px;
+        /*background-color: #FBFBFF;*/
+        height: 40px
+    }
+
+    td {
+        text-align: center;
+    }
+
+    .table {
+        width: 1300px;
+        border: 1px solid #D0D0D0;
+        background-color: #FCFCFC
+    }
+
+    .backTh {
+        width: 100px
+    }
+
+    .backCBody {
+        padding: 50px 0 0 80px;
+        width: 1280px
+    }
+
+    .frame {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .form {
+        display: inline;
+        position: absolute;
+        right: 0;
+    }
+
+    body {
+        background-color: #efeff6
+    }
+
+    .divnone {
+        height: 40px
+    }
+
+    .addbtn {
+        margin: 10px 0 0 0
+    }
+
+    .thCount {
+        width: 7%
+    }
+
+    .thbtn {
+        width: 15%
+    }
+
+    .th10 {
+        width: 10%
+    }
+
+    .page-breadcrumb {
+        margin: 60px 0 15px 0;
+    }
+
+    .breadcrumb-item {
+        font-size: 15px
+    }
+
+    #myTable th {
+        background-color: #4F4F4F;
+        color: white;
+        height: 90%
+    }
+
+    #myTable a {
+        font-size: 12px
+    }
+</style>
+
+<script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
+<script src='//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js'></script>
+<link href='//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css' rel='stylesheet' />
+
+<div class="backCBody">
+    <div class="frame">
+        <h1 class="coachTitle">評論管理</h1>
+
+            @using (Html.BeginForm(FormMethod.Post, new { @class = "form" }))
+            {
+                <a asp-action="backScoreAnalysis" class="btn btn-warning rounded-pill addbtn"><i class="fas fa-chart-pie"></i> 評論分析</a>
+            }
+
+    </div>
+
+    <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb" style="border-top: 1px solid #ADADAD ">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href=@Url.Action("List", "BackHome") class="breadcrumb-link">首頁</a></li>
+                <li class="breadcrumb-item active" aria-current="page">評論管理</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4" style=" padding: 5px 0;">
+
+                    <div id="beforeSelect" class="m-b-10">
+                        <p style="display: inline; font-size: 16px; color: #71748d ">條件篩選：</p>
+                        <div id="selectDiv" style="display: inline; font-size: 16px;"></div>
+                    </div>
+
+                    <table id="myTable" class="display w-100">
+                        <thead>
+                            <tr>
+                                <th class="thCount">序號</th>
+                                <th>@Html.DisplayNameFor(model => model.LogInName)</th>
+                                <th class="th10">@Html.DisplayNameFor(model => model.CourseCategoryName)</th>
+                                <th class="thbtn">@Html.DisplayNameFor(model => model.CourseClassName)</th>
+                                <th>@Html.DisplayNameFor(model => model.CoachName)</th>
+                                <th> @Html.DisplayNameFor(model => model.Classcomment)</th>
+                                <th class="thCount"> @Html.DisplayNameFor(model => model.ClassScore)</th>
+                                <th> @Html.DisplayNameFor(model => model.ClassRecord)</th>
+                                <th class="th10">刪除</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int count = 0;
+
+                                foreach (var item in Model)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td>
+                                            @count
+                                        </td>
+                                        <td class="thCount">
+                                            @Html.DisplayFor(modelItem => item.LogInName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CourseCategoryName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CourseClassName)
+                                        </td>
+                                        <td class="thCount">
+                                            @Html.DisplayFor(modelItem => item.CoachName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Classcomment)
+                                        </td>
+                                        <td class="thCount">
+                                            @Html.DisplayFor(modelItem => item.ClassScore)顆★
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ClassRecord)
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-danger rounded-pill" href="@Url.Action("backScoreDelete", "Backstage", new { id = item.ScoreId })" onclick="return confirm ('確定要刪除嗎?')"><i class="fas fa-trash-alt"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#myTable').DataTable({
+        language: {
+            "emptyTable": "無資料...",
+            "processing": "處理中...",
+            "loadingRecords": "載入中...",
+            "lengthMenu": "每頁 _MENU_ 筆資料",
+            "zeroRecords": "無搜尋結果",
+            "info": "_START_ 至 _END_ / 共 _TOTAL_ 筆",
+            "infoEmpty": "尚無資料",
+            "infoFiltered": "(從 _MAX_ 筆資料過濾)",
+            "infoPostFix": "",
+            "search": "搜尋:",
+            "paginate": {
+                "first": "首頁",
+                "last": "末頁",
+                "next": "下一頁",
+                "previous": "上一頁"
+            },
+            "aria": {
+                "sortAscending": ": 升冪",
+                "sortDescending": ": 降冪"
+            }
+        }
+    });
+
+    var table = $('#myTable').DataTable();
+    table.columns([2, 4, 6]).flatten().each(function (colIdx) {
+        // Create the select list and search operation
+        var theadname = $("#myTable th").eq([colIdx]).text(); //used this specify table name and head
+        var select = $('<select class="m-l-10" style="width:10%"><option value="">' + theadname + '</option></select>')
+            .appendTo('#selectDiv')
+            .on('change', function () {
+                table
+                    .column(colIdx)
+                    .search($(this).val())
+                    .draw();
+            });
+
+        // Get the search data for the first column and add to the select list
+        table
+            .column(colIdx)
+            .cache('search')
+            .sort()
+            .unique()
+            .each(function (d) {
+                select.append($('<option value="' + d + '">' + d + '</option>'));
+            });
+    });
+</script>

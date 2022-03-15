@@ -1,0 +1,287 @@
+﻿.purchase-form {
+    display:flex;
+    flex-direction:column;
+    background-color: white;   
+    padding: 1%;
+    margin: 50px 0
+}
+
+#classtable {
+    border: 2px solid rgba(0,0,0,.2);
+}
+
+.flex-grop {
+    display: flex;
+    margin-top: 5px;
+    flex-wrap: wrap;
+}
+.groplb1{
+    margin-top:23px;
+}
+.groplb{
+    width:100%;
+}
+.m-left {
+    margin-left: 20px;
+}
+.outer-purchase-frame {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.Customization-form img {
+    filter: invert(1);
+}
+.img-invert img {
+    filter: invert(1);
+}
+.img-bx-16 {
+    width: 330px;
+    overflow: hidden;
+    height: 230px;
+}
+
+.img-bx-16 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.img-bx-16-pay {
+    width: 100%;
+    height: 200px
+}
+.img-bx-16-pay img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position:center;
+}
+    #foodblock div {
+        filter: invert(1);
+    }
+.grop-control {
+    width: 50%;
+    text-align: center;
+    margin-left: 10px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+.purchase-frame {
+    width: 90%;
+    padding: 3%;
+    background-color: white;
+    filter: invert(1);
+}
+
+.purchase-frame .navbar{
+    margin-bottom:2%;
+    border-bottom:1px solid rgba(0,0,0,.1)
+}
+
+/*購買方式*/
+
+.purchase-introduce-outer-frame {
+    height:700px;
+    width: 100%;
+    display: flex;
+    border:2px solid rgba(0,0,0,.2);
+}
+
+.purchase-introduce-outer-frame .purchase-introduce-pic-frame {
+    width: 70%;
+    height: 100%;
+    background-color: white;       
+}
+
+.purchase-introduce-pic-title{    
+    height:10%;
+    margin:auto;
+    display:flex;
+    align-content:center;
+}
+
+.purchase-introduce-pic-title h2 {
+    margin:auto;
+    text-align: center;
+    color: rgba(0,0,0,.3);
+    font-size:40px;
+}
+
+.purchase-introduce-pic-table{
+    height:60%;
+    padding:10%;
+    display:flex;
+}
+
+.purchase-introduce-pic-table .item{
+    margin:2%;
+    width:100%;
+    background-color:rgb(128, 128, 128,.1);
+    display:flex;
+}
+
+.item .pic{
+    width:30%;
+    overflow:hidden;
+}
+
+.item .into{
+    padding:2%;
+    width:70%;
+    display:flex;
+    justify-content:space-around;
+}
+
+.into #classname{
+    font-size:1.2em;
+    font-weight:bold;
+}
+.item .into div {
+    height: 50%;
+}
+
+.item .into > div {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-self: center;
+}
+
+
+.purchase-introduce-outer-frame .purchase-introduce-text-frame {
+    width: 30%;
+    background-color: #e8930e;
+    height: 100%;  
+    flex-wrap: wrap;
+    position:relative;
+}
+
+#price {
+    font-size:20px;
+    font-weight:900;
+    float:right;
+    width:30%;
+    text-align:center;
+    margin-top: 2%;
+    height: 60%;
+}
+
+.btn-border {
+    border: 2px solid black;
+}
+
+#check-out {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.check-out button{
+    height:100%;
+    width:100%;
+}
+    
+/*Check-out*/
+
+.Check-out-outer-frame {
+    height: 700px;
+    width: 100%;
+    border: 2px solid rgba(0,0,0,.2);
+}
+
+.Check-out-title {
+    height: 10%;
+
+}
+
+.Check-out-title h2 {
+    margin: auto;
+    text-align: center;
+    color: rgba(0,0,0,.3);
+    font-size: 40px;
+}
+
+.Check-out-table{
+    width:60%;
+    height:65%;
+    margin:0 auto;
+}
+
+.Check-out-table p {
+    text-align: center;
+    font-size: 18px;
+}
+
+.Check-out-outer-frame .confirm {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.confirm div {
+    align-self:center;
+}
+
+.list-group {
+    user-select: none;
+}
+
+/*returnUrl*/
+.div-16all {
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.div-16-window {
+    width: 70%;
+    height: 100%;
+    display: inline-block;
+    margin: 100px auto 0;
+}
+.div-returnUrl {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    font-weight: 900;
+}
+.div-returnUrl-state {
+    width: 100%;
+    font-size:48px;
+    text-align:center;
+    color:white;
+    padding-bottom:20px;
+}
+.div-returnUrl span {
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    font-weight: 500;
+}
+.div-16-window-table {
+    width: 50%;
+    height: 100%;
+    display: inline-block;
+    margin: 20px auto 50px;
+}
+.div-16-button {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom:100px;
+}
+.back-button {
+    height: 60%;
+    font-size: 24px;
+    font-weight: 900;
+    padding: 0 30px;
+}
+

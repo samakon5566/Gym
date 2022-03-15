@@ -1,0 +1,505 @@
+﻿
+@{
+    ViewData["Title"] = "backLessonList";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+
+
+<style>
+    .coachTitle {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        font-weight: 800;
+        /*margin:0 0 0 500px*/
+    }
+
+    .table {
+        /*margin: auto*/
+        /*width: 1300px;*/
+        /*border: 1px solid gray*/
+    }
+
+    .page-breadcrumb {
+        margin: 60px 0 15px 0;
+    }
+
+    .breadcrumb-item {
+        font-size: 15px
+    }
+
+    .backCBody {
+        padding: 50px 0 0 65px;
+        width: 1300px
+    }
+
+    .form {
+        display: inline;
+        position: absolute;
+        right: 0;
+    }
+
+    .calendar {
+        width: 450px;
+        height: 350px;
+        background: #fff;
+        box-shadow: 0px 1px 1px rgba(0,0,0,0.1);
+    }
+
+    .body-list ul {
+        width: 100%;
+        font-family: arial;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+        .body-list ul li {
+            width: 14.28%;
+            height: 36px;
+            line-height: 36px;
+            list-style-type: none;
+            display: block;
+            box-sizing: border-box;
+            float: left;
+            text-align: center;
+        }
+
+    .lightgrey {
+        color: #a8a8a8; /*浅灰色*/
+    }
+
+    .darkgrey {
+        color: #565656;
+    }
+
+    .green {
+        color: #6ac13c;
+    }
+
+    .greenbox {
+        border: 1px solid #6ac13c;
+        background: #e9f8df;
+    }
+
+    body {
+        background-color: #efeff6
+    }
+
+    .nav-link {
+        font-weight: 900;
+        font-size: 20px;
+    }
+
+    .frame {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .addbtn {
+        margin: 10px 10px 0 0
+    }
+
+    #timeInput {
+        margin-left: 35px
+    }
+
+
+</style>
+
+
+
+    <div class="backCBody">
+
+        <div class="frame ">
+            <h1 class="coachTitle">課程安排</h1>
+            @using (Html.BeginForm(FormMethod.Post, new { @class = "form" }))
+            {
+                <a asp-action="backCourseClassCreate" class="btn btn-warning rounded-pill addbtn"><i class="far fa-calendar-plus"></i> 新增課程</a>
+                <a asp-action="addLessonView" class="btn btn-info rounded-pill addbtn" id="lessonCount"><i class="fas fa-plus-circle"></i> 堂數 @ViewBag.lessonCount</a>
+            }
+        </div>
+
+        <div class="page-breadcrumb">
+            <nav aria-label="breadcrumb" style="border-top: 1px solid #ADADAD ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href=@Url.Action("List", "BackHome") class="breadcrumb-link">首頁</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">課程安排</li>
+                </ol>
+            </nav>
+        </div>
+
+
+        <div class="table-responsive">
+            <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4" style=" padding: 10px 0;">
+
+                <div class="tab-content" id="myTabContent" style="width:1200px;margin:auto">
+
+                    <form name="submitform">
+                        <table style="width:1200px">
+                            <tr valign="top" style="width:1400px">
+                                <td style="width:15%">
+                                    <div class="card" style="width: 90%; height: 315px">
+                                        <div class="card-body">
+                                            <h3 class="card-title border-bottom pb-2 " style="font-size:20px;font-weight:900">教室查詢</h3>
+                                            <div style="margin-left:15px;padding-top:10px">
+                                                <div class="form-group">
+                                                    <label class="control-label">日期</label>
+                                                    <input type="date" style="width:200px" id="date" name="date" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label">教室</label>
+                                                    <select class="form-select" style="width:200px" id="classroomSelect" name="ClassroomId">
+                                                        <option>　請選擇</option>
+                                                        <option value="1">　拳擊教室</option>
+                                                        <option value="2">　飛輪教室</option>
+                                                        <option value="3">　重訓教室</option>
+                                                        <option value="4">　有氧教室</option>
+                                                        <option value="5">　瑜珈教室</option>
+                                                        <option value="6">　TRX教室</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div style="display:flex;justify-content:center;margin-top:30px">
+                                                <input type="button" id="classroomBtn" class="btn btn-rounded btn-primary " value="送出" style="width:80px" />
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="width:30%; ">
+                                    <div class="card" style="width: 95%; height: 315px ">
+                                        <div class="card-body">
+                                            <h3 class="card-title border-bottom pb-2 " style="font-size:20px;font-weight:900">選擇課程</h3>
+                                            <div style="margin-left:40px;padding-top:10px">
+                                                <div class="form-group ">
+                                                    <label class="control-label">課程種類　</label>
+                                                    <select name="CourseCategoryName" id="categorySelect" class="form-select" aria-label="Default select example" style="width:200px;height:40px"></select>
+                                                </div>
+
+                                                <div class="form-group" style="padding-top:5px">
+                                                    <label class="control-label">課程分類　</label>
+                                                    <select name="CourseDetailName" id="detailSelect" class="form-select" style="width:200px;height:40px"></select>
+                                                </div>
+
+                                                <div class="form-group" style="padding-top:5px">
+                                                    <label class="control-label">課程班名　</label>
+                                                    <select name="LessonClassId" id="classSelect" class="form-select" style="width:200px;height:40px"></select>
+                                                </div>
+
+                                                <div class="form-group" style="padding-top:5px">
+                                                    <label class="control-label">課程教練　</label>
+                                                    <input id="coachName" class="form-select" style="width:200px;height:40px" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td style="width:30%">
+                                    <div class="card" style="height: 315px">
+                                        <div class="card-body">
+                                            <h3 class="card-title border-bottom pb-2 " style="font-size:20px;font-weight:900">選擇時段</h3>
+                                            <div id="timeInput">
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="divide[]" value="08"><span class="custom-control-label">08:00-09:00</span>
+                                                </label>
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="divide[]" value="09"><span class="custom-control-label">09:00-10:00</span>
+                                                </label>
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="divide[]" value="10"><span class="custom-control-label">10:00-11:00</span>
+                                                </label>
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="divide[]" value="11"><span class="custom-control-label">11:00-12:00</span>
+                                                </label>
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="divide[]" value="12"><span class="custom-control-label">12:00-13:00</span>
+                                                </label>
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="divide[]" value="13"><span class="custom-control-label">13:00-14:00</span>
+                                                </label>
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="divide[]" value="14"><span class="custom-control-label">14:00-15:00</span>
+                                                </label>
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="divide[]" value="15"><span class="custom-control-label">15:00-16:00</span>
+                                                </label>
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="divide[]" value="16"><span class="custom-control-label">16:00-17:00</span>
+                                                </label>
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="divide[]" value="17"><span class="custom-control-label">17:00-18:00</span>
+                                                </label>
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="divide[]" value="18"><span class="custom-control-label">18:00-19:00</span>
+                                                </label>
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="divide[]" value="19"><span class="custom-control-label">19:00-20:00</span>
+                                                </label>
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="divide[]" value="20"><span class="custom-control-label">20:00-21:00</span>
+                                                </label>
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="divide[]" value="21"><span class="custom-control-label">21:00-22:00</span>
+                                                </label>
+                                            </div>
+
+                                            <div style="justify-content: center; display: flex;">
+                                                <button type="submit" id="submitBtn" class="btn btn-warning" style="font-weight: 900; width: 25%">新增</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+
+                <div style="width: 100% ;padding:0 20px" id="lessonDiv">
+                    @*<div class="card-body card">
+                            <div id="lessonDiv"></div>
+                        </div>*@
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+
+        const categorySelect = document.querySelector('#categorySelect')
+        const detailSelect = document.querySelector('#detailSelect')
+        const classSelect = document.querySelector('#classSelect')
+        const coachSelect = document.querySelector('#coachSelect')
+        const planSelect = document.querySelector('#planSelect')
+
+        const classroomBtn = document.querySelector('#classroomBtn')
+        const lessonDiv = document.querySelector('#lessonDiv')
+        const date = document.querySelector('#date')
+        const classroomSelect = document.querySelector('#classroomSelect')
+
+        async function Load() {
+
+            //categorySelect
+            const categoryResponse = await fetch('@Url.Content("~/BackApi/categorySelect")')
+            const categoryDatas = await categoryResponse.json()
+            //console.log(categoryDatas)
+            renderCategorySelect(categoryDatas)
+
+
+            //detailSelect
+            const categoryIndex = categorySelect.selectedIndex
+            const category = categorySelect.options[categoryIndex].value
+
+            const detailResponse = await fetch('@Url.Content("~/BackApi/detailSelect?CourseCategoryId=")' + category)
+            const detailDatas = await detailResponse.json()
+            //console.log(detailDatas)
+            renderdetailSelect(detailDatas)
+
+
+            //classSelect
+            const detailIndex = detailSelect.selectedIndex
+            const detail = detailSelect.options[detailIndex].value
+            //console.log(detail)
+
+            const classResponse = await fetch('@Url.Content("~/BackApi/classSelect?CourseDetailId=")' + detail)
+            const classDatas = await classResponse.json()
+            //console.log(classDatas)
+            renderclassSelect(classDatas)
+
+
+            //coachSelect
+            const coachResponse = await fetch('@Url.Content("~/BackApi/coachSelect?SkillCourseCategoryId=")' + category)
+            const coachDatas = await coachResponse.json()
+            //console.log(coachDatas)
+            rendercoachSelect(coachDatas)
+
+        }
+
+        Load()
+
+        function renderCategorySelect(datas) {
+
+            const opt0 = new Option('　請選擇')
+            categorySelect.options.add(opt0)
+
+            datas.forEach((item) => {
+                //console.log(item.courseCategoryName)
+                const opt = new Option(`　${item.courseCategoryName}`, item.courseCategoryId)
+                categorySelect.options.add(opt)
+            })
+        }
+
+        function renderdetailSelect(datas) {
+
+            detailSelect.options.length = 0;
+            const opt0 = new Option('　請選擇')
+            detailSelect.options.add(opt0)
+
+            datas.forEach((item) => {
+                //console.log(item)
+                const opt = new Option(`　${item.courseDetailName}`, item.courseDetailId)
+                detailSelect.options.add(opt)
+            })
+        }
+
+        function renderclassSelect(datas) {
+
+            classSelect.options.length = 0;
+            const opt0 = new Option('　請選擇')
+            classSelect.options.add(opt0)
+
+            datas.forEach((item) => {
+                console.log(item)
+                const opt = new Option(`　${item.courseClassName}`, item.courseClassId)
+                classSelect.options.add(opt)
+            })
+        }
+
+
+        function rendercoachSelect(datas) {
+
+            coachSelect.options.length = 0;
+            const opt0 = new Option('　請選擇')
+            coachSelect.options.add(opt0)
+
+            datas.forEach((item) => {
+                //console.log(item)
+                const opt = new Option(`　${item.logInName}`, item.skillCoachId)
+                coachSelect.options.add(opt)
+            })
+        }
+
+        function renderplanSelect(datas) {
+
+            const opt0 = new Option('　請選擇')
+            planSelect.options.add(opt0)
+
+            datas.forEach((item) => {
+                console.log(item)
+                const opt = new Option(`　${item.discountPlan1}`, item.discountPlanId)
+                planSelect.options.add(opt)
+            })
+        }
+
+        //categorySelect-change
+        categorySelect.addEventListener('change', async function () {
+
+            //detailSelect
+            const index = categorySelect.selectedIndex
+            const category = categorySelect.options[index].value
+            //console.log(category)
+            const detailResponse = await fetch('@Url.Content("~/BackApi/detailSelect?CourseCategoryId=")' + category)
+            const detailDatas = await detailResponse.json()
+            renderdetailSelect(detailDatas)
+
+            //classSelect
+            const detailIndex = detailSelect.selectedIndex
+            const detail = detailSelect.options[detailIndex].value
+            const classResponse = await fetch('@Url.Content("~/BackApi/classSelect?CourseDetailId=")' + detail)
+            const classDatas = await classResponse.json()
+            renderclassSelect(classDatas)
+
+            //coachSelect
+            const coachResponse = await fetch('@Url.Content("~/BackApi/coachSelect?SkillCourseCategoryId=")' + category)
+            const coachDatas = await coachResponse.json()
+            rendercoachSelect(coachDatas)
+        })
+
+
+        //detailSelect-change
+        detailSelect.addEventListener('change', async function () {
+            const detailIndex = detailSelect.selectedIndex
+            const detail = detailSelect.options[detailIndex].value
+            const classResponse = await fetch('@Url.Content("~/BackApi/classSelect?CourseDetailId=")' + detail)
+            const classDatas = await classResponse.json()
+            renderclassSelect(classDatas)
+        })
+
+    //classSelect-change
+        classSelect.addEventListener('change', async function () {
+            const classIndex = classSelect.selectedIndex
+            const classID = classSelect.options[classIndex].value
+            const classCoachResponse = await fetch('@Url.Content("~/BackApi/classCoachName?classID=")' + classID) 
+            const classCoach = await classCoachResponse.json()
+            $('#coachName').val(classCoach)
+        })
+
+    //classroomSelect-change
+    //classroomSelect.addEventListener('change', async function () {
+
+    //    const classroomIndex = classroomSelect.selectedIndex
+    //    const ClassroomId = classroomSelect.options[classroomIndex].value
+
+    //    })
+
+        //查詢課堂
+        $('#classroomBtn').click(function () {
+            const day = date.value
+            const classroomIndex = classroomSelect.selectedIndex
+            const ClassroomId = classroomSelect.options[classroomIndex].value
+            $('#lessonDiv').load('@Url.Content("~/BackApi/lessonList?day=")' + day + '&ClassroomId=' + ClassroomId)
+        })
+
+
+
+</script>
+
+
+    <script>
+    $('#submitBtn').click(function (event) {
+
+        event.preventDefault();
+        const formData = new FormData(document.submitform)
+
+        fetch('@Url.Content("~/Backstage/addLesson")',
+            {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then((data) =>
+            {
+                if (data.length < 5)
+                {
+                    $('#lessonCount')[0].innerHTML = '<i class="fas fa-plus-circle"></i> 堂數 ' + data
+                }
+                else
+                {
+                    swal("無法新增", data, "warning")
+                }
+
+            });
+
+        })
+
+    </script>
+
+    <script>
+        //勾選時段改變name 讓值可以丟給Action
+        $('#timeInput input').change(function () {
+
+            if ($(this).attr('checked', true)) {
+                $(this).attr('name', 'time')
+            }
+            else {
+                $(this).attr('name', 'divide[]')
+            }
+
+        })
+    </script>
+
+
+}
+

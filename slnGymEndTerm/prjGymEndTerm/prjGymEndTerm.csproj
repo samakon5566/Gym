@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>	
+    <TargetFramework>net5.0</TargetFramework>
+	  <!--<GenerateAssemblyInfo>false</GenerateAssemblyInfo>-->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="obj\Debug\net5.0\.NETCoreApp,Version=v5.0.AssemblyAttributes.cs" />
+    <Compile Include="obj\Debug\net5.0\prjGymEndTerm.AssemblyInfo.cs" />
+    <Compile Include="obj\Debug\net5.0\prjGymEndTerm.RazorAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="obj\prjGymEndTerm.csproj.nuget.dgspec.json" />
+    <Content Include="obj\project.assets.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="bin\Debug\net5.0\ref\" />
+    <Folder Include="obj\Debug\net5.0\ref\" />
+    <Folder Include="wwwroot\css\calendar\" />
+    <Folder Include="wwwroot\img\topheader\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="obj\Debug\net5.0\prjGymEndTerm.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\net5.0\prjGymEndTerm.assets.cache" />
+    <None Include="obj\Debug\net5.0\prjGymEndTerm.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\net5.0\prjGymEndTerm.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="obj\Debug\net5.0\prjGymEndTerm.RazorAssemblyInfo.cache" />
+    <None Include="obj\prjGymEndTerm.csproj.nuget.g.props" />
+    <None Include="obj\prjGymEndTerm.csproj.nuget.g.targets" />
+    <None Include="obj\project.nuget.cache" />
+  </ItemGroup>
+
+</Project>

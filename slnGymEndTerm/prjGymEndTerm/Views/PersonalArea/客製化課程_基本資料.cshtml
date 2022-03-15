@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewData["Title"] = "客製化課程_基本資料";
+}
+<style>
+    .div_all {
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+    }
+
+    .div_window {
+        margin: 0 auto;
+        width: 80%;
+        padding-top: 150px;
+        height: 2000px;
+        display: flex;
+    }
+    .div_midline{
+        /*基本資料右框線條*/
+        border-right:20px white dashed;
+        border-width:5px;
+    }
+    .div_out_InformationExpected {
+        /*基本資料 和 預期結果的外層*/
+        width: 50%;
+        height:30%;
+        padding:0 5%;
+    }
+    .form_informationExpected {
+        /*基本資料Form 預期結果Form*/
+        width: 100%;
+        height: 100%;
+    }
+    .div_form_cell{
+        /*Form裡面元素外圍div*/
+        width:100%;
+        height:25%;
+        padding:1em;
+    }
+    .div_form_submit {
+        /*botton至中*/
+        text-align: center;
+        line-height: 150px;
+    }
+</style>
+<div class="div_all">
+    <div class="div_window">
+        <div class="div_out_InformationExpected div_midline">
+            <form class=".form_informationExpected">
+                <div class="div_form_cell">
+                    <label for="in_height" style="font-size:24px; color:white">身　高</label>
+                    <input id="in_heigh" style="background-color: #ceefe4;margin-top:20px;" class="form-control" value="" type="number" required />
+                </div>
+                <div class="div_form_cell">
+                    <label for="in_weight" style="font-size:24px; color:white">體　重</label>
+                    <input id="in_weight" style="background-color: #ceefe4;margin-top:20px;" class="form-control" value="" type="number" required />
+                </div>
+                <div class="div_form_cell">
+                    <label for="in_aget" style="font-size:24px; color:white">年　齡</label>
+                    <input id="in_age" style="background-color: #ceefe4;margin-top:20px;" class="form-control" value="" type="number" required />
+                </div>
+                <div class="div_form_cell div_form_submit">
+                    <button style="background-color: #ceefe4; font-size: 20px; " class="btn btn-light">計　算　結　果</button>
+                </div>
+                <div class="div_form_cell div_form_submit">
+                    <label for="in_weight" style="font-size:24px; color:white">T　D　E　E</label><br />
+                    <label for="in_weight" style="font-size:24px; color:white">0</label>
+                </div>
+            </form>
+        </div>
+        <div class="div_out_InformationExpected">
+            <form class=".form_informationExpected">
+                <div class="div_form_cell">
+                    <label for="in_weight" style="font-size:24px; color:white">體　重</label>
+                    <input id="in_weight" style="background-color: #ceefe4;margin-top:20px;" class="form-control" value="" type="number" required />
+                </div>
+                <div class="div_form_cell">
+                    <label for="in_aget" style="font-size:24px; color:white">年　齡</label>
+                    <input id="in_age" style="background-color: #ceefe4;margin-top:20px;" class="form-control" value="" type="number" required />
+                </div>
+                <div class="div_form_cell div_form_submit">
+                    <button style="background-color: #ceefe4; font-size: 20px; " class="btn btn-light">計　算　結　果</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

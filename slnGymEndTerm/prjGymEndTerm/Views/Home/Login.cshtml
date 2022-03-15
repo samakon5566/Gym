@@ -1,0 +1,312 @@
+﻿@model int
+@{
+    ViewData["Title"] = "List";
+}
+
+<style>
+    .demo-button {
+        text-align:center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        font-weight: 700;
+        /*        height: 50px;*/
+        /*        text-align:center;*/
+        background-color: #FFA500;
+        color: #151515;
+        width: 30%;
+        margin: 20px;
+        font-size: 15px;
+        cursor: pointer;
+    }
+</style>
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <title>登入</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="Phoenixcoded" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+<body>
+    <!-- [ auth-signin ] start -->
+    <div class="row" style="width: 100%; margin:200px auto; ">
+        <div class="col-lg-6" style="margin:80px auto;padding:0 200px">
+            <div class="section-title chart-calculate-title">
+                <span style="color:#FFA500">Login Member</span>
+                <h2>會員登入</h2>
+            </div>
+            <div class="chart-calculate-form">
+                <form action="Login" method="post" id="Login-form" name="LoginData">
+                    <div>
+                        <div class="col-sm-6">
+                            <input type="text" name="txtAccount" placeholder="使用者帳號" style="width:210%;border:1px solid #8E8E8E">
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="password" name="txtPassword" placeholder="使用者密碼" style="width:210%;border:1px solid #8E8E8E">
+                        </div>
+
+                        <div class="custom-control custom-checkbox text-left mb-4 mt-2" style="margin:0 20px">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1" style="color:#E0E0E0;">記住我的帳號</label>
+                        </div>
+                        <div class="col-lg-12" style="display:flex;margin:auto">
+                            <button id="Login"  type="button" style="background-color: #FFA500; color: #151515; width: 30%; margin:20px auto;font-size:15px" >登入</button>
+                            <a class="demo-button" id="Coach-Demo">教練Demo</a>
+                            <a class="demo-button" id="Member-Demo">會員Demo</a>
+                            <a class="demo-button" id="Admin-Demo1" style="width:32%">管理者Demo</a>
+                        </div>
+
+                        <hr style="background-color: #5B5B5B ">
+                        <div>
+                            <div style=" text-align: center ">
+                                <p class="mb-2 text-muted">忘記密碼? 　<a data-toggle="modal" href="#forgetpassword" class="f-w-400" style="color: #FFA500">找回密碼</a></p>
+                            </div>
+                            <div style="text-align: center ">
+                                <p class="mb-0 text-muted">還不是會員?　<a asp-action="create" style="color: #FFA500">建立帳號</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="modal fade" id="forgetpassword" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content" style="width:80%">
+                    <div class="modal-header">
+                        <h5 class="modal-title " id="exampleModalLabel">忘記密碼</h5>
+                        <a class="close" data-dismiss="modal"><i class="fas fa-times"></i></a>
+                    </div>
+                    <div style="margin: auto; position: relative" class="modal-body text-center">
+                        <p style="color:#5B5B5B;margin-top:20px">輸入您的帳號與電子郵件<br>我們將通過電子郵件發送給您，以助您重設新密碼。</p>
+                    </div>
+                    <div style=" margin: auto; position: relative" class="login-form formplate">
+                        <form id="forgetForm">
+                            <div>
+                                <label>　　帳號:</label>
+                                <input placeholder="輸入帳號" name="email" type="email" id="accountInput">
+                            </div>
+                            <div>
+                                <label>電子郵件:</label>
+                                <input placeholder="輸入電子郵件" name="email" type="email" id="emailInput">
+                            </div>
+                        </form>
+                        <P style="margin: 20px auto; display: flex; justify-content: center; color: whitesmoke; background-color: #9D9D9D " id="check"></P>
+                        <hr />
+                        <input style="width: 25%; margin:auto; position: relative" type="submit" value="送出" class="btn btn-block btn-primary mb-4" id="submitBtn">
+                        <div style="display:flex;justify-content:center">
+                            <a class="demo-button" id="errDemo">錯誤Demo</a>
+                            <a class="demo-button" id="rightDemo">正確Demo</a>
+                        </div>
+                        <form id="form">
+                            <input type="text" name="MemberName" id="MemberName" hidden>
+                            <input type="text" name="password" id="password" hidden>
+                            <input type="text" name="MemberEmail" id="MemberEmail" hidden>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" hidden="hidden" id="trigger-no-session" @*hidden="hidden"*@ class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            trigger no-session
+        </button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">警告</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        請先登入您的帳號
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">確認</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img src="~/img/16img/tdeeback1.jpg" style="margin-top: 200px; position: absolute; opacity: 0.3; height: 100%; width: 100%; z-index: -1; top: -200px " />
+    </div>
+    <!-- [ auth-signin ] end -->
+    <!-- Required Js -->
+    <script src="assets/js/vendor-all.min.js"></script>
+    <script src="assets/js/plugins/bootstrap.min.js"></script>
+    <script src="assets/js/pcoded.min.js"></script>
+    @section Scripts{
+        <script>
+            $("#Login").click(function () {
+                const formData = new FormData(document.LoginData);
+                fetch('@Url.Content("~/api/Login")', {
+                    method: 'POST',  //GET、POST、PUT、DELETE
+                    body: formData    //json string
+                }).then(response => response.text())
+                    .then(data => {
+                        if (data == 1)
+                            window.location.href = '@Url.Action("List", "BackHome")';
+                        else if (data == 2)
+                            window.location.href = '@Url.Action("List", "PersonalArea")';
+                        else if (data == 3)
+                            window.location.href = '@Url.Action("List", "Coach")';
+                        else {
+                            swal('登入失敗','','warning');
+                        }
+                    })
+            })
+
+
+                $("#Coach-Demo").click(function () {
+                    $("#Login-form input").eq(0).val("jason555");
+                    $("#Login-form input").eq(1).val("jason123");
+                })
+                $("#Member-Demo").click(function () {
+                    $("#Login-form input").eq(0).val("uCNT3829");
+                    $("#Login-form input").eq(1).val("kuGZ8535");
+                })
+                $("#Admin-Demo1").click(function () {
+                    $("#Login-form input").eq(0).val("FhRl1481");
+                    $("#Login-form input").eq(1).val("TlVq0105");
+                })
+            $("#errDemo").click(function () {
+                $("#forgetForm input").eq(0).val("FhRl148");
+                $("#forgetForm input").eq(1).val("a102362000@gmail.com");
+            })
+            $("#rightDemo").click(function () {
+                $("#forgetForm input").eq(0).val("FhRl1481");
+                $("#forgetForm input").eq(1).val("a102362000@gmail.com");
+            })
+
+                $(function () {
+                    console.log(@Model);
+                    if(!@Model)
+                    $("#trigger-no-session").trigger("click");
+                })
+        </script>
+
+
+        @*忘記密碼*@
+        <script>
+
+            const submitBtn = document.querySelector('#submitBtn')
+
+
+            submitBtn.addEventListener('click', async function () {
+
+            const account = $('#accountInput').val()
+            const email = $('#emailInput').val()
+
+            const passwordResponse = await fetch('@Url.Content("~/BackApi/ForgotPassword?account=")' + account + '&email=' + email)
+
+
+            const passwordDatas = await passwordResponse.json()
+            //console.log(passwordDatas)
+
+             if (passwordDatas == '沒有資料')
+             {
+                 $('#check')[0].innerHTML = '您的資料並未在系統中，請<a href="@Url.Action("create", "Home")" style="margin-left:10px">註冊會員</a>'
+             }
+             else
+             {
+                 console.log("A")
+                 sendLetterDetail(passwordDatas)
+                 console.log("B")
+
+
+                 // 創建事件物件
+                 var evt = document.createEvent("HTMLEvents");
+                 // 初始化
+                 evt.initEvent("submit", false, false);
+                 //觸發事件
+                 document.querySelector('#form').dispatchEvent(evt)
+
+
+             }
+
+    })
+
+            //填寄信需要的資料進隱藏的input
+    function sendLetterDetail(passwordDatas) {
+
+        $('#MemberName').val(passwordDatas.logInName)
+        $('#password').val(passwordDatas.logInPassword)
+        $('#MemberEmail').val(passwordDatas.logInEmail)
+
+    }
+
+
+        </script>
+
+
+
+        @*點進Input時清除提醒*@
+        <script>
+
+            $('#accountInput').focus(function () { $('#check')[0].innerHTML = "" });
+            $('#emailInput').focus(function () { $('#check')[0].innerHTML = "" });
+
+        </script>
+
+
+
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+        <script type="text/javascript">emailjs.init('user_bPwkeJvMOntP9asXPUyOe')</script>
+
+
+        @*寄信*@
+        <script>
+
+        const btn = document.getElementById('button');
+
+        document.getElementById('form').addEventListener('submit', function (event) {
+
+            event.preventDefault();
+
+            const serviceID = 'default_service';
+            const templateID = 'template_3w1awpf';
+
+            emailjs.sendForm(serviceID, templateID, this)
+                .then(() => {
+
+                    confirm('信件已送出，請至留存的Email收信，謝謝您!')
+
+                    if (confirm) {
+                        console.log("A")
+                        window.location.href = '@Url.Action("Login", "Home")?flag=1';
+
+                    }
+
+                }
+                    , (err) => {
+                        alert('您的資料並未在系統中，是否輸入錯誤?');
+                    });
+        });
+
+        </script>
+
+
+    }
+</body>
+</html>
+

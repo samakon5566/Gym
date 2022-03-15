@@ -1,0 +1,69 @@
+﻿@model prjGymEndTerm.ViewModels.CCustomerLetterViewModel
+
+@{
+    ViewData["Title"] = "backCustomerReplyEdit";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+
+<style>
+    CCoachTitle {
+        /*text-align: center;*/
+        text-decoration: underline
+    }
+
+    .backCBody {
+        padding: 50px 0 0 200px
+    }
+</style>
+
+
+<div class="backCBody">
+
+    <h1 class="CCoachTitle" style="font-weight:800"><i class="far fa-file-alt"></i> 回覆信件</h1>
+
+    @*<h4>LogIn</h4>*@
+
+    <hr />
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="backCustomerReplyEdit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input type="hidden" name="LetterId" value="@Model.LetterId" />
+
+                <div class="form-group">
+                    <label asp-for="LetterContent" class="control-label"></label>
+                    <input asp-for="LetterContent" class="form-control"  />
+                    <span asp-validation-for="LetterContent" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LetterStatusId" class="control-label"></label>
+                    <input asp-for="LetterStatusId" class="form-control" />
+                    <span asp-validation-for="LetterStatusId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LetterManergerId" class="control-label"></label>
+                    <input asp-for="LetterManergerId" class="form-control" />
+                    <span asp-validation-for="LetterManergerId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LetterManergerContent" class="control-label"></label>
+                    <input asp-for="LetterManergerContent" class="form-control" />
+                    <span asp-validation-for="LetterManergerContent" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="回覆信件" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewData["Title"] = "Video_List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style{
+    <style>
+        #myTable {
+            text-align: center;
+            width: 1140px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #myTable_length {
+            color: white;
+        }
+
+        #myTable_filter {
+            color: white;
+        }
+
+        #myTable_info {
+            color: white;
+        }
+        #myTable_paginate > a {
+            filter: invert(1);
+            /*filter: grayscale(1);*/
+            /*            filter: brightness(1);*/
+        }
+
+        #myTable_paginate > span {
+            filter: invert(1);
+            /*filter: grayscale(1);*/
+            /*            filter: brightness(1);*/
+        }
+
+        #myTable thead {
+            font-size: 22px;
+        }
+
+        #myTable tbody {
+            color: black;
+            font-size: 18px;
+        }
+
+
+        .container > div > a {
+            color: #FFA500;
+        }
+
+            .container > div > a:visited {
+                color: #FFA500;
+            }
+    </style>
+}
+
+<section class="class-details-section spad-3">
+    <div class="container">
+        <div>
+            <a asp-controller="Coach" asp-action="List" style="color:#FFF">
+                教練首頁
+            </a>
+            <label style="color:#FFF">
+                >
+            </label>
+            <a href="#">
+                目前頁面
+            </a>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="class-details-text">
+                    <a asp-action="Video_Create" style="float:right;color:white">+新增資料</a>
+                    <div class="cd-text" style="color:white">
+                        <select id="course">
+                            <option>請選擇課程分類</option>
+                        </select>
+                    </div>
+                    <div class="cd-trainer">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="cd-trainer-pic" id="VideoPartial" style="color:white">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts{
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
+    <script src='//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js'></script>
+    <link href='//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css' rel='stylesheet' />
+
+    <script>
+        const selCourse = document.querySelector('#course');
+
+        $(function () {
+            $("#VideoPartial").load('@Url.Content("~/Coach/_Video_List")', LoadDataTable);
+        })
+
+        function LoadDataTable() {
+            $('#myTable').DataTable({
+                language: {
+                    "emptyTable": "無資料...",
+                    "processing": "處理中...",
+                    "loadingRecords": "載入中...",
+                    "lengthMenu": "每頁 _MENU_ 筆資料",
+                    "zeroRecords": "無搜尋結果",
+                    "info": "_START_ 至 _END_ / 共 _TOTAL_ 筆",
+                    "infoEmpty": "尚無資料",
+                    "infoFiltered": "(從 _MAX_ 筆資料過濾)",
+                    "infoPostFix": "",
+                    "search": "搜尋:",
+                    "paginate": {
+                        "first": "首頁",
+                        "last": "末頁",
+                        "next": "下一頁",
+                        "previous": "上一頁"
+                    },
+                    "aria": {
+                        "sortAscending": ": 升冪",
+                        "sortDescending": ": 降冪"
+                    }
+                }
+            });
+        }
+
+        async function LoadCourse() {
+            const response = await fetch('@Url.Content("~/api/selectCategoty")');
+            RenderCourse(await response.json())
+        }
+        LoadCourse();
+
+
+        selCourse.addEventListener('change', async function () {
+            const selCourseIndex = selCourse.selectedIndex;
+            console.log(selCourseIndex);
+            $("#VideoPartial").load('@Url.Content("~/Coach/_Video_List?FitnessVideo_ID=")' + selCourseIndex, LoadDataTable);
+        })
+
+        function RenderCourse(datas) {
+            datas.forEach((item) => {
+                const opt = new Option(item.courseCategoryName, item.courseCategoryId);
+                selCourse.options.add(opt)
+            })
+        }
+
+    </script>
+}

@@ -1,0 +1,9 @@
+﻿@model List<int>
+
+@{
+    ViewData["Title"] = "home";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+
+<h1>home</h1>
+<p>@Html.DisplayFor(model => model[0])</p>

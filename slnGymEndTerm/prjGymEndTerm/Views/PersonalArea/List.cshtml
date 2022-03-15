@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewData["Title"] = "PersonalArea_List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style{
+<style>       
+    .calendat-19 {
+        position: relative;
+        padding-top: 30px;
+        padding-right: 30px;
+        padding-left: 30px;
+        padding-bottom: 20px;
+        background-color: rgb(255,255,255);
+        width: 1200px;
+        height: 600px;
+        border-bottom-right-radius: 30px;
+        border-bottom-left-radius: 30px;
+        font-size:16px;
+    }
+    .calendatHeader-19 {
+        width: 1200px;
+        height: 50px;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        background-color: #FFA500;
+    }
+</style>
+}
+<!-- Class Timetable Section Begin -->
+<section class="contact-section  spad-2">           
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12" style="margin-left:50px">                    
+                    <div style="float:right;">
+                        <a id="attend" style="color:white;font-size:20px;background-color:#0088A8" class="btn btn-primary">上課打卡</a>
+                    </div>                    
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px;">
+                <div class="col-12">
+                    <div class="calendatHeader-19">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="calendat-19">
+                        <div id='calendar'></div>
+                        <div id="dialogClockIn" style=" align-items: center; " class="CourseDetail" title="請假">
+                            <form name="leaveForm">
+                                <input type="hidden" name="lessonId" id="lessonId" />
+                                <label style="font-weight:500">課程:</label>
+                                <h5 id="title" style="font-weight:500"></h5>
+                                <label style="margin-top:10px;font-weight:500">時間:</label>
+                                <h5 id="test"></h5>
+                                <a id="leave" style="margin-top:10px;color:white;font-size:20px;background-color:#0088A8;" class="btn btn-primary ">請假</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+</section>
+<!-- Class Timetable Section End -->
+
+@section Scripts{
+<link href="~/js/CoachCourse/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/js/CoachCourse/jquery-ui.min.js"></script>
+<script src="~/js/CoachCourse/main.js"></script>
+<link href="~/js/CoachCourse/main.css" rel="stylesheet" />
+<script src="~/js/CoachCourse/locales-all.js"></script>
+
+<script>
+    $(function () {
+        $("#dialogClockIn").hide();
+    });
+    var initial = "timeGridWeek";
+    document.addEventListener('DOMContentLoaded', LoadCalendat);
+
+    function LoadCalendat() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: initial,
+            locale: 'zh-tw',
+            height: 470,
+            slotMinTime: "08:00:00",
+            slotMaxTime: "23:00:00",
+            slotDuration: '01:00:00',
+            slotLabelFormat: {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            },
+            allDaySlot: false,
+            /* navLinks: true,*/
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'timeGridWeek,timeGridDay,listWeek'
+            },
+            views: {
+                timeGrid: {
+                    displayEventTime: false
+                }
+            },
+            eventClick: async function (info) {
+                $("#dialogClockIn").dialog({
+                    height: 250,
+                    width: 250
+                });
+                var title = info.event.title;
+                var id = info.event.id;
+                var time = info.event.startStr;
+                var a = time.indexOf("+");
+                $("#test").text(time.substring(0, a));
+                $("#title").text(title);
+                $("#lessonId").val(id);
+            },
+            dateClick: function (info) {
+                $("#dialogLesson").dialog({
+                    height: 500,
+                    width:400
+                });
+                var time = info.dateStr;
+                var a = time.indexOf("+");
+                $("#courseTime").val(time.substring(0, a));
+            },
+            
+            eventBackgroundColor: '#FFA500',
+            eventTextColor: '#000000',
+            events: '@Url.Content("~/api/selectMemberClass")'
+        });
+        calendar.render();
+    };
+
+    $("#attend").click(async function () {
+        let response = await fetch('@Url.Content("~/PersonalArea/AttendUpdate")');        
+        let num = await response.text();
+        if(num != 0)
+        {
+            alert("打卡成功");
+        }
+        else
+        {
+            alert("打卡失敗");
+        }       
+            
+    })
+
+     $("#leave").click(function () {
+        const formData = new FormData(document.leaveForm)
+        fetch('@Url.Content("~/PersonalArea/LeaveUpdate")', {
+            method: 'POST',
+            body: formData
+        }).then(async function (response) {
+            let num = await response.text();
+            if (num == "0")
+                alert("請假失敗");
+            else
+                alert("請假成功");
+        })
+    })
+
+    //$("#leave").click(function () {
+    //    let response = await fetch('@Url.Content("~/PersonalArea/LeaveUpdate")');        
+    //    let num = await response.text();
+    //    if(num != 0)
+    //    {
+    //        alert("請假成功");
+    //    }
+    //    else
+    //    {
+    //        alert("請假失敗");
+    //    }       
+    //})        
+</script>
+}

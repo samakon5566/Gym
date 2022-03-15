@@ -1,0 +1,307 @@
+﻿@model prjGymEndTerm.ViewModels.CLoginViewModel
+
+@{
+    ViewData["Title"] = "基本資料";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style{
+    <style>
+        .Breadcrumb-text-19 a{
+            color: #FFF;
+        }
+        .Breadcrumb-text-19 a:visited {
+            color: #FFF;
+        }
+        .Breadcrumb-text-19  a:hover {
+            color: #FFF;
+            text-decoration: underline;
+        }
+        .Breadcrumb-text-19 > span {
+            color: #FFA500;
+        }
+        .Coach-panel-19 {
+            color: #FFF;
+            background-color: #272727;
+            border-radius: 15px;
+            padding: 20px 20px 20px 20px;
+            margin-top: 0px;
+        }
+        .Coach-panel-row-19 {
+            margin-top: 10px;
+            color: #FFF;
+        }
+        .Coach-panel-19 .Coach-panel-row-19 a:hover {
+            color: #F36100;
+            cursor: grab;
+            text-decoration: underline;
+        }
+        .Coach-panel-19 .Coach-panel-row-19 > input {
+            font-size: 14px;
+            color: #c4c4c4;
+            width: 90%;
+            height: 50px;
+            padding-left: 20px;
+            padding-right: 5px;
+            background: black;
+            margin-bottom: 20px;
+            border: 1px solid #8E8E8E;
+        }
+            .Coach-panel-19  button {
+                font-size: 14px;
+                color: #ffffff;
+                text-transform: uppercase;
+                font-weight: 700;
+                width: 20%;
+                border: none;
+                padding: 14px 0 12px;
+            }
+        .coach-image-19{
+            margin-top:5%;
+        }
+        .coach-image-19 > img {
+            border-radius: 50%;
+            height: 150px;
+            width: 150px;
+        }
+
+        input[type="date"] {
+            position: relative;
+            padding: 10px;
+        }
+
+            input[type="date"]::-webkit-calendar-picker-indicator {
+                color: transparent;
+                background: none;
+                z-index: 1;
+            }
+
+            input[type="date"]:before {
+                color: transparent;
+                background: none;
+                display: block;
+                font-family: 'FontAwesome';
+                content: '\f073';
+                /* This is the calendar icon in FontAwesome */
+                width: 15px;
+                height: 20px;
+                position: absolute;
+                top: 12px;
+                right: 6px;
+                color: #999;
+            }
+
+    </style>
+}
+<!-- Contact Section Begin -->
+<section class="contact-section spad-3">
+    <div class="container">
+        <div class="Breadcrumb-text-19">
+            <a asp-controller="PersonalArea" asp-action="List">
+                會員首頁
+            </a>
+            <label style="color:#FFF">
+                >
+            </label>
+            <span >
+                目前頁面
+            </span>
+        </div>
+        <div class="tab-regular" style="width: 840px;margin:auto;position:relative">
+            <ul style="font-size: 18px; color: black; margin-left: 50px" class="nav nav-tabs " id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a style="color: #ffa500; font-weight:900" class="nav-link active show" id="基本資料-tab" data-toggle="tab" href="#基本資料" role="tab" aria-controls="基本資料" aria-selected="true">基本資料</a>
+                </li>
+                <li class="nav-item" >
+                    <a style="color: #ffa500; font-weight: 900" class="nav-link" id="修改密碼-tab" data-toggle="tab" href="#修改密碼" role="tab" aria-controls="修改密碼" aria-selected="false">修改密碼</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-lg-8">
+                <div class="tab-content" id="myTabContent" style="margin-top: 5px; margin: auto; position: relative; width: 800px">
+                    <div class="tab-pane fade" id="修改密碼" role="tabpanel" aria-labelledby="修改密碼-tab" style=" margin-top: 10px; margin: auto; position: relative; ">
+                        <div class="Coach-panel-19">
+                                <div class="Coach-panel-row-19">
+                                    <label>會員帳號:</label>
+                                    <label>@Model.LogInAccount</label>
+                                </div>
+                                <div class="Coach-panel-row-19" id="ShowPwdDiv">
+                                    <label>舊密碼:</label> <p class="w-25 m-l-20 pasP1 " style="display:inline;color:red " id="pasP1"></p>
+                                    <input id="OldPwd" class="form-control" />
+                                    <button type="button" id="ModiPwd" style="background-color:#FFA500;color:black">修改密碼</button>
+                                    <button type="button" id="Demo" style="background-color:#FFA500;color:black">Demo</button>
+                                </div>
+                                <div class="Coach-panel-row-19" id="ModiPwdDiv">
+                                    <label>新密碼:</label>
+                                    <input id="NewPwd" class="form-control" />
+                                    <label>再次輸入新密碼:</label>
+                                    <input id="NewPwd2" class="form-control" />
+                                    <button type="button" id="ModiPwdOk" style="background-color:#FFA500;color:black">確定修改</button>
+                                    <button type="button" id="DEMO1" style="background-color:#FFA500;color:black;display:none">DEMO</button>
+                                </div>
+                                <div class="Coach-panel-row-19" id="remindDiv"  style="border: 1px solid #efeff6; width: 450px; padding: 20px;margin-top:20px;">
+                                    <p style="background-color: #C4E1FF; color: #930000; font-weight: 900 ">為了您的帳戶安全，密碼需執行強化密碼設定原則。</p>
+                                    <p>密碼條件為：</p>
+                                    <p>1. 不得低於6碼</p>
+                                    <p>2. 包含英文、數字的組合</p>
+                                    <p> 3. 不得使用特殊字元</p>
+                                    <p> 4. 不能與舊的密碼相同</p>
+                                </div>
+                                
+                        </div>
+                    </div>
+                    <div class="tab-pane fade active show" id="基本資料" role="tabpanel" aria-labelledby="基本資料-tab">
+                        <div class="Coach-panel-19">
+                            <form asp-action="基本資料" enctype="multipart/form-data">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="hidden" name="LogInId" value="@Model.LogInId" />
+                                <table style="width:100%">
+                                    <tr >
+                                        <td style="width:40%" class="m-r-25" valign="top">
+                                            <div class="Coach-panel-row-19">
+                                                <img src="~/img/LoginFigure/@Model.LoginFigures" id="preview_img" style="width: 400px; height: 250px; margin: 0 0 20px 0;padding-right:30px" />
+                                                <input asp-for="LoginFigures" name="LoginFigure" onchange="openFile(event)" class="form-control" type="file" id="formFile" style="height:45px">
+                                                <span asp-validation-for="LoginFigures" class="text-danger"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="Coach-panel-row-19">
+                                                <label> @Html.DisplayNameFor(model => model.LogInName):</label>
+                                                <input asp-for="LogInName" class="form-control w-100" />
+                                                <span asp-validation-for="LogInName" class="text-danger"></span>
+                                            </div>
+                                            <div class="Coach-panel-row-19">
+                                                <label> @Html.DisplayNameFor(model => model.LogInIdNumber):</label>
+                                                <input asp-for="LogInIdNumber" class="form-control w-100" />
+                                                <span asp-validation-for="LogInIdNumber" class="text-danger"></span>
+                                            </div>
+                                            <div class="Coach-panel-row-19">
+                                                <label> @Html.DisplayNameFor(model => model.LogInGender):</label>
+                                                <input asp-for="LogInGender" asp-items="@(new SelectList("男","女"))" class="form-control w-100" />
+                                                <span asp-validation-for="LogInGender" class="text-danger"></span>
+                                            </div>
+                                            <div class="Coach-panel-row-19">
+                                                <label> @Html.DisplayNameFor(model => model.LogInBrithDay):</label>
+                                                <input type="date" asp-for="LogInBrithDay" class="form-control w-100" />
+                                                <span asp-validation-for="LogInBrithDay" class="text-danger"></span>
+                                            </div>
+                                            <div class="Coach-panel-row-19">
+                                                <label> @Html.DisplayNameFor(model => model.LogInPhone):</label>
+                                                <input asp-for="LogInPhone" class="form-control w-100" />
+                                                <span asp-validation-for="LogInPhone" class="text-danger"></span>
+                                            </div>
+                                            <div class="Coach-panel-row-19">
+                                                <label> @Html.DisplayNameFor(model => model.LogInEmail):</label>
+                                                <input asp-for="LogInEmail" class="form-control w-100" />
+                                                <span asp-validation-for="LogInEmail" class="text-danger"></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"  align= "right">
+                                            <button type="submit" id="OKbutton" style="background-color:#FFA500;color:black">儲存變更</button>
+                                            <button type="button" id="CancelButton" style="background-color:#F9FAFB;color:black">取消</button>
+                                            <button id="demo2" hidden></button>
+                                        </td>
+                                    </tr>
+                                </table>                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section End -->
+@section Scripts{
+    <script>
+        $(function () {
+            $("#ModiPwdDiv").hide();
+            $("#remindDiv").hide();
+        })
+         function openFile(event) {
+            var input = event.target; //取得上傳檔案
+            var reader = new FileReader(); //建立FileReader物件
+
+            reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
+
+            reader.onload = function () { //FileReader取得上傳檔案後執行以下內容
+                var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
+                $('#preview_img').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
+            };
+        }
+        $("#OKbutton").click(function () {
+            alert("儲存成功")
+        })
+        $("#CancelButton").click(function () {
+             window.location.href = '@Url.Action("List", "PersonalArea")';
+        })
+        $("#ModiPwd").click(async function () {
+            const oldPassword = $('#OldPwd').val();
+            const oldPasswordResponse = await fetch('@Url.Content("~/PersonalArea/odlPassword?password=")' + oldPassword);
+            const oldPasswordData = await oldPasswordResponse.json();
+
+            if (oldPasswordData == "密碼正確") {
+                $("#remindDiv").show();
+                $("#ModiPwdDiv").show();
+                $("#ShowPwdDiv").hide();
+                $("#DEMO1").css("display", "inline")
+            }
+            else {
+                $('#pasP1')[0].innerHTML = oldPasswordData;
+
+            }
+        })
+        $("#ModiPwdOk").click(async function () {
+
+
+            const password1 = $('#NewPwd').val()
+            const password2 = $('#NewPwd2').val()
+
+            const PasswordChangeResponse = await fetch('@Url.Content("~/PersonalArea/passwordChange?password1=")' + password1 + '&password2=' + password2)
+            const PasswordChangeData = await PasswordChangeResponse.json()
+
+            if (PasswordChangeData != "") {
+                //SweetAlert
+                document.getElementById("demo2").addEventListener("click", function () {
+                    swal("修改失敗", PasswordChangeData, "error", { button: "關閉" });
+                });
+
+                // 創建事件物件
+                var evt = document.createEvent("HTMLEvents");
+                // 初始化
+                evt.initEvent("click", false, false);
+                //賦予事件
+                document.querySelector("#demo2").dispatchEvent(evt)
+            }
+            else {
+                //SweetAlert
+                document.getElementById("demo2").addEventListener("click", function () {
+                    swal("修改成功", "下次登入請使用新密碼", "success")
+                        .then(() => { window.location.href = '@Url.Content("~/PersonalArea/List")' });
+                });
+
+                // 創建事件物件
+                var evt = document.createEvent("HTMLEvents");
+                // 初始化
+                evt.initEvent("click", false, false);
+                //賦予事件
+                document.querySelector("#demo2").dispatchEvent(evt)
+            }
+
+        })
+        $("#Demo").click(function () {            
+            $("#OldPwd").val("kuGZ8535");
+        })
+        $("#DEMO1").click(function () {
+            $("#NewPwd").val("kuGZ85350");
+            $("#NewPwd2").val("kuGZ8535");
+        })
+    </script>
+}
+
+
+

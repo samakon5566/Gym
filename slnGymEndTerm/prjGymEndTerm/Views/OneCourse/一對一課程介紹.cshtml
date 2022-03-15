@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewData["Title"] = "一對一課程介紹";
+}
+<style>
+    .intro-title16 {
+        font-weight: bold;
+        font-family: Helvetica;
+        top: 50%;
+        left: 45%;
+        position: absolute;
+        color: white;
+        opacity: 1;
+    }
+
+    .CourseIntroduction_section {
+    }
+
+    .CourseIntroduction_div_Out {
+        margin: 0 auto;
+        width: 70%;
+        height: 1000px;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: start;
+    }
+
+    .CourseIntroduction_div {
+        margin: 0px auto;
+        height: 50%;
+        width: 50%;
+    }
+
+    .CourseIntroduction_div_kind {
+        padding: 7.5% 15%;
+        height: 100%;
+        width: 100%;
+        border-radius: 5px;
+        border: 2px;
+        border-color: white;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: start;
+        text-align: center;
+    }
+
+        .CourseIntroduction_div_kind p {
+            font-size: 24px;
+            color: white;
+            margin: 2em auto;
+        }
+
+    .CourseIntroduction_div_img {
+        border-radius: 15px;
+        width: 100%;
+        height: 80%;
+        border-radius: 15px;
+    }
+
+    .a_hoverWarp {
+        padding: 10%;
+        position: absolute;
+        background-color: black;
+        border-radius: 15px;
+        width: 70%;
+        height: 65%;
+        opacity: 0;
+        border-bottom: 15px solid #ff6a00;
+    }
+
+        .a_hoverWarp:hover {
+            opacity: 0.7;
+        }
+
+        .a_hoverWarp p, .a_hoverWarp a {
+            width: auto;
+            height: auto;
+            left: auto;
+            margin: auto;
+        }
+
+
+        .a_hoverWarp a {
+            font-size: 50px;
+            /*123*/
+        }
+</style>
+
+<section class="outer-frame">
+    <div class="div-container-out">
+        <div class="div-container">
+            <h2 class="topheader-title">一　對　一　課　程　介　紹</h2>
+            <img src="~/img/16img/background/backgroundonecourse6.jpg" />
+        </div>
+    </div>
+</section>
+<section class="web-path">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="breadcrumb-text">
+                <div class="bt-option">
+                    <a asp-controller="BackHome" asp-action="List">主頁</a>
+                    <span>一對一課程介紹</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="CourseIntroduction_section">
+    <div class="CourseIntroduction_div_Out">
+        <div class="CourseIntroduction_div">
+            <div class="CourseIntroduction_div_kind">
+                <img id="CourseIntroduction_img" src="~/img/16img/pic1.jpg" class="CourseIntroduction_div_img" />
+                <div class="a_hoverWarp">
+                    <a asp-controller="OneCourse" asp-action="一對一課程介紹_1器材訓練">
+                        <i class="fas fa-arrow-circle-right" style="font-size:200px;color:orange"></i>
+                    </a>
+                </div>
+                <p style="text-align: center;">器　材　訓　練</p>
+            </div>
+        </div>
+        <div class="CourseIntroduction_div">
+            <div class="CourseIntroduction_div_kind">
+                <img src="~/img/16img/intrdition2.jpg" class="CourseIntroduction_div_img" />
+                <div class="a_hoverWarp">
+                    <a asp-controller="OneCourse" asp-action="一對一課程介紹_2自由重量" style="margin:auto">
+                        <i class="fas fa-arrow-circle-right" style="font-size:200px;color:orange;"></i>
+                    </a>
+                </div>
+                <p>自　由　重　量</p>
+            </div>
+        </div>
+        <div class="CourseIntroduction_div">
+            <div class="CourseIntroduction_div_kind">
+                <img src="~/img/16img/Diet.jpg" class="CourseIntroduction_div_img" />
+                <div class="a_hoverWarp">
+                    <a asp-controller="OneCourse" asp-action="一對一課程介紹_3飲食控制">
+                        <i class="fas fa-arrow-circle-right" style="font-size:200px;color:orange"></i>
+                    </a>
+                </div>
+                <p style="text-align: center;">飲　食　控　制</p>
+            </div>
+        </div>
+        <div class="CourseIntroduction_div">
+            <div class="CourseIntroduction_div_kind">
+                <img src="~/img/16img/sleep.jpg" class="CourseIntroduction_div_img" />
+                <div class="a_hoverWarp">
+                    <a asp-controller="OneCourse" asp-action="一對一課程介紹_4生活型態">
+                        <i class="fas fa-arrow-circle-right" style="font-size:200px;color:orange"></i>
+                    </a>
+                </div>
+                <p>生　活　型　態</p>
+            </div>
+        </div>
+        <div style="height:20%;width:100%;"></div>
+    </div>
+</section>
+<div style="width:100%;height:300px"></div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    $("#CourseIntroduction_img").hover(function () {
+        $("#cdiv_a16").fadeIn(3000);
+    });
+</script>
+
+

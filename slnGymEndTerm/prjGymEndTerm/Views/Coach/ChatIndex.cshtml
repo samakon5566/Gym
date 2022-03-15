@@ -1,0 +1,54 @@
+﻿@{
+    Layout = null;
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<style>
+    body {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: url(http://www.oxxostudio.tw/firebase-webduino-im/bg2.jpg);
+        background-size: cover;
+    }
+
+    .exit {
+        margin: 5px;
+        width:300px;
+        height:100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-lg {
+        font-size: 3.25rem;
+    }
+</style>
+
+<div style="display: flex;width: 100%;height: 100%;flex-direction: column;justify-content: space-evenly;align-items: center;">
+    <a asp-controller="Coach" asp-action="GroupChat" class="btn btn-primary btn-lg exit">群組聊天室</a>
+
+    @{
+        if (ViewBag.TypeId == 3)
+        {
+        <a asp-controller="Coach" asp-action="RoomChat" class="btn btn-primary btn-lg exit">私人聊天室</a>
+        }
+        else if (ViewBag.TypeId == 2)
+        {
+            <a asp-controller="Coach" asp-action="RoomChatStu" class="btn btn-primary btn-lg exit">私人聊天室</a>
+        }
+
+    }
+</div>
+
+
+
+
+
+
+

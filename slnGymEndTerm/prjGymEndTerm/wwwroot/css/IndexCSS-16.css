@@ -1,0 +1,871 @@
+﻿
+.div-equipmentGD-out {
+    margin-top:150px;
+    position: relative;
+    height: 900px;
+    width: 100%;
+    background: url("../img/equiment.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: bottom;
+    padding: 175px 0;
+}
+.a-16 {
+    display: contents;
+}
+
+.div-equipmentGD {
+    margin: 0 auto;
+    width: 70%;
+    height: 100%;
+    background-color: #151515;
+    box-shadow: 3px 3px 5px 6px black;
+    display: flex;
+    padding: 25px;
+}
+.div-equipmentGD-in {
+    height: 100%;
+    width: 100%;
+}
+.div-equipmentGD-Word{
+    margin:0 auto;
+    width:65%;
+    height:100%;
+}
+.div-equipmentGD-pic {
+    width: 30%;
+    height: 100%;
+}
+.equipmentGD-pic {
+    margin:auto;
+    width: 80%;
+    object-fit: cover;
+    object-position: center;
+}
+.equipmentGD-title {
+    margin: 0 auto;
+    margin-top: 30px;
+    padding-bottom: 30px;
+    width: 100%;
+    text-align: center;
+    font-size: 48px;
+    color: white;
+    border-bottom: 1px solid #ffd700;
+}
+.equipmentGD-content {
+    margin: 0 auto;
+    margin-top: 60px;
+    font-size: 24px;
+    color: white;
+    width:100%;
+}
+.div-equipmentGD-a {
+    margin-top: 20px;
+    height: 200px;
+    width: 100%;
+    display: flex;
+}
+
+
+.div-Customization-out {
+    margin-top: 150px;
+    position: relative;
+    height: 800px;
+    width: 100%;
+    display: flex;
+    background: linear-gradient(360deg, rgba(0, 7, 13, 0.8)36%, rgba(255, 255, 255, 0.2)100%);
+    background: -moz-linear-gradient(360deg, rgba(0, 7, 13, 0.8)36%, rgba(255, 255, 255, 0.2)100%);
+    background: -webkit-linear-gradient(360deg, rgba(0, 7, 13, 0.8)36%, rgba(255, 255, 255, 0.2)100%);
+    background: -o-linear-gradient(360deg, rgba(0, 7, 13, 0.8)36%, rgba(255, 255, 255, 0.2)100%);
+}
+.div-Customization-pic {
+    height: 100%;
+    width: 50%;
+}
+.Customization-pic {
+    background: url("../img/Customizartion/Custimization.jpg");
+    background-size: cover;
+    background-attachment: inherit;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    opacity: 0.7;
+}
+.div-Customization-in {
+    height: 100%;
+    width: 100%;
+}
+
+.div-Customization-Word {
+    width: 50%;
+    height: 100%;
+}
+.Customization-title {
+    margin: 0 auto;
+    margin-top: 200px;
+    padding-bottom: 30px;
+    width: 80%;
+    text-align: center;
+    font-size: 48px;
+    color: white;
+    border-bottom: 1px solid #ffd700;
+}
+
+.Customization-content {
+    margin: 0 auto;
+    margin-top: 60px;
+    font-size: 24px;
+    color: white;
+    width: 80%;
+}
+.div-Customization-a{
+    margin-top:100px;
+    height:200px;
+    width:100%;
+    display:flex;
+}
+.Customization-a {
+    margin: 0 auto;
+    text-align: center;
+    height: 80px;
+    width: 200px;
+    background-color: orange;
+    color: white;
+    font-size: 48px;
+    transform: scale(1);
+    transition: transform 0.8s var(--delay,0s) cubic-bezier(0.33,1,0.68,1);
+    will-change: transform;
+}
+.Customization-a:hover {
+    transform: scale(1.2);
+    transition: transform 0.8s var(--delay,0s) cubic-bezier(0.33,1,0.68,1);
+    will-change: transform;
+    color: black;
+    background-color: #7D7DFF;
+}
+
+.div-onecoures-out {
+    margin-top:200px;
+    display:inline-block;
+    position: relative;
+    width: 100%;
+    background: #333 url("../img/16img/background/meal_bg.png");
+}
+.div-onecoures-out:before {
+    content: "";
+    position: absolute;
+    background: url(../img/16img/background/product_bg_bottom2.png)no-repeat;
+    width: 100%;
+    height: 151px;
+    bottom: -150px;
+}
+.div-onecoures-out:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 161px;
+    top: -160px;
+    background: url(../img/16img/background/product_bg_top2.png)no-repeat;
+}
+
+.div-onecoures {
+    margin: 0 auto;
+    width: 35%;
+    height: 100%;
+    background-color: #151515;
+    box-shadow: 3px 3px 5px 6px black;
+    display: flex;
+    padding: 25px;
+}
+.div-onecoures-in {
+    height: 100%;
+    width: 100%;
+}
+.onecoures-title {
+    margin: 0 auto;
+    margin-top: 200px;
+    padding-bottom: 30px;
+    width: 80%;
+    text-align: center;
+    font-size: 48px;
+    color: white;
+    border-bottom: 1px solid #ffd700;
+}
+.Customization-content {
+    margin: 0 auto;
+    margin-top: 60px;
+    font-size: 24px;
+    color: white;
+    width: 80%;
+}
+
+.div-onecoures-Coach {
+    margin: 0 auto;
+    width: 40%;
+    height: 100%;
+    background-color: #151515;
+    box-shadow: 3px 3px 5px 6px black;
+    display: flex;
+    padding: 50px;
+    flex-wrap:wrap;
+}
+.onecoures-Coach-title {
+    margin: 0 auto;
+    padding-bottom: 30px;
+    width: 100%;
+    text-align: center;
+    font-size: 48px;
+    color: white;
+    border-bottom: 1px solid #ffd700;
+    height: 10%;
+}
+.div-onecoures-hot-Coach {
+    height: 90%;
+    width:100%;
+}
+.onecoures-hot-Coach{
+    margin:0 auto;
+    margin-top:25px;
+    height:50%;
+    width:70%;
+}
+.onecoures-hot-Coach-Score{
+    margin:0 auto;
+    margin-top:20px;
+    height:25%;
+    width:85%;
+    color:white;
+    text-align:center;
+    font-size:12px;
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.img-hot-Coach {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.div-onecoures-a {
+    margin-top:50px;
+    height: 200px;
+    width: 100%;
+    display: flex;
+}
+
+.onecoures-a {
+    margin: 0 auto;
+    text-align: center;
+    height: 80px;
+    width: 200px;
+    background-color: orange;
+    color: white;
+    font-size: 48px;
+    transform: scale(1);
+    transition: transform 0.8s var(--delay,0s) cubic-bezier(0.33,1,0.68,1);
+    will-change: transform;
+}
+
+.onecoures-a:hover {
+    transform: scale(1.2);
+    transition: transform 0.8s var(--delay,0s) cubic-bezier(0.33,1,0.68,1);
+    will-change: transform;
+    color: black;
+    background-color: #7D7DFF;
+}
+
+.div-GroupCourse-out {
+    height: 1200px;
+    width: 100%;
+    background: url("../img/16img/background/bg_whit.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: bottom;
+    padding: 200px 0;
+    display: flex;
+    flex-wrap:wrap;
+}
+.div-GroupCourse-title {
+    height: 25%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: center;
+    margin-bottom:50px;
+}
+.GroupCourse-title {
+    color: #7E3D76;
+    font-size: 36px;
+    text-align: center;
+    font-weight: 500;
+    width:100%;
+}
+.GroupCourse-content {
+    color: #C6A300;
+    width: 100%;
+    font-size: 24px;
+    text-align: center;
+    font-weight: 500;
+}
+.div-GroupCourse-Class-out {
+    height: 85%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.div-GroupCourse-Category {
+    height: 100%;
+    width: 15%;
+    display:flex;
+    flex-wrap:wrap;
+}
+.div-GroupCourse-Category-btn {
+    margin: 0 auto;
+    width: 70%;
+    height: 10%;
+    position: relative;
+    z-index: 1;
+}
+.div-GroupCourse-Category-btn:after {
+    content: "";
+    position: absolute;
+    background: #333 url(../img/16img/background/button_list.png)no-repeat;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: -1;
+}
+.GroupCourse-Category-btn {
+    height: 100%;
+    width: 100%;
+    /*background: #333 url("../img/16img/background/meal_bg.png");*/
+    color:black;
+    background-color:rgba(0,0,0,0);
+    font-size:48px;
+    position:absolute;
+    background-color:white;
+}
+.div-GroupCourse-GroupClass-out {
+    height: 70%;
+    width: 40%;
+    justify-content: space-around;
+    align-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.top1-3{
+    height:60%;
+    width:50%;
+    display:flex;
+    justify-content:space-around;
+}
+
+.div-GroupCourse-GroupClass {
+    height: 45%;
+    width: 30%;
+    position: relative;
+    transition: transform 0.8s var(--delay,0s) cubic-bezier(0.33,1,0.68,1);
+    /*    overflow: hidden;*/
+}
+
+.top1-3 .div-GroupCourse-GroupClass {
+    height: 80%;
+    width: 30%;
+    align-self:center;
+}
+
+.rank-display{
+    font-size:25px;
+    padding:1%;
+    height:15%;
+}
+
+.rank-display-1 i{
+    color:gold;
+}
+
+.rank-display-2 i {
+    color: silver;
+}
+
+.rank-display-3 i {
+    color: brown;
+}
+
+.top1-3 .div-GroupCourse-GroupClass .img-GroupCourse {
+    height: 80%;
+}
+
+.img-GroupCourse {
+    width: 100%;
+    height: 90%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    transform: scale(1);
+    transition: transform 0.8s var(--delay,0s) cubic-bezier(0.33,1,0.68,1);
+    will-change: transform;
+}
+.GroupCourse-ClassName{
+    position: absolute;
+    top:0px;
+    width: 0;
+    height: 0;
+    border-top: 40px solid red;
+    border-right: 40px solid transparent;
+    display:inline-block;
+}
+
+.textPositionSmall {
+    position: relative;
+    color: black;
+    top: 150px;
+    font-weight: 900;
+}
+
+.textPositionBig {
+    position: relative;
+    color: black;
+    top: 260px;
+    font-weight: 900;
+}
+
+.div-GroupCourse-GroupClass:hover /*.img-GroupCourse*/ {
+    transform: scale(1.1);
+    transition: transform 0.8s var(--delay,0s) cubic-bezier(0.33,1,0.68,1);
+    will-change: transform;
+}
+.GroupCourse-ClassName-out {
+    position: relative;
+    width: 100%;
+    height: 40px;
+}
+.GroupCourse-ClassName-out #text {
+    position: absolute;
+    left:2%;
+    color:white;
+}
+.GroupCourse-Category-bd {
+    position: absolute;
+    height: 80%;
+    width: 80%;
+    border: 1px solid #FFD306;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.view-class {
+    justify-content: space-around;
+    width: 1200px;
+}
+/*首頁---------首頁---------首頁---------首頁---------首頁---------*/
+/*首頁---------首頁---------首頁---------首頁---------首頁---------*/
+/*首頁---------首頁---------首頁---------首頁---------首頁---------*/
+/*團體課-------團體課-------團體課-------團體課-------團體課-------*/
+/*團體課-------團體課-------團體課-------團體課-------團體課-------*/
+/*團體課-------團體課-------團體課-------團體課-------團體課-------*/
+.div-Category-610 {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: space-between;
+}
+.div-Category-63 {
+    width: 30%;
+    height: 100%;
+    background-color: red;
+}
+.div-Category-67 {
+    width: 65%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+.div-Category-410 {
+    width: 100%;
+    height: 35%;
+    display: flex;
+    justify-content: space-between;
+}
+.div-Category-45 {
+    width: 48%;
+    height: 100%;
+    background-color:green;
+}
+.div-Category-47 {
+    width: 100%;
+    height: 48%;
+    background-color: green;
+}
+.div-GroupCourse-hover a {
+    margin:20px;
+    font-size: 36px;
+}
+
+@keyframes GroupCourse-hover-a {
+    0% {
+        color: orange;
+        transition: 1s;
+    }
+
+    50% {
+        color: black;
+        background-color:white;
+        transition: 1s;
+    }
+    100% {
+        color: orange;
+        transition: 1s;
+    }
+}
+/*團體課-------團體課-------團體課-------團體課-------團體課-------*/
+/*團體課-------團體課-------團體課-------團體課-------團體課-------*/
+/*團體課-------團體課-------團體課-------團體課-------團體課-------*/
+/*1-1課-------1-1課-------1-1課-------1-1課-------1-1課-------*/
+/*1-1課-------1-1課-------1-1課-------1-1課-------1-1課-------*/
+/*1-1課-------1-1課-------1-1課-------1-1課-------1-1課-------*/
+.div16-oneCourse-out {
+    width: 100%;
+    height: 800px;
+    /*background: rgba(255, 255, 255, 0.2) url(../img/16img/background/meal_bg.png);
+    background-attachment: fixed;
+    background-size: contain;
+    background-position: bottom;*/
+}
+.div16-oneCourse-introduce {
+    z-index: 1;
+    padding: 60px 0;
+    width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    height: 36vw;
+    background: url(../img/16img/background/pg-0319.jpg)no-repeat;
+    background-size: cover;
+}
+
+.div16-oneCourse-introduce-word1 {
+    padding: 35px 0px 50px 100px;
+    height: 400px;
+    line-height: 36px;
+    margin: 40px 0px 170px;
+    background: linear-gradient( 90deg, rgb(0, 0, 0)36%, rgba(0, 0, 0, 0.04)74%);
+    position: relative;
+    left: -180px;
+    text-shadow: 2px 2px 1px #5c5b5b;
+}
+.div16-oneCourse-introduce-word1:before {
+    content: "";
+    position: absolute;
+    background: url(../img/16img/background/about-line-pic.jpg)no-repeat;
+    background-size: cover;
+    width: 68%;
+    height: 9px;
+    top: 400px;
+    left: 0px;
+    bottom: -150px;
+}
+.div16-oneCourse-introduce-pic {
+    margin-top: 95px;
+    padding: 0px;
+    left: 698px;
+    height: 520px;
+    width: 511px;
+    position: absolute;
+    top: -47px;
+}
+.div16-oneCourse-introduce-title {
+    margin-bottom:50px;
+    color: white;
+    font-size: 36px;
+    text-align: left;
+    text-shadow: 0.2em 0.5em 0.1em #333;
+}
+.oneCourse-introduce {
+    padding-left:36px;
+    margin-top:3%;
+    color: white;
+    font-size: 24px;
+    text-align: left;
+}
+
+.div16-oneCourse-out:before {
+    content: "";
+    position: absolute;
+    background: url(../img/16img/background/product_bg_bottom2.png)no-repeat;
+    width: 100%;
+    height: 151px;
+    bottom: -445px;
+}
+
+.div16-oneCourseFemale-out {
+    width: 100%;
+    padding-top: 200px;
+    height: 1000px;
+    background: url(../img/16img/background/pexels-photo-2088205.jpg);
+    background-attachment: fixed;
+    background-position: bottom;
+    background-size: cover;
+}
+
+.div16-oneCourseFemale-introduce {
+    z-index: 1;
+    padding: 60px 0;
+    width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    height: 80%;
+    background: url(../img/16img/background/background-p.jpg)no-repeat;
+    background-size: cover;
+    box-shadow: 20px 18px 20px 7px #38383894;
+}
+
+.div16-oneCourseFemale-introduce-pic {
+    margin-top: 95px;
+    padding: 0px;
+    left: -357px;
+    height: 520px;
+    width: 511px;
+    position: absolute;
+    top: -47px;
+}
+
+.div16-oneCourseFemale-introduce-title {
+    margin-bottom: 50px;
+    margin-top: 65px;
+    color: white;
+    font-size: 48px;
+    text-align: center;
+    text-shadow: 0.2em 0.5em 0.1em #333;
+}
+
+.oneCourseFemale-introduce {
+    padding-left: 36px;
+    margin-top: 3%;
+    color: white;
+    font-size: 36px;
+    text-align: center;
+    text-shadow: 1em 1em 1em #333;
+}
+  
+/*22 use*/
+.custom-switch {
+    display: flex;
+    height: 50%;
+    width: 200px;
+    transform: scale(1.5);
+    justify-content: space-around;
+}
+
+#customSwitch1, #labelswitch {
+    align-self: center;
+    height: 50%;
+    user-select: none;
+}
+
+#customSwitch1::before, #labelswitch:before {
+    user-select: none;
+}
+
+#customSwitch1::after, #labelswitch::after {
+    user-select:none;
+}
+
+/*1-1課-------1-1課-------1-1課-------1-1課-------1-1課-------*/
+/*1-1課-------1-1課-------1-1課-------1-1課-------1-1課-------*/
+/*1-1課-------1-1課-------1-1課-------1-1課-------1-1課-------*/
+/*導覽列-------導覽列-------導覽列-------導覽列-------*/
+/*導覽列-------導覽列-------導覽列-------導覽列-------*/
+/*導覽列-------導覽列-------導覽列-------導覽列-------*/
+.navbar-tag {
+    position: absolute;
+    width: 50px;
+    top: 300px;
+    height: 250px;
+    font-size: 60px;
+    line-height: 250px;
+    margin-left: 150px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    opacity: 0.3;
+    transition: all 0.7s ease;
+}
+.navbar-tag:hover {
+    opacity: 1;
+    margin-left: 170px;
+    transition: all 0.7s ease;
+    width:55px;
+}
+.navbar-tag i {
+    transform: scaleY(1.5);
+}
+.background-black {
+    margin-left: 125px;
+    background-color: rgba(0,0,0,.5);
+}
+.coach-nav-getin {
+    transform: translateX(350px);
+}
+.navbar-tag:hover .transform-mirrorch {
+    transform: translateX(-20px);
+}
+
+.transform-mirrorch {
+    transform: rotate(-180deg);
+}
+.coach-nav {
+    position: fixed;
+    top: 10%;
+    left: -350px;
+    text-align: center;
+    border-right: 2px solid #ffffff85;
+    margin-bottom: 30px;
+    color: white;
+    height: 1000px;
+    width: 350px;
+    background-color: #24282c;
+    transition: all 0.7s ease;
+    z-index:3;
+}
+
+/*.coach-nav:hover {
+    height: 1000px;
+    width: 300px;
+    border-right: 1px solid #ffffff85;
+    transition: all 0.7s ease;
+}*/
+
+/*導覽列-------導覽列-------導覽列-------導覽列-------*/
+/*導覽列-------導覽列-------導覽列-------導覽列-------*/
+/*導覽列-------導覽列-------導覽列-------導覽列-------*/
+/*右下角-------右下角-------右下角-------右下角-------*/
+/*右下角-------右下角-------右下角-------右下角-------*/
+/*右下角-------右下角-------右下角-------右下角-------*/
+.chat-nav {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    color: white;
+    height: 130px;
+    width: 130px;
+    z-index: 6;
+}
+.chat-nav a{
+    display: contents;
+}
+.chat-bkgd{
+    
+    width:100%;
+    height:100%;
+    background:url(../img/16img/background/chat.png);
+    position:relative;
+}
+/*.chat-loopt-div {
+    position: relative;
+    width: 100%;0
+    \ \ \\ 
+    height: 100%;
+    top: -130px;
+    z-index: -1;
+    transform: scale(1.2);
+    border-radius: 50%;
+    background: transparent;
+    border-top: 4px solid red;
+}
+.chat-loopt-div:after {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: blue;*/
+    /*box-shadow: 0 0 0 5px #fff, 0 0 0 5px #fff, 0 0 0 10px red,0 0 0 15px blue;*/
+/*}*/
+/*中心點*/
+.chat-face {
+    position: absolute;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transition: all 1.5s ease;
+}
+.chat-bkgd:after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: 20px;
+    top: 50px;
+    border-radius: 50%;
+    background-color: white;
+    transition: all 0.7s ease;
+}
+
+.chat-bkgd:before {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: 80px;
+    top: 50px;
+    border-radius: 50%;
+    background-color: white;
+    transition: all 0.7s ease;
+}
+
+.chat-nav:hover .chat-bkgd:after {
+    transform: translateY(-12px);
+/*    animation: blink 2s linear infinite;
+    transition:0.2s;*/
+}
+
+.chat-nav:hover .chat-bkgd:before {
+    transform: translateY(-12px);
+/*    animation: blink 2s linear infinite;
+    transition: 0.2s;*/
+}
+
+
+.chat-nav:hover .chat-face {
+    transform: translate(-50%, 30%);
+    background-color: white;
+    width: 80px;
+    height: 40px;
+    border-radius: 0 0 80px 80px;
+}
+/*    animation: blink 2s linear infinite;
+    transition:0.2s;*/
+/*@keyframes blink {
+    0% {
+    }
+
+    45% {
+        height:2px;
+    }
+
+    50% {
+        height: 30px;
+    }
+
+    65% {
+        height: 2px;
+    }
+
+    70% {
+        height: 30px;
+    }
+
+    100% {
+    }
+}*/

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+此檔案由您的 Web 專案發佈/封裝處理序使用。您可以藉由編輯此 MSBuild 檔案，
+自訂此處理序的行為。若要深入了解，請前往 https://go.microsoft.com/fwlink/?LinkID=208121。 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAOpZajrmvj0uce2lCd3OTCgAAAAACAAAAAAAQZgAAAAEAACAAAABp+t/VIcEOLjD57JauigisXy9MWFG20ADX6UHzF1/vDgAAAAAOgAAAAAIAACAAAAAqlVEsp2pOlBiVpXlyH6+CJpFkGjIpc307lknDJ2ilpIAAAACsPOxCPwt4oUEVqJ8PZ1+T3sWQdMc6geuOCdjg8UTurAhNnmnqzqiNpAZHnwJ+I42znMxJPT6AF5O4uYiqdbXPpJWgCepclnxkfQBgA/7qf7o8nZkkM9KZBjMV0pr3+p4YqifJgsJc8D0T2xawysGsEGjBbSPanMIED3k/GCNPI0AAAAA2Kpv+HzE35VWFGpynVtoNb398yoe7618bZO6UBOghZ8oeN4+RjxX1zsLKHxQUy4VpUax+lxDr+pYWKOZNJW9L</EncryptedPassword>
+    <History>False|2022-01-19T13:55:44.6210514Z;True|2022-01-19T15:15:54.2837115+08:00;False|2022-01-19T15:15:02.4385072+08:00;True|2022-01-19T12:50:21.1046753+08:00;False|2022-01-19T12:49:27.6128873+08:00;True|2022-01-19T11:18:57.2834188+08:00;False|2022-01-19T11:17:31.3194627+08:00;False|2022-01-19T11:16:52.7239093+08:00;False|2022-01-19T11:16:18.9048970+08:00;False|2022-01-19T11:15:03.9264691+08:00;False|2022-01-19T11:14:39.7277929+08:00;False|2022-01-19T11:14:17.5141141+08:00;False|2022-01-19T11:13:20.8344378+08:00;False|2022-01-19T11:12:47.0908999+08:00;True|2022-01-18T14:20:54.0402230+08:00;</History>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,87 @@
+﻿@model prjGymEndTerm.ViewModels.CLoginViewModel
+
+@{
+    ViewData["Title"] = "backMemberEdit";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+
+<style>
+    CCoachTitle {
+        /*text-align: center;*/
+        text-decoration: underline
+    }
+
+    .backCBody {
+        padding: 50px 0 0 200px
+    }
+    .control-label {
+        font-size: 20px;
+        font-weight: 900
+    }
+
+    body {
+        background-color: #efeff6
+    }
+    .page-breadcrumb {
+        margin-bottom: 30px;
+    }
+    .breadcrumb-item{
+        font-size:15px
+    }
+</style>
+
+
+
+<div class="backCBody">
+
+
+
+    <h1 class="CCoachTitle" style="font-weight:800"><i class="fas fa-edit"></i> 修改基本資料</h1>
+
+    <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb" style="border-top: 1px solid #ADADAD ">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href=@Url.Action("List", "BackHome") class="breadcrumb-link">首頁</a></li>
+                <li class="breadcrumb-item"><a href=@Url.Action("backMemberList", "Backstage") class="breadcrumb-link">會員管理</a></li>
+                <li class="breadcrumb-item active" aria-current="page">修改基本資料</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="backMemberEdit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" name="LogInId" value="@Model.LogInId" />
+                <div class="form-group">
+                    <label asp-for="LogInName" class="control-label" style="font-weight: 900"></label>
+                    <input asp-for="LogInName" class="form-control form-control-lg" />
+                    <span asp-validation-for="LogInName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LogInBrithDay" class="control-label" style="font-weight: 900"></label>
+                    <input asp-for="LogInBrithDay" class="form-control form-control-lg" type="date" />
+                    <span asp-validation-for="LogInBrithDay" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LogInPhone" class="control-label" style="font-weight: 900"></label>
+                    <input asp-for="LogInPhone" class="form-control form-control-lg" />
+                    <span asp-validation-for="LogInPhone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LogInEmail" class="control-label" style="font-weight: 900"></label>
+                    <input asp-for="LogInEmail" class="form-control form-control-lg" />
+                    <span asp-validation-for="LogInEmail" class="text-danger"></span>
+                </div>
+                <div class="form-group m-t-40">
+                    <input type="submit" value="修改並儲存" class="btn btn-primary" style="font-weight: 900" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

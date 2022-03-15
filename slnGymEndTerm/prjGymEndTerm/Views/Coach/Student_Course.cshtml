@@ -1,0 +1,336 @@
+﻿
+@model List<prjGymEndTerm.ViewModels.CoachArea.CStudentCourseViewModel>
+@{
+    ViewData["Title"] = "Student_Course";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Style{
+    <style>
+        .container > div > a {
+            color: #FFA500;
+        }
+
+            .container > div > a:visited {
+                color: #FFA500;
+            }
+
+        .openCLose {
+            font-size: 24px;
+        }
+        .openCLose:hover {
+            cursor: pointer;
+            color: blue;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            text-align: center;
+            padding: 5px;
+            /*border: 1px solid black;*/
+        }
+
+        .two_level {
+            /*align:right;*/
+            display: none;
+        }
+    </style>
+
+
+}
+<section class="contact-section spad-3">
+    <div class="container">
+        <div class="Breadcrumb-text-19">
+            <a asp-controller="Coach" asp-action="List" style="color:#FFF">
+                教練首頁
+            </a>
+            <label style="color:#FFF">
+                >
+            </label>
+            <a asp-controller="Coach" asp-action="Student_List" style="color:#FFF">
+                學生列表
+            </a>
+            <label style="color:#FFF">
+                >
+            </label>
+            <a href="#">
+                目前頁面
+            </a>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2 style="color:white">會員姓名:@ViewBag.MemberName</h2>
+                </div>
+                <div class="class-details-text">
+                    @*<a asp-action="Student_Body_Create" style="float:right;color:white">+新增資料</a>*@
+                    <div class="cd-text" style="color:white;">
+                        @using (Html.BeginForm())
+                        {
+                            @:關鍵字 @Html.TextBox("txtKeyword")
+                            <input type="submit" value="查詢" />
+                        }
+                    </div>
+                    <div class="cd-trainer">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="cd-trainer-pic">
+                                    <table class="table table-dark table-hover" @*style="border:3px red solid;" border='1'*@>
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2">
+                                                    訂單序號
+                                                </th>
+                                                <th colspan="2">
+                                                    @Html.DisplayNameFor(model => model[0].CourseCategory_Name)
+                                                </th>
+                                                <th colspan="2">
+                                                    @Html.DisplayNameFor(model => model[0].CourseDetail_Name)
+                                                </th>
+                                                <th colspan="2">
+                                                    @Html.DisplayNameFor(model => model[0].CourseClass_Name)
+                                                </th>
+                                                <th colspan="2">
+                                                    開課日期
+                                                </th>
+                                                <th colspan="2">
+
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tb">
+                                            @{
+                                                int count = 0;
+                                                foreach (var item in Model)
+                                                {
+                                                    count++;
+                                                    <tr class="one_level">
+                                                        <td colspan="2">
+                                                            @Html.DisplayFor(modelItem => item.OrderId)
+                                                        </td>
+                                                        <td colspan="2">
+                                                            @Html.DisplayFor(modelItem => item.CourseCategory_Name)
+                                                        </td>
+                                                        <td colspan="2">
+                                                            @Html.DisplayFor(modelItem => item.CourseDetail_Name)
+                                                        </td>
+                                                        <td colspan="2">
+                                                            @Html.DisplayFor(modelItem => item.CourseClass_Name)
+                                                        </td>
+                                                        <td colspan="2">
+                                                            @Html.DisplayFor(modelItem => item.Lesson_Time)
+                                                        </td>
+                                                        <td data="@count" class="openCLose">+</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr class="two_level two_level_@count table-secondary" style="color:lightslategrey">
+                                                        <td style="background-color:#353B41"></td>
+                                                        <td colspan="2">時間</td>
+                                                        <td colspan="2">體重</td>
+                                                        <td>肌肉量</td>
+                                                        <td>基礎代謝</td>
+                                                        <td>脂肪</td>
+                                                        <td colspan="2"></td>
+                                                        <td style="background-color:#353B41" colspan="2"></td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<form name="StudentBody" id="HiddenForm">
+    <input type="hidden" name="id" />
+    <input type="hidden" name="weight" id="test" />
+    <input type="hidden" name="muscleBass" />
+    <input type="hidden" name="basalMetabolism" />
+    <input type="hidden" name="fat" />
+</form>
+
+
+@section Scripts{
+    <script>
+        var bigFlag = 0;
+
+        $('.openCLose').click(async function () {
+            var flag = 0;
+            var text = $(this).text();
+            var data = $(this).attr('data');
+            var two_level_class = '.two_level_' + data;
+            if (text == '+') {
+                $(this).text('-');
+                var OrderId = $(this).prevAll().last().text().trim();
+                await LoadStudentBody(OrderId, data);
+                $("#tb").on("click", ".modiPosture", async function () {
+/*                $(".modiPosture").click(async function () {*/
+                    if (flag == 1) {
+                        alert("請先儲存變更");
+                    }
+                    else {
+                        flag = 1;
+                        var ModiTr = $(this).closest("tr");
+                        var id = ModiTr.children("td").eq(0).text().trim();
+                        var Class = ModiTr.children("td").eq(1).text().trim();
+                        var weight = ModiTr.children("td").eq(2).text().trim();
+                        var muscleBass = ModiTr.children("td").eq(3).text().trim();
+                        var basalMetabolism = ModiTr.children("td").eq(4).text().trim();
+                        var fat = ModiTr.children("td").eq(5).text().trim();
+                        ModiTr.html('<td style="background-color:#353B41;color:#353B41;">' + id + '</td>\
+	                    <td colspan="2">'+ Class + '</td >\
+	                    <td colspan="2">' + '<input type="text" value="' + weight + '" style="width:50px"/>' + '</td >\
+	                    <td> ' + '<input type="text" value="' + muscleBass + '"/>' + '</td >\
+	                    <td> ' + '<input type="text" value="' + basalMetabolism + '"/>' + '</td >\
+	                    <td> ' + '<input type="text" value="' + fat + '"/>' + '</td > \
+                        <td><i class="fas fa-check" id="ModiOK"></i></td>\
+                        <td><i class="far fa-id-card"  id="ModiCancel"></i></td>\
+                        <td style="background-color:#353B41" colspan="2"></td>');
+
+                        $("#tb").on("click", "#ModiOK", async function () {
+                        /* $("#ModiOK").click(function () {*/
+                            var ModiTr1 = $(this).closest("tr");
+                            var id1 = ModiTr1.children("td").eq(0).text().trim();
+                            var Class = ModiTr1.children("td").eq(1).text().trim();
+                            var weight = ModiTr1.children("td").eq(2).children("input").val();
+                            var muscleBass = ModiTr1.children("td").eq(3).children("input").val();
+                            var basalMetabolism = ModiTr1.children("td").eq(4).children("input").val();
+                            var fat = ModiTr1.children("td").eq(5).children("input").val();
+                            $("#HiddenForm>input").eq(0).val(id1);
+                            $("#HiddenForm>input").eq(1).val(weight);
+                            $("#HiddenForm>input").eq(2).val(muscleBass);
+                            $("#HiddenForm>input").eq(3).val(basalMetabolism);
+                            $("#HiddenForm>input").eq(4).val(fat);
+                            const formData = new FormData(document.StudentBody)
+                            fetch('@Url.Content("~/api/update")', {
+                                method: 'POST',  //GET、POST、PUT、DELETE
+                                body: formData    //json string
+                            }).then(async function (response) {
+                                if (response.ok) {
+                                    alert("修改成功");
+                                    flag = 0;
+                                    await LoadStudentBody(OrderId, data);
+                                }
+                                else {
+                                    alert("失敗");
+                                    flag = 0;
+                                }
+                            })
+                        })
+                        $("#tb").on("click", "#ModiCancel", async function () {
+                            var ModiTr = $(this).closest("tr");
+                            ModiTr.children("td").eq(2).children("input").val("60.2");
+                            ModiTr.children("td").eq(3).children("input").val("35.4");
+                            ModiTr.children("td").eq(4).children("input").val("1560.2");
+                            ModiTr.children("td").eq(5).children("input").val("31.7");
+                        })
+                     }
+                })
+                $("#tb").on("click", ".deletePosture", async function () {
+/*                $(".deletePosture").click(async function () {*/
+                    var ModiTr = $(this).closest("tr");
+                    var id = ModiTr.children("td").eq(0).text().trim();
+                    const response = await fetch('@Url.Content("~/api/Delete/")'+id);
+                    const res = await response.text();
+                    if (res == 1) {
+                        alert("刪除成功");
+                        await LoadStudentBody(OrderId, data);
+                    }
+                })
+                    $("#tb").on("click", "#CreateBody", async function () {
+                    var ModiTr = $(this).closest("tr");
+                    var Class = ModiTr.children("td").eq(1).text().trim();
+                    var weight = ModiTr.children("td").eq(2).children("input").val();
+                    var muscleBass = ModiTr.children("td").eq(3).children("input").val();
+                    var basalMetabolism = ModiTr.children("td").eq(4).children("input").val();
+                    var fat = ModiTr.children("td").eq(5).children("input").val();
+
+                    $("#HiddenForm>input").eq(0).val(OrderId);
+                    $("#HiddenForm>input").eq(1).val(weight);
+                    $("#HiddenForm>input").eq(2).val(muscleBass);
+                    $("#HiddenForm>input").eq(3).val(basalMetabolism);
+                    $("#HiddenForm>input").eq(4).val(fat);
+
+                    const formData = new FormData(document.StudentBody)
+                    fetch('@Url.Content("~/api/Insert")', {
+                        method: 'POST',  //GET、POST、PUT、DELETE
+                        body: formData    //json string
+                    }).then(async function (response) {
+                        if (response.ok) {
+                            alert("新增成功");
+                            await LoadStudentBody(OrderId, data);
+                        }
+                        else {
+                            alert("失敗");
+                        }
+                    })
+                })
+            }
+			else {
+                $(this).text('+');
+                $(two_level_class).hide();
+            }
+        });
+
+        $("#tb").on("click", "#demo", async function () {
+            var ModiTr = $(this).closest("tr");
+            ModiTr.children("td").eq(2).children("input").val("99.9");
+            ModiTr.children("td").eq(3).children("input").val("11.1");
+            ModiTr.children("td").eq(4).children("input").val("9999.9");
+            ModiTr.children("td").eq(5).children("input").val("99.9");
+        })
+
+
+        async function LoadStudentBody(OrderId, data) {
+            var two_level_class = '.two_level_' + data;
+            const response = await fetch('/api/select/' + OrderId);
+            const PostureList = await response.json();
+            if (PostureList.length == 0) {
+                $(two_level_class + ":gt(0)").remove();
+                //$(two_level_class + ":last").after('<tr class="two_level two_level_' + data + '"><td  colspan="12">該會員無體態資料</td></tr>')
+            }
+            else {
+                $(two_level_class + ":gt(0)").remove();
+                for (var i = 0; i < PostureList.length; i++) {
+                    var a = (PostureList[i].recordTime).indexOf("T");
+                    var time = (PostureList[i].recordTime).substring(0, a);
+
+                    $(two_level_class + ":last").after('<tr class="table-secondary ' + "two_level two_level_" + data + '" style="color:lightslategray">\
+                        <td style="background-color:#353B41;color:#353B41;">'+ PostureList[i].recordId + '</td>\
+	                    <td colspan="2"> '+ time + ' </td >\
+	                    <td colspan="2"> ' + PostureList[i].weight + '</td >\
+	                    <td> ' + PostureList[i].muscleBass + '</td >\
+	                    <td> ' + PostureList[i].basalMetabolism + '</td >\
+	                    <td> ' + PostureList[i].fat + '</td > \
+                        <td><i class="fas fa-pencil-alt modiPosture"></i></td>\
+                        <td><i class="fas fa-times deletePosture"></i></td>\
+                        <td style="background-color:#353B41" colspan="2"></td>\
+	                    </tr>');
+                }
+            }
+            var Today = new Date();
+            $(two_level_class + ":last").after('<tr class="table-secondary ' + "two_level two_level_" + data + '" style="color:lightslategray">\
+	                 <td style="background-color:#353B41;color:#353B41;"></td>\
+	                    <td colspan="2"> '+ Today.getFullYear() + '-' + (Today.getMonth() + 1) + '-' + Today.getDate() + ' </td >\
+	                    <td colspan="2">' + '<input type="text" style="width:50px"/>' + '</td >\
+	                    <td> ' + '<input type="text"/>' + '</td >\
+	                    <td> ' + '<input type="text"/>' + '</td >\
+	                    <td> ' + '<input type="text"/>' + '</td > \
+                        <td><i class="fas fa-check" id="CreateBody"></i></td>\
+                        <td><i class="far fa-id-card"  id="demo"></i></td>\
+                        <td style="background-color:#353B41" colspan="2"></td>\
+	                    </tr>');
+            $(two_level_class).show();
+        }
+
+
+    </script>
+}

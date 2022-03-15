@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "backReport";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+<style>
+    .reportTitle {
+        font-size: 50px;
+        font-weight: 900;
+        /*padding-top: 20px;*/
+    }
+
+/*    .backCBody {
+        padding: 50px 0 0 100px;
+        width:120%
+    }*/
+    .backCBody {
+        padding: 50px 0 0 80px;
+        width: 1280px
+    }
+
+    body {
+        background-color: #efeff6
+    }
+    .page-breadcrumb {
+        margin: 0 0 15px 0;
+    }
+    .breadcrumb-item {
+        font-size: 15px
+    }
+</style>
+
+<div class="backCBody">
+
+    <h1 class="reportTitle"><i class="fas fa-chart-bar"></i> 圖表分析</h1>
+    <div class="text-center">
+        <div class="page-breadcrumb">
+            <nav aria-label="breadcrumb" style="border-top: 1px solid #ADADAD ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href=@Url.Action("List", "BackHome") class="breadcrumb-link">首頁</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">報表分析</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="m-t-20">
+            <iframe width="1200" height="612" src="https://app.powerbi.com/view?r=eyJrIjoiNGZlNWNmYjQtMmU1Yy00NzM4LTljODEtMDE0MjlmZjJiNmE2IiwidCI6IjJkNGRmNzRjLWExMmItNDNiYy04MmZmLTMwMDAwNzVhNjVmYSIsImMiOjEwfQ%3D%3D&pageName=ReportSection" frameborder="0" allowFullScreen="true"></iframe>
+        </div>
+    </div>
+</div>

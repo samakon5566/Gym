@@ -1,0 +1,412 @@
+﻿
+@{
+    ViewData["Title"] = "Tdee計算機";
+}
+<style>
+    .div_all {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        display: inline-block;
+        justify-content: center;
+    }
+
+    .div_window {
+        width: 75%;
+        margin: auto;
+        height: 1500px;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: start;
+    }
+    /*-------------標題--------------------*/
+    .div_title {
+        width: 100%;
+        margin: 10px auto 10px auto;
+        height: 250px;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 72px;
+        font-weight: 700;
+        color: #ceefe4;
+    }
+
+    .div_content1 {
+        width: 100%;
+        margin: 10px auto 10px auto;
+        height: 20%;
+        padding: 10px 25%;
+        font-family: Microsoft YaHei;
+        font-size: 30px;
+        color: #9dd3a8;
+    }
+
+    .div_content2 {
+        width: 100%;
+        margin: 10px auto 10px auto;
+        height: 20%;
+        padding: 10px 10%;
+        font-family: SimSun;
+        font-size: 30px;
+        color: #9dd3a8;
+    }
+    /*-------------標題--------------------*/
+    /*--------------計算機---------------------*/
+    .div_TDEEcomputer1 {
+        width: 50%;
+        margin: 0 auto;
+        height: 500px;
+        border-radius: 20px;
+        background-color: transparent;
+    }
+
+    .div_TDEEcomputer2 {
+        width: 50%;
+        background-color: transparent;
+        margin: 0 auto;
+        height: 500px;
+        border-radius: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 5% 2.5%;
+        z-index: 7;
+    }
+    /*------------計算機1------------------------*/
+    .div_TDEE_Form1 {
+        margin: 0 auto;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: start;
+        padding: 5% 0;
+        background-color: transparent;
+        z-index: 7;
+    }
+
+    .div_TDEE_Form div {
+        padding: 1em;
+    }
+
+    .div_TDEE_age {
+        padding: 2% 5%;
+        width: 50%;
+        height: 30%;
+    }
+
+    .div_TDEE_height {
+        padding: 2% 5%;
+        width: 50%;
+        height: 30%;
+    }
+
+    .div_TDEE_weight {
+        padding: 2% 5%;
+        width: 50%;
+        height: 30%;
+    }
+
+    .div_TDEE_Sportlevel {
+        padding: 2% 5%;
+        width: 50%;
+        height: 30%;
+    }
+    /*----------*/
+    .div_TDEE_submit {
+        width: 50%;
+        height: 30%;
+        text-align: center;
+        line-height: 190px;
+    }
+
+    .div_TDEE_gender {
+        padding: 2% 5%;
+        width: 50%;
+        height: 30%;
+        display: flex;
+    }
+
+    .div_TDEE_Form label {
+        padding: 1em;
+        font-weight: 900;
+        color: white;
+        margin: 0 0 20% 0;
+        line-height: 20px;
+        font-weight: 700;
+    }
+
+    .div_TDEE_Form button {
+        font-size: 20px;
+        font-weight: 900;
+        color: black;
+    }
+
+    .div_TDEE_Form input:focus {
+        border: 5px white solid;
+    }
+    /*------------計算機1------------------------*/
+    /*------------計算機2------------------------*/
+    .div_result_out {
+        margin: 0 auto;
+        width: 40%;
+        height: 40%;
+    }
+
+    .div_result {
+        padding: 2%;
+        text-align: center;
+        background-color: #d9d9f3;
+        border-radius: 10px;
+    }
+
+    .h3_output {
+        padding: 2px;
+        width: 100%;
+        height: 50%;
+        font-size: 24px;
+    }
+
+    .output_TDEE {
+        padding: 2px;
+        width: 100%;
+        height: 50%;
+        font-size: 36px;
+    }
+
+    h3 {
+        font-weight: 700;
+    }
+
+    .radio { /*radio_label*/
+        width: 50%;
+        justify-self: center;
+        align-self: center;
+        font-size: 24px;
+        color: white;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    input[type="radio"]:checked + label {
+        color: black;
+        text-align: center;
+        background-color: white;
+        border-radius: 5px;
+    }
+
+    .gender_radio {
+        position: absolute;
+        opacity: 0;
+    }
+    /*------------計算機2------------------------*/
+</style>
+
+@*section頂層標頭*@
+<section class="outer-frame">
+    <div class="div-container-out">
+        <div class="div-container">
+            <h2 class="topheader-title">T　D　E　E　計　算　機</h2>
+            <img src="~/img/topheader/TH-TDEE.png" />
+        </div>
+    </div>
+</section>
+@*到目前網頁的網站路徑*@
+<section class="web-path">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="breadcrumb-text">
+                <div class="bt-option">
+                    <a asp-controller="Home" asp-action="Index">主頁</a>
+                    <span>TDEE計算機</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="div_all">
+    <img src="~/img/16img/tdeeback1.jpg" style="margin-top: 200px; position: absolute; opacity: 0.3; height: 100%; width: 100%; z-index: -1; top: 700px " />
+    <div class="div_window">
+        <div class="div_title">
+            <h6 class="title">TDEE Total Daily Energy Expenditure</h6>
+            <div class="div_content1">
+                所謂TDEE就是身體一整天所消耗掉的熱量。也就是為維持體重的熱量，當你今天攝取的卡路里 = TDEE，稱為熱量赤字，此時體重將會維持。
+            </div>
+        </div>
+        <div class="div_TDEEcomputer1">
+            <form class="div_TDEE_Form1" id="TDEE-from">
+                <div class="div_TDEE_gender">
+                    <input class="gender_radio" type="radio" id="male" value="male" name="radio-gender" checked />
+                    <label class="radio" for="male">男性</label>
+                    <input class="gender_radio" type="radio" id="female" value="female" name="radio-gender" />
+                    <label class="radio" for="female">女性</label>
+                </div>
+                <div class="div_TDEE_height">
+                    <label for="in_height" style="font-size:24px; color:white">身　高</label>
+                    <input id="in_height" style="background-color: #ceefe4;margin-top:20px;" class="form-control" placeholder="身　高" type="number" required />
+                </div>
+                <div class="div_TDEE_weight">
+                    <label for="in_weight" style="font-size:24px; color:white">體　重</label>
+                    <input id="in_weight" style="background-color: #ceefe4;margin-top:20px;" class="form-control" placeholder="體　重" type="number" required />
+                </div>
+                <div class="div_TDEE_age">
+                    <label for="in_aget" style="font-size:24px; color:white">年　齡</label>
+                    <input id="in_age" style="background-color: #ceefe4;margin-top:20px;" class="form-control" placeholder="年　齡" type="number" required />
+                </div>
+                <div class="div_TDEE_Sportlevel">
+                    <label for="in_Sportlevel" style="font-size:24px; color:white">運　動　量</label>
+                    <select id="in_Sportlevel" style="background-color: #ceefe4;margin-top:20px;" class="form-control">
+                        <option>－請　選　擇－</option>
+                        <option value="1.2">快樂肥宅</option>
+                        <option value="1.375">每周運動1-2次</option>
+                        <option value="1.55">每周運動3-5次</option>
+                        <option value="1.725">每周運動6-7次</option>
+                        <option value="1.9">奧運選手</option>
+                    </select>
+                </div>
+                <div class="div_TDEE_submit">
+                    <button id="TDEEsubmit" type="button" style="background-color: #ceefe4; font-size: 20px; " class="btn btn-light">計　算　結　果</button>
+                    <input type="button" value="Demo" name="demo" id="TDEEDemo" style="line-height: 40px; background-color: #ceefe4;margin-left:50px;" />
+                </div>
+            </form>
+        </div>
+        <div class="div_TDEEcomputer2">
+            <div class="div_result_out">
+                <div class="div_result">
+                    <h3 class="h3_output">基礎代謝率 BMR</h3>
+                    <div id="output_BMR" class="output_TDEE">0</div>
+                </div>
+            </div>
+            <div class="div_result_out">
+                <div class="div_result">
+                    <h3 class="h3_output">總熱量消耗 TDEE</h3>
+                    <div id="output_TDEE" class="output_TDEE">0</div>
+                </div>
+            </div>
+            <div class="div_result_out">
+                <div class="div_result">
+                    <h3 class="h3_output">身體質量指數 BMI</h3>
+                    <div id="output_BMI" class="output_TDEE">0</div>
+                </div>
+            </div>
+            <div class="div_result_out">
+                <div class="div_result">
+                    <h3 class="h3_output">本周運動量應消耗</h3>
+                    <div id="output_weekcal" class="output_TDEE">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    let height;
+    let age;
+    let weight;
+    let BMR = $("#output_BMR").text();
+    let TDEE = $("#output_TDEE").text();
+    let BMI = $("#output_BMI").text();
+    let weekcal = $("#output_weekcal").text();
+    let Sportlevel;
+    let BMI1 = parseFloat(BMI).toFixed(2);
+    let TDEE1;
+    let weekcal1;
+    let gender;
+
+    $("#TDEEsubmit").on("click", function () {
+        height = $("#in_height").val();
+        age = $("#in_age").val();
+        weight = $("#in_weight").val();
+        BMI = weight / ((height / 100) * (height / 100));
+        BMI1 = parseFloat(BMI).toFixed(2);
+        $("#output_BMI").text(BMI1);
+        Sportlevel = $("#in_Sportlevel>option:selected").val();
+        gender = $('input:radio[name="radio-gender"]:checked').val();
+        if (gender == null) {
+            alert("什麼也沒選中!");
+            return false;
+        }
+        else if (gender == "male") {
+            console.log("male")
+            BMR = (13.7 * weight) + (5 * height) - (6.8 * age) + 66;
+            $("#output_BMR").text(BMR + "卡");
+        }
+        else if (gender == "female") {
+            console.log("female");
+            BMR = (9.6 * weight) + (1.8 * height) - (4.7 * age) + 655;
+            $("#output_BMR").text(BMR + "卡");
+        }
+        /*---------------------------------判斷男女^------------------------*/
+        /*---------------------------------判斷運動量v------------------------*/
+        if (Sportlevel == 1.2) {
+            TDEE = BMR * 1.2;
+            TDEE1 = parseFloat(TDEE).toFixed(2);
+            $("#output_TDEE").text(TDEE1 + "卡");
+            weekcal = TDEE1 - BMR;
+
+            weekcal1 = parseFloat(weekcal).toFixed(2);
+            $("#output_weekcal").text(weekcal1 + "卡");
+        }
+        if ($("#in_Sportlevel>option:selected").val() == 1.375) {
+            TDEE = BMR * 1.375;
+            TDEE1 = parseFloat(TDEE).toFixed(2);
+            $("#output_TDEE").text(TDEE1 + "卡");
+            weekcal = TDEE1 - BMR;
+            console.log(weekcal);
+            weekcal1 = parseFloat(weekcal).toFixed(2);
+            $("#output_weekcal").text(weekcal1 + "卡");
+        }
+        if ($("#in_Sportlevel>option:selected").val() == 1.55) {
+            TDEE = BMR * 1.55;
+            TDEE1 = parseFloat(TDEE).toFixed(2);
+            $("#output_TDEE").text(TDEE1 + "卡");
+            weekcal = TDEE1 - BMR;
+            console.log(weekcal);
+            weekcal1 = parseFloat(weekcal).toFixed(2);
+            $("#output_weekcal").text(weekcal1 + "卡");
+        }
+        if ($("#in_Sportlevel>option:selected").val() == 1.725) {
+            TDEE = BMR * 1.725;
+            TDEE1 = parseFloat(TDEE).toFixed(2);
+            $("#output_TDEE").text(TDEE1 + "卡");
+            weekcal = TDEE1 - BMR;
+            console.log(weekcal);
+            weekcal1 = parseFloat(weekcal).toFixed(2);
+            $("#output_weekcal").text(weekcal1 + "卡");
+        }
+        if ($("#in_Sportlevel>option:selected").val() == 1.9) {
+            TDEE = BMR * 1.9;
+            TDEE1 = parseFloat(TDEE).toFixed(2);
+            $("#output_TDEE").text(TDEE1 + "卡");
+            weekcal = TDEE1 - BMR;
+            console.log(weekcal);
+            weekcal1 = parseFloat(weekcal).toFixed(2);
+            $("#output_weekcal").text(weekcal1 + "卡");
+        }
+        console.log("1:" + height);
+        console.log("1:" + age);
+        console.log("1:" + weight);
+        console.log("1:" + BMR);
+        console.log("1:" + TDEE);
+        console.log("1:" + BMI);
+        console.log("1:" + weekcal);
+        console.log("1:" + Sportlevel);
+        console.log("1:" + BMI1);
+        console.log("1:" + TDEE1);
+        console.log("1:" + weekcal1);
+        console.log("1:" + gender);
+
+    });
+
+
+    $("#TDEEDemo").click(function () {
+        $("#TDEE-from input").eq(2).val("155");
+        $("#TDEE-from input").eq(3).val("60");
+        $("#TDEE-from input").eq(4).val("45");
+        $("#TDEE-from select").eq(0).val("1.2");
+    })
+</script>
+
+

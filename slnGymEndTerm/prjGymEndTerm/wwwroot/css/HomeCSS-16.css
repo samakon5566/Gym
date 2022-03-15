@@ -1,0 +1,335 @@
+﻿/*舊的*/
+.div-index {
+    width: 100%;
+    height: 5200px;
+}
+
+.div-titel h1 {
+    color: white;
+    font-weight: 900;
+    text-align: center;
+}
+
+.div-feature {
+    height: 500px;
+    width: 100%;
+    display: flex;
+}
+
+.background-grey {
+    background-color: #151515;
+}
+
+.div-feature-flex20 {
+    width: 20%;
+    height: 100%;
+    padding: 20px;
+}
+
+.div-feature-flex30 {
+    width: 30%;
+    height: 100%;
+}
+
+.div-feature-flex40 {
+    width: 40%;
+    height: 100%;
+}
+
+.div-feature-flex50 {
+    width: 50%;
+    height: 100%;
+}
+
+.div-feature-flex50-title {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.div-feature-flex60 {
+    width: 60%;
+    height: 100%;
+}
+
+.div-feature-flex70 {
+    margin: 0 auto;
+    width: 70%;
+    height: 100%;
+    display: flex;
+}
+
+.div-feature-flex80 {
+    margin: 0 auto;
+    width: 80%;
+    height: 100%;
+    display: flex;
+}
+
+.div-feature-hover {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: transform 2s var(--delay,0s) cubic-bezier(0.33,1,0.68,1);
+}
+
+.feature-img-aboutus {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    object-fit: cover;
+    object-position: center;
+}
+
+.feature-img {
+    position: absolute;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.hotonecoures-img {
+    position: absolute;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.black-warp {
+    background-color: rgb(0, 0, 0,.4);
+    transition: transform 2s var(--delay,0s) cubic-bezier(0.33,1,0.68,1);
+    will-change: transform;
+}
+
+.div-feature-hover:hover .black-warp {
+    background-color: rgb(0, 0, 0, 0);
+    transition: transform 2s var(--delay,0s) cubic-bezier(0.33,1,0.68,1);
+}
+
+.div-feature-hover:hover .feature-img {
+    transform: scale(1.1);
+    transition: transform 2s var(--delay,0s) cubic-bezier(0.33,1,0.68,1);
+    will-change: transform;
+}
+
+.borderLR {
+    border-bottom-left-radius: 50PX;
+}
+
+.borderRR {
+    border-bottom-right-radius: 50PX;
+}
+
+.div-feature-hover-warp {
+    overflow: hidden;
+    position: absolute;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.feature-title {
+    margin: 0 auto;
+    color: white;
+    border-bottom: solid 5px white;
+    font-size: 48px;
+    font-weight: 900;
+    margin-top: 50px;
+    height: 80px;
+}
+
+.feature-hot-title {
+    margin: 0 auto;
+    color: orange;
+    font-size: 60px;
+    font-weight: 900;
+    height: 200px;
+    font-weight: 900;
+    justify-self: center;
+    align-self: center;
+}
+
+.feature-hot-introduce {
+    margin: 0 auto;
+    color: white;
+    font-size: 24px;
+    font-weight: 900;
+    height: 100px;
+    font-weight: 900;
+    justify-self: center;
+    align-self: center;
+}
+
+.feature-introduce {
+    margin: 0 auto;
+    color: white;
+    opacity: 1;
+    font-size: 24px;
+    font-weight: 500;
+    padding: 50px;
+}
+
+.introduce-pading {
+    padding: 0 100px;
+}
+
+.Category-title {
+    background-color: black;
+    color: white;
+    height: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: 100px;
+    writing-mode: horizontal-tb;
+    line-height: normal;
+}
+
+.trx-title {
+    background-color: black;
+    color: white;
+    height: 33%;
+    width: 100%;
+    text-align: center;
+    font-size: 100px;
+    writing-mode: horizontal-tb;
+    line-height: normal;
+}
+
+.HotCoatch-img {
+    position: absolute;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.img-left {
+    border-bottom-left-radius: 50PX;
+    border-top-left-radius: 50PX;
+}
+
+.img-right {
+    border-bottom-right-radius: 50PX;
+    border-top-right-radius: 50PX;
+}
+
+.div-HotCoatch-hover {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.div-HotCoatch-hover-warp {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.HotCoatch-name {
+    
+    margin: 0 auto;
+    color: white;
+    font-size: 48px;
+    font-weight: 900;
+    margin-top: 50px;
+    height: 80px;
+    transform: translateY(100%) rotate( 10deg);
+    transition: transform 0.8s var(--delay,0s) cubic-bezier(0.33,1,0.68,1);
+    will-change: transform;
+}
+
+.HotCoatch-hidden {
+    margin: 0 auto;
+    height: 22%;
+    overflow: hidden;
+}
+
+.div-HotCoatch-hover-warp:hover .HotCoatch-name {
+    transform: translateY(0%) rotate(0);
+    transition: transform 0.8s var(--delay,0s) cubic-bezier(0.33,1,0.68,1);
+    will-change: transform;
+    transform-origin: 0% 0%;
+}
+
+.div-HotCoatch-hover-warp:hover .div-score-star {
+    transform: translateY(0%) rotate(0);
+    transition: transform 0.8s var(--delay,0s) cubic-bezier(0.33,1,0.68,1);
+    will-change: transform;
+    transform-origin: 0% 0%;
+}
+
+.div-score-star {
+    padding-top: 5px;
+    height: 35%;
+    width: 100%;
+    background-color: gray;
+    align-self: end;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-evenly;
+    transform: translateY(100%);
+    transition: transform 0.8s var(--delay,0s) cubic-bezier(0.33,1,0.68,1);
+}
+
+.score-count {
+    height: 35%;
+    width: 100%;
+    font-size: 24px;
+    color: white;
+    text-align: center
+}
+
+.score-star {
+    width: 100px;
+    height: 100px;
+    align-self: center;
+    justify-self: center;
+}
+
+.img-score-star {
+    width: 100%;
+    height: 100%;
+}
+
+.div-interval {
+    height: 100px;
+    width: 100%;
+}
+
+
+.div-hotonecoures {
+    height: 800px;
+    width: 100%;
+    display: flex;
+    background-color: #151515;
+    position: relative;
+}
+
+.div-hotonecoures-hover {
+    margin: auto;
+    width: 100%;
+    height: 70%;
+    position: relative;
+}
+
+.div-feature-flex30-hot {
+    width: 30%;
+    height: 100%;
+}

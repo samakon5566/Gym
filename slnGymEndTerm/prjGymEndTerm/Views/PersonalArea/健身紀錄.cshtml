@@ -1,0 +1,273 @@
+﻿@model List<prjGymEndTerm.ViewModels.CPostureChangeViewModel>
+
+@{
+    ViewData["Title"] = "健身紀錄";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+
+<style>
+    body {
+        background-color: #151515
+    }
+     .container a{
+            color: #FFF;
+        }
+        .container a:visited {
+            color: #FFF;
+        }
+        .container  a:hover {
+            color: #FFF;
+            text-decoration: underline;
+        }
+        .container  span {
+            color: #FFA500;
+        }
+        .Coach-panel-19 {
+            color: #FFF;
+            background-color: #272727;
+            border-radius: 15px;
+            padding: 20px 20px 20px 20px;
+            margin-top: 0px;
+        }
+        .Coach-panel-row-19 {
+            margin-top: 10px;
+            color: #FFF;
+        }
+        .Coach-panel-19 .Coach-panel-row-19 a:hover {
+            color: #F36100;
+            cursor: grab;
+            text-decoration: underline;
+        }
+        .Coach-panel-19 .Coach-panel-row-19 > input {
+            font-size: 14px;
+            color: #c4c4c4;
+            width: 90%;
+            height: 50px;
+            padding-left: 20px;
+            padding-right: 5px;
+            background: black;
+            margin-bottom: 20px;
+            border: 1px solid #8E8E8E;
+        }
+            .Coach-panel-19  button {
+                font-size: 14px;
+                color: #ffffff;
+                text-transform: uppercase;
+                font-weight: 700;
+                width: 20%;
+                border: none;
+                padding: 14px 0 12px;
+            }
+        .coach-image-19{
+            margin-top:5%;
+        }
+        .coach-image-19 > img {
+            border-radius: 50%;
+            height: 150px;
+            width: 150px;
+        }
+
+        input[type="date"] {
+            position: relative;
+            padding: 10px;
+        }
+
+            input[type="date"]::-webkit-calendar-picker-indicator {
+                color: transparent;
+                background: none;
+                z-index: 1;
+            }
+
+            input[type="date"]:before {
+                color: transparent;
+                background: none;
+                display: block;
+                font-family: 'FontAwesome';
+                content: '\f073';
+                /* This is the calendar icon in FontAwesome */
+                width: 15px;
+                height: 20px;
+                position: absolute;
+                top: 12px;
+                right: 6px;
+                color: #999;
+            }
+</style>
+
+<section class="contact-section spad-3">
+    <div style="width: 1000px;padding-left:0px; margin: auto;  position: relative; font-size:18px" class="container">
+        <div>
+            <a asp-controller="PersonalArea" asp-action="List">
+                會員首頁
+            </a>
+            <label style="color:#FFF">
+                >
+            </label>
+            <span >
+                目前頁面
+            </span>
+        </div>
+        <div class="leave-comment">
+            <label style="margin: auto; position: relative; font-size: 28px; color: orange"></label>
+        </div>
+        <div class="tab-regular" style="width: 1000px; margin: auto;  position: relative;">
+            <ul style="font-size:18px;color:black" class="nav nav-tabs " id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a style="color: #ffa500;font-weight:900" class="nav-link active show" id="健身紀錄-tab" data-toggle="tab" href="#健身紀錄" role="tab" aria-controls="健身紀錄" aria-selected="true">健身紀錄</a>
+                </li>
+                <li class="nav-item">
+                    <a style="color: #ffa500; font-weight: 900" class="nav-link" id="體態變化表-tab" data-toggle="tab" href="#體態變化表" role="tab" aria-controls="體態變化表" aria-selected="false">體態變化表</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <div class="tab-content" id="myTabContent" style="width: 1000px; padding-top:20px; margin: auto; position: relative;">
+            <div class="tab-pane fade active show" id="健身紀錄" role="tabpanel" aria-labelledby="健身紀錄-tab">
+                <table style="text-align: center" class="table table-dark table-striped ">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model[0].RecordTime)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model[0].Weight)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model[0].MuscleBass)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model[0].BasalMetabolism)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model[0].Fat)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RecordTime)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Weight)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MuscleBass)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BasalMetabolism)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Fat)
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="體態變化表" role="tabpanel" aria-labelledby="體態變化表-tab">
+                <div style="padding:10px; width:1000px;background-color:azure; margin: auto; position: relative;border-radius:5px;">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    var strReplace = ('@ViewBag.workoutweight').replaceAll("&quot;", '"');
+    var strReplace1 = ('@ViewBag.workoutfat').replaceAll("&quot;", '"');
+    var strReplace2 = ('@ViewBag.workoutdate').replaceAll("&quot;", '"');
+
+    var chartdata = JSON.parse(strReplace);
+    var chartdata1 = JSON.parse(strReplace1);
+    var chartlabel = JSON.parse(strReplace2);
+
+ 
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: chartlabel,
+            datasets: [
+                {
+                    label: '體重(kg)',
+                    yAxisID: 'A',
+                    data: chartdata,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255,1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255,1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                },
+                {           
+                    label: '體指率(%)',
+                    yAxisID: 'B',                
+                    data: chartdata1,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255,1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255,1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1,                
+                }]
+        },
+       options: { 
+            scales: { 
+                 A: 
+                 {              
+                    type: 'linear',  
+                    display: true,
+                    position: 'left',                   
+                    suggestedMin: 40,
+                    suggestedMax: 80
+                 }, 
+                 B:{              
+                     type: 'linear', 
+                     position: 'right',
+                     display: true,
+                     grid: {
+                     drawOnChartArea: false, 
+                     },
+                     suggestedMin: 10,
+                     suggestedMax: 50
+                 },
+        } 
+    } 
+    });
+</script>
+
+
+
+

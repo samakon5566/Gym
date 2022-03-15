@@ -1,0 +1,58 @@
+﻿@model List<prjGymEndTerm.ViewModels.CoachArea.CoachCommentListViewModel>
+
+<table class="table table-dark table-hover" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].StudentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].ClassName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].CoachName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].ClassScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].ClassRecord)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].RecordTime)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int count = 0;
+            foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClassName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CoachName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClassScore)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClassRecord)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RecordTime)
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+

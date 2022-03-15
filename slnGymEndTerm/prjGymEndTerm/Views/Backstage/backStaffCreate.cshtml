@@ -1,0 +1,134 @@
+﻿@model prjGymEndTerm.Models.LogIn
+
+@{
+    ViewData["Title"] = "backStaffCreate";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+
+<style>
+    CCoachTitle {
+        /*text-align: center;*/
+        text-decoration: underline
+    }
+
+    .backCBody {
+        padding: 50px 0 0 200px
+    }
+
+    body {
+        background-color: #efeff6
+    }
+    .page-breadcrumb {
+        margin-bottom: 30px;
+    }
+
+    .breadcrumb-item {
+        font-size: 15px
+    }
+</style>
+
+
+<div class="backCBody">
+    <h1 class="CCoachTitle" style="font-weight:800"><i class="fas fa-user-plus"></i>  <i class="fas fa-fire-alt"></i>新增員工</h1>
+
+    <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb" style="border-top: 1px solid #ADADAD ">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href=@Url.Action("List", "BackHome") class="breadcrumb-link">首頁</a></li>
+                <li class="breadcrumb-item"><a href=@Url.Action("backStaffList", "Backstage") class="breadcrumb-link">員工管理</a></li>
+                <li class="breadcrumb-item active" aria-current="page">新增員工</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="backStaffCreate">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <table style="width:320%">
+                    <tr style="border-bottom:1px dashed #9D9D9D;">
+                        <th style="width: 45%; padding-bottom: 20px">
+                            <div class="form-group">
+                                <label asp-for="LogInAccount" class="control-label" style="font-weight: 900">帳號</label>
+                                <input asp-for="LogInAccount" class="form-control" />
+                                <span asp-validation-for="LogInAccount" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInPassword" class="control-label" style="font-weight: 900">密碼</label>
+                                <input asp-for="LogInPassword" class="form-control" />
+                                <span asp-validation-for="LogInPassword" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInName" class="control-label" style="font-weight: 900">姓名</label>
+                                <input asp-for="LogInName" class="form-control" />
+                                <span asp-validation-for="LogInName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInIdNumber" class="control-label" style="font-weight: 900">身分證字號</label>
+                                <input asp-for="LogInIdNumber" class="form-control" />
+                                <span asp-validation-for="LogInIdNumber" class="text-danger"></span>
+                            </div>
+                        </th>
+                        <th style="width: 50%; padding-left: 20px; padding-bottom: 20px">
+                            <div class="form-group">
+                                <label asp-for="LogInGender" class="control-label" style="display:block;font-weight: 900;padding-bottom:15px">性別</label>
+                                <div class="form-check form-check-inline">
+                                    <input asp-for="LogInGender" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="male">
+                                    <label class="form-check-label" for="inlineCheckbox1">男性</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input asp-for="LogInGender" class="form-check-input" type="checkbox" id="inlineCheckbox2" value="female">
+                                    <label class="form-check-label" for="inlineCheckbox2">女性</label>
+                                </div>
+                                <span asp-validation-for="LogInGender" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInBrithDay" class="control-label" style="font-weight: 900">生日</label>
+                                <input asp-for="LogInBrithDay" class="form-control" type="date" />
+                                <span asp-validation-for="LogInBrithDay" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInPhone" class="control-label" style="font-weight: 900">電話</label>
+                                <input asp-for="LogInPhone" class="form-control" />
+                                <span asp-validation-for="LogInPhone" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInEmail" class="control-label" style="font-weight: 900">電子信箱</label>
+                                <input asp-for="LogInEmail" class="form-control" />
+                                <span asp-validation-for="LogInEmail" class="text-danger"></span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th style="padding-top:20px">
+                            <div class="form-group">
+                                <label asp-for="LogInHeight" class="control-label" style="font-weight: 900">身高</label>
+                                <input asp-for="LogInHeight" class="form-control" />
+                                <span asp-validation-for="LogInHeight" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInWeight" class="control-label" style="font-weight: 900">體重</label>
+                                <input asp-for="LogInWeight" class="form-control" />
+                                <span asp-validation-for="LogInWeight" class="text-danger"></span>
+                            </div>
+
+                        </th>
+                    </tr>
+                </table>
+                <div class="form-group">
+                    <input asp-for="LogInTypeId" class="form-control" value="1" type="hidden" />
+                    <input asp-for="LogInRegisterTime" class="form-control" value="@DateTime.Now" type="hidden" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="新增資料" class="btn btn-warning" style="font-weight:900" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

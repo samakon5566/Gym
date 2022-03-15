@@ -1,0 +1,176 @@
+﻿@model List<prjGymEndTerm.ViewModels.CCourseDetailViewmodel>
+
+@{
+    ViewData["Title"] = "課程介紹有氧";
+}
+<style>
+    .div-all {
+        width: 100%;
+        height: 100%;
+    }
+
+    .div-window {
+        margin: 0 auto;
+        width: 70%;
+        height: @ViewBag.Count;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .div-GroupCourse-CourseClass {
+        width: 100%;
+        height: 500px;
+        margin-bottom:100px;
+        display: flex;
+    }
+
+    .div-GroupCourse-imghover {
+        width: 60%;
+        height: 100%;
+        position: relative;
+    }
+
+    .GroupCourse-img {
+        position: absolute;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .div-GroupCourse-hover {
+        position: absolute;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+    }
+
+    .div-GroupCourse-p {
+        width: 40%;
+        height: 100%;
+    }
+
+    .div-GroupCourse-hover:hover {
+        padding: 20px 0;
+        transition: 2s;
+        background-color: rgba(0,0,0,.4);
+    }
+
+    .div-GroupCourse-hover:hover a {
+        opacity: 1;
+        transition: 2s;
+    }
+
+    h1, h3 {
+        color: white;
+    }
+    .div-GroupCourse-p h1{
+        color:orange;
+        text-align:center;
+        border-bottom:solid 2px #ffea00;
+    }
+
+    h1 {
+        font-size: 36px;
+        padding: 10px;
+    }
+
+    h3 {
+        font-size: 20px;
+        line-height:30px;
+        margin-top:50px;
+    }
+
+    .div-GroupCourse-hover a {
+        opacity: 0;
+        color: orange;
+        font-size: 24px;
+        align-self: flex-end;
+        margin-left: auto;
+    }
+    .Mright{
+        margin-left:50px;
+    }
+    .Mleft {
+        margin-right: 50px;
+    }
+</style>
+
+<section class="outer-frame">
+    <div class="div-container-out">
+        <div class="div-container">
+            <h2 class="topheader-title">有　氧　課　程</h2>
+            <img src="~/img/topheader/TH-GC-1.jpg" />
+        </div>
+    </div>
+</section>
+@*各課程用導覽列*@
+<nav id="view-class">
+    <ul class="menu transition">
+        <li><a asp-controller="GroupCourse" asp-action="課程介紹有氧">有氧課程</a></li>
+        <li><a asp-controller="GroupCourse" asp-action="課程介紹拳擊">拳擊課程</a></li>
+        <li><a asp-controller="GroupCourse" asp-action="課程介紹瑜珈">瑜珈課程</a></li>
+        <li><a asp-controller="GroupCourse" asp-action="課程介紹飛輪">飛輪課程</a></li>
+        <li><a asp-controller="GroupCourse" asp-action="課程介紹TRX">TRX課程</a></li>
+    </ul>
+</nav>
+@*到目前網頁的網站路徑*@
+<section class="web-path">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="breadcrumb-text">
+                <div class="bt-option">
+                    <a asp-controller="Home" asp-action="Index">主頁</a>
+                    <a asp-controller="GroupCourse" asp-action="課程介紹團體課">團體課程介紹</a>
+                    <span>有氧課程</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="div-all">
+    <div class="div-window">
+        @{
+            int cont = 0;
+            foreach (var item in Model)
+            {
+                cont++;
+                if (cont % 2 == 1)
+                {
+                    <div class="div-GroupCourse-CourseClass">
+                        <div class="div-GroupCourse-imghover">
+                            <img src="~/img/CourseDetail/@Html.DisplayFor(modelItem => item.CourseDetailPicture)" class="GroupCourse-img" />
+                            <div class="div-GroupCourse-hover">
+                                <a asp-controller="GroupCourse" asp-action="課程與選購">我要上課>>></a>
+                            </div>
+                        </div>
+                        <div class="div-GroupCourse-p Mright">
+                            <h1>@Html.DisplayFor(modelItem => item.CourseDetailName)</h1>
+                            <h3>@Html.DisplayFor(modelItem => item.CourseDetailIntroduce)</h3>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="div-GroupCourse-CourseClass">
+                        <div class="div-GroupCourse-p Mleft">
+                            <h1>@Html.DisplayFor(modelItem => item.CourseDetailName)</h1>
+                            <h3>@Html.DisplayFor(modelItem => item.CourseDetailIntroduce)</h3>
+                        </div>
+                        <div class="div-GroupCourse-imghover">
+                            <img src="~/img/CourseDetail/@Html.DisplayFor(modelItem => item.CourseDetailPicture)" class="GroupCourse-img" />
+                            <div class="div-GroupCourse-hover">
+                                <a asp-controller="GroupCourse" asp-action="課程與選購">我要上課>>></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            }
+
+        }
+    </div>
+</div>
+
+

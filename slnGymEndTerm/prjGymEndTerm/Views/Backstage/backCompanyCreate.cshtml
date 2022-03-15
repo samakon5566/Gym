@@ -1,0 +1,78 @@
+﻿@model prjGymEndTerm.Models.Company
+
+@{
+    ViewData["Title"] = "backCompanyCreate";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+
+<style>
+    CCoachTitle {
+        /*text-align: center;*/
+        text-decoration: underline
+    }
+
+    .backCBody {
+        padding: 50px 0 0 200px
+    }
+
+    .control-label {
+        font-size:20px;
+        font-weight: 900
+    }
+    body {
+        background-color: #efeff6
+    }
+    .page-breadcrumb {
+        margin-bottom: 30px;
+    }
+
+    .breadcrumb-item {
+        font-size: 15px
+    }
+</style>
+
+<body>
+    <div class="backCBody">
+        <h1 class="CCoachTitle" style="font-weight:800"><i class="fas fa-wrench"></i>   新增廠商</h1>
+
+        <div class="page-breadcrumb">
+            <nav aria-label="breadcrumb" style="border-top: 1px solid #ADADAD ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href=@Url.Action("List", "BackHome") class="breadcrumb-link">首頁</a></li>
+                    <li class="breadcrumb-item"><a href=@Url.Action("backCompanyList", "Backstage") class="breadcrumb-link">所有廠商</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">新增廠商</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="backCompanyCreate">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="CompanyName" class="control-label">廠商名稱</label>
+                        <input asp-for="CompanyName" class="form-control form-control-lg" />
+                        <span asp-validation-for="CompanyName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CompanyTaxId" class="control-label">廠商統編</label>
+                        <input asp-for="CompanyTaxId" class="form-control form-control-lg" />
+                        <span asp-validation-for="CompanyTaxId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ComapnyPhone" class="control-label">廠商電話</label>
+                        <input asp-for="ComapnyPhone" class="form-control form-control-lg" />
+                        <span asp-validation-for="ComapnyPhone" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group m-t-40">
+                        <input type="submit" value="+ 新增" class="btn btn-warning" style="font-weight:900" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

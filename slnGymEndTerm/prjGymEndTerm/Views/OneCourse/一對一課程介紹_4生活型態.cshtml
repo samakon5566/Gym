@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewData["Title"] = "一對一課程介紹_4生活型態";
+}
+<style>
+    .div_all {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .div_window {
+        width: 70%;
+        height: 1440px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: start;
+    }
+
+    .div_section {
+        margin-top: 100px;
+        width: 100%;
+        height: 600px;
+        display: flex;
+    }
+
+    .div_introduce1 {
+        width: 70%;
+        height: auto;
+    }
+
+    .div_pic {
+        width: 30%;
+        height: 100%;
+        justify-content: center;
+        padding: 0 10px 0 0;
+    }
+
+    .introduce_img1 {
+        padding: 20% 0;
+    }
+
+    .introduce1_title {
+        text-align: center;
+        color: white;
+        font-size: 48px;
+        border-bottom: 2px outset #ffd800;
+        margin: 0 3em;
+        padding-bottom: 15px;
+    }
+
+    .introduce {
+        color: white;
+        font-size: 36px;
+        margin: 1em 10% 10% 2em;
+        line-height: 48px;
+    }
+
+        .introduce > li:hover {
+            font-size: 36px;
+            color: orange;
+        }
+    /*---------------------------------------------*/
+</style>
+<section class="outer-frame">
+    <div class="div-container-out">
+        <div class="div-container">
+            <h2 class="topheader-title">生　活　型　態</h2>
+            <img src="~/img/16img/background/backgroundonecourse11.jpg" />
+        </div>
+    </div>
+</section>
+
+<section class="web-path">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="breadcrumb-text">
+                <div class="bt-option">
+                    <a asp-controller="BackHome" asp-action="List">主頁</a>
+                    <a asp-controller="OneCourse" asp-action="一對一課程介紹">一對一課程介紹</a>
+                    <span>生活型態</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="div_all">
+    <div class="div_window">
+        <div class="div_section">
+            <div class="div_pic">
+                <img class="introduce_img1" src="~/img/16img/life2.jpg" />
+            </div>
+            <div class="div_introduce1">
+                <h6 class="introduce1_title">睡　眠</h6>
+                <h3 class="introduce">　　睡眠對於每個人都是很重要的，對體態上面來講，睡不好的人的減肥效果可以減少高達50％的效率，因為沒睡好會有瘦素、胰島素敏感度、飢餓素、皮質醇、睪酮、生長激素、類胰島素生長因素等荷爾蒙異常的狀況，會讓你較容易堆積脂肪不容易長出肌肉，讓你食慾很夠加上血糖控制出問題，等於就是在幫你增脂減肌。</h3>
+            </div>
+        </div>
+        <div class="div_section">
+            <div class="div_introduce1">
+                <h6 class="introduce1_title">結　論</h6>
+                <h3 class="introduce">　　生活型態意義上囊括前面健身、飲食、睡眠，想要擁有令人稱羨的完美體態生活型態可以說是缺一不可，一對一教練課程也提供諮詢服務，很多人健身很久之後體態就會開始卡關，遲遲無法向前，可能就是我們的生活型態出了問題，透過諮詢了解自己生活上那些習慣需要改進，才能讓自己傭有更好的體態。</h3>
+            </div>
+            <div class="div_pic">
+                <img class="introduce_img1" src="~/img/16img/life1.jpg" />
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewData["Title"] = "uploadDemo";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+
+@using (Html.BeginForm("uploadDemo", "Backstage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="NewsFigure" />
+    <input type="submit" value="OK" />
+}
+

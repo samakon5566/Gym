@@ -1,0 +1,229 @@
+﻿@model prjGymEndTerm.Models.CourseClass
+
+@{
+    ViewData["Title"] = "backCourseClassEdit";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+
+<style>
+    CCoachTitle {
+        /*text-align: center;*/
+        text-decoration: underline
+    }
+
+    .backCBody {
+        padding: 50px 0 0 200px
+    }
+
+    .control-label {
+        font-weight: 900
+    }
+
+    body {
+        background-color: #efeff6
+    }
+
+    .page-breadcrumb {
+        margin-bottom: 30px;
+    }
+
+    .breadcrumb-item {
+        font-size: 15px
+    }
+</style>
+
+<div class="backCBody">
+    <h1 class="CCoachTitle" style="font-weight:800"><i class="fas fa-clipboard"></i>   修改課程</h1>
+
+    <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb" style="border-top: 1px solid #ADADAD ">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href=@Url.Action("List", "BackHome") class="breadcrumb-link">首頁</a></li>
+                <li class="breadcrumb-item"><a href=@Url.Action("backClassList", "Backstage") class="breadcrumb-link">課程總覽</a></li>
+                <li class="breadcrumb-item active" aria-current="page">修改課程</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row" style="margin:auto 20px;">
+        <form asp-action="backCourseClassEdit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="CourseClassId" value="@Model.CourseClassId" />
+
+            <table>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label class="control-label">課程種類</label>
+                            <select id="categorySelect" class="form-select" aria-label="Default select example" style="width:400px;height:40px"></select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CourseClassDetailId" class="control-label">課程分類</label>
+                            <select asp-for="CourseClassDetailId" id="detailSelect" class="form-select" style="width:400px;height:40px"></select>
+                            <span asp-validation-for="CourseClassDetailId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CourseClassCoachId" class="control-label">教練</label>
+                            <select asp-for="CourseClassCoachId" id="coachSelect" class="form-select" style="width:400px;height:40px"></select>
+                            <span asp-validation-for="CourseClassCoachId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CourseClassClassroomId" class="control-label">教室</label>
+                            <select asp-for="CourseClassClassroomId" class="form-select" style="width:400px;height:40px">
+                                <option>請選擇</option>
+                                <option value="1">拳擊教室</option>
+                                <option value="2">飛輪教室</option>
+                                <option value="3">重訓教室</option>
+                                <option value="4">有氧教室</option>
+                                <option value="5">瑜珈教室</option>
+                                <option value="6">TRX教室</option>
+                            </select>
+                            <span asp-validation-for="CourseClassClassroomId" class="text-danger"></span>
+                        </div>
+                    </td>
+                    <td valign="bottom" style="padding-left: 50px" class="p-t-10">
+                        <div class="form-group">
+                            <label asp-for="CourseClassName" class="control-label">課程名稱</label>
+                            <input asp-for="CourseClassName" class="form-control" style="width: 400px; height: 40px; border: 1px solid #6C6C6C " />
+                            <span asp-validation-for="CourseClassName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CourseClassPeople" class="control-label">人數上限</label>
+                            <input asp-for="CourseClassPeople" class="form-control" style="width: 400px; height: 40px; border: 1px solid #6C6C6C " />
+                            <span asp-validation-for="CourseClassPeople" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CourseClassPlanId" class="control-label">方案</label>
+                            <select asp-for="CourseClassPlanId" id="planSelect" style="width:400px;height:40px"></select>
+                            <span asp-validation-for="CourseClassPlanId" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="p-t-20 pull-right" style="float:right">
+                <input type="submit" value="修改並儲存" class="btn btn-primary" style="font-weight:900" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script>
+
+        const categorySelect = document.querySelector('#categorySelect')
+        const detailSelect = document.querySelector('#detailSelect')
+        const coachSelect = document.querySelector('#coachSelect')
+        const planSelect = document.querySelector('#planSelect')
+
+
+        async function Load() {
+
+            //categorySelect
+            const categoryResponse = await fetch('@Url.Content("~/BackApi/categorySelect")')
+            const categoryDatas = await categoryResponse.json()
+            //console.log(categoryDatas)
+            renderCategorySelect(categoryDatas)
+
+
+            //detailSelect
+            const index = categorySelect.selectedIndex
+            const category = categorySelect.options[index].value
+
+            const detailResponse = await fetch('@Url.Content("~/BackApi/detailSelect?CourseCategoryId=")' + category)
+            const detailDatas = await detailResponse.json()
+            //console.log(detailDatas)
+            renderdetailSelect(detailDatas)
+
+
+            //coachSelect
+            const coachResponse = await fetch('@Url.Content("~/BackApi/coachSelect?SkillCourseCategoryId=")' + category)
+            const coachDatas = await coachResponse.json()
+            //console.log(coachDatas)
+            rendercoachSelect(coachDatas)
+
+
+            //planSelect
+            const planResponse = await fetch('@Url.Content("~/BackApi/planSelect")')
+            const planDatas = await planResponse.json()
+            //console.log(planDatas)
+            renderplanSelect(planDatas)
+        }
+
+        Load()
+
+        function renderCategorySelect(datas) {
+
+            const opt0 = new Option('　請選擇')
+             categorySelect.options.add(opt0)
+
+            datas.forEach((item) => {
+                //console.log(item.courseCategoryName)
+                const opt = new Option(`　${item.courseCategoryName}`, item.courseCategoryId)
+                categorySelect.options.add(opt)
+            })
+        }
+
+        function renderdetailSelect(datas) {
+
+            detailSelect.options.length = 0;
+            const opt0 = new Option('　請選擇')
+             detailSelect.options.add(opt0)
+
+            datas.forEach((item) => {
+                 //console.log(item)
+                const opt = new Option(`　${item.courseDetailName}`, item.courseDetailId)
+                detailSelect.options.add(opt)
+            })
+        }
+
+        function rendercoachSelect(datas) {
+
+            coachSelect.options.length = 0;
+            const opt0 = new Option('　請選擇')
+            coachSelect.options.add(opt0)
+
+            datas.forEach((item) => {
+                //console.log(item)
+                const opt = new Option(`　${item.logInName}`, item.skillCoachId)
+                coachSelect.options.add(opt)
+            })
+            }
+
+        function renderplanSelect(datas) {
+
+            const opt0 = new Option('　請選擇')
+            planSelect.options.add(opt0)
+
+            datas.forEach((item) => {
+               // console.log(item)
+                const opt = new Option(`　${item.discountPlan1}`, item.discountPlanId)
+                planSelect.options.add(opt)
+            })
+        }
+
+            categorySelect.addEventListener('change', async function () {
+
+                //detailSelect
+                const index = categorySelect.selectedIndex
+                const category = categorySelect.options[index].value
+                //console.log(category)
+                const detailResponse = await fetch('@Url.Content("~/BackApi/detailSelect?CourseCategoryId=")' + category)
+                const detailDatas = await detailResponse.json()
+                renderdetailSelect(detailDatas)
+
+                //coachSelect
+                const coachResponse = await fetch('@Url.Content("~/BackApi/coachSelect?SkillCourseCategoryId=")' + category)
+                const coachDatas = await coachResponse.json()
+                rendercoachSelect(coachDatas)
+            })
+
+
+
+
+</script>
+
+}

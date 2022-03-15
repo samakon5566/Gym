@@ -1,0 +1,238 @@
+﻿@model prjGymEndTerm.ViewModels.CLoginViewModel
+
+
+@{
+    ViewData["Title"] = "backCoachCreate";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+<style>
+    CCoachTitle {
+        /*text-align: center;*/
+        text-decoration: underline
+    }
+
+    .backCBody {
+        padding: 50px 0 0 200px
+    }
+
+    body {
+        background-color: #efeff6
+    }
+
+    .page-breadcrumb {
+        margin-bottom: 30px;
+    }
+
+    .breadcrumb-item {
+        font-size: 15px
+    }
+
+/*    #skillInput label {
+        margin-right: 40px;
+        margin-bottom:20px
+    }*/
+    #ttable input
+    {
+        width:400px
+    }
+</style>
+
+
+<div class="backCBody">
+    <h1 class="CCoachTitle" style="font-weight:800"><i class="fas fa-user-plus"></i>  <i class="fas fa-fire-alt"></i>新增教練</h1>
+
+    <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb" style="border-top: 1px solid #ADADAD ">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href=@Url.Action("List", "BackHome") class="breadcrumb-link">首頁</a></li>
+                <li class="breadcrumb-item"><a href=@Url.Action("backCoachList", "Backstage") class="breadcrumb-link">教練管理</a></li>
+                <li class="breadcrumb-item active" aria-current="page">新增教練</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row" style="margin:auto 30px;">
+            <form asp-action="backCoachCreate" enctype="multipart/form-data" id="form" >
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <table id="ttable">
+                    <tr >
+                        <td>
+                            <div class="form-group">
+                                <label asp-for="LogInAccount" class="control-label" style="font-weight: 900">帳號</label>
+                                <input asp-for="LogInAccount" class="form-control" />
+                                <span asp-validation-for="LogInAccount" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInPassword" class="control-label" style="font-weight: 900">密碼</label>
+                                <input asp-for="LogInPassword" class="form-control" />
+                                <span asp-validation-for="LogInPassword" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInName" class="control-label" style="font-weight: 900">姓名</label>
+                                <input asp-for="LogInName" class="form-control" />
+                                <span asp-validation-for="LogInName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInIdNumber" class="control-label" style="font-weight: 900">身分證字號</label>
+                                <input asp-for="LogInIdNumber" class="form-control" />
+                                <span asp-validation-for="LogInIdNumber" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td style="padding-left:40px">
+                            <div class="form-group">
+                                <label asp-for="LogInGender" class="control-label" style="display:block;font-weight: 900;padding-bottom:15px">性別</label>
+                                <div class="form-check form-check-inline">
+                                    <input asp-for="LogInGender" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="male" style="width:50px">
+                                    <label class="form-check-label" for="inlineCheckbox1">男性</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input asp-for="LogInGender" class="form-check-input" type="checkbox" id="inlineCheckbox2" value="female" style="width:50px">
+                                    <label class="form-check-label" for="inlineCheckbox2">女性</label>
+                                </div>
+                                <span asp-validation-for="LogInGender" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInBrithDay" class="control-label" style="font-weight: 900">生日</label>
+                                <input asp-for="LogInBrithDay" class="form-control" type="date" />
+                                <span asp-validation-for="LogInBrithDay" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInPhone" class="control-label" style="font-weight: 900">電話</label>
+                                <input asp-for="LogInPhone" class="form-control" />
+                                <span asp-validation-for="LogInPhone" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInEmail" class="control-label" style="font-weight: 900">電子信箱</label>
+                                <input asp-for="LogInEmail" class="form-control" />
+                                <span asp-validation-for="LogInEmail" class="text-danger"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="border-bottom:1px dashed #9D9D9D;">
+                        <td colspan="2">
+                            <div class="form-group">
+                                <label asp-for="CoachAddress" class="control-label" style="font-weight: 900">地址</label>
+                                <input asp-for="CoachAddress" class="form-control" style="width:840px"/>
+                                <span asp-validation-for="CoachAddress" class="text-danger"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="padding-top:20px" valign="top">
+                            <div class="form-group">
+                                <label asp-for="LoginFigure" class="control-label" style="font-weight: 900">照片</label>
+                                <div class="mb-3 m-t-10">
+                                    <input asp-for="LoginFigure" name="LoginFigure" class="form-control " type="file" onchange="openFile(event)" id="formFile" style="height:45px">
+                                </div>
+                                <span asp-validation-for="LoginFigure" class="text-danger"></span>
+                            </div>
+                            <div class="form-group" style="padding-top:20px">
+                                <label asp-for="LogInHeight" class="control-label" style="font-weight: 900">身高</label>
+                                <input asp-for="LogInHeight" class="form-control" />
+                                <span asp-validation-for="LogInHeight" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LogInWeight" class="control-label" style="font-weight: 900">體重</label>
+                                <input asp-for="LogInWeight" class="form-control" />
+                                <span asp-validation-for="LogInWeight" class="text-danger"></span>
+                            </div>
+
+
+
+                        </th>
+                        <th style=" padding-left: 40px; padding-top: 20px" valign="top">
+                            <div class="form-group">
+                                <label class="control-label" style="font-weight: 900">授課項目</label>
+                                <div id="skillInput">
+                                    <label class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" class="custom-control-input" name="divide[]" value="1" id="skill1"><span class="custom-control-label">有氧</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" class="custom-control-input" name="divide[]" value="2" id="skill2"><span class="custom-control-label">拳擊</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" class="custom-control-input" name="divide[]" value="3" id="skill3"><span class="custom-control-label">瑜珈</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" class="custom-control-input" name="divide[]" value="5" id="skill5"><span class="custom-control-label">飛輪</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" class="custom-control-input" name="divide[]" value="6" id="skill6"><span class="custom-control-label">TRX</span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox custom-control-inline">
+                                        <input type="checkbox" class="custom-control-input" name="divide[]" value="4" id="skill4"><span class="custom-control-label">重量訓練</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CoachExperience" class="control-label" style="font-weight: 900">授課年資</label>
+                                <input asp-for="CoachExperience" class="form-control" />
+                                <span asp-validation-for="CoachExperience" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CoachBackground" class="control-label" style="font-weight: 900">專業證照/技能</label>
+                                <input asp-for="CoachBackground" class="form-control" />
+                                <span asp-validation-for="CoachBackground" class="text-danger"></span>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+                <div class="form-group">
+                    <input asp-for="LogInTypeId" class="form-control" value="3" type="hidden" />
+                    <input asp-for="LogInRegisterTime" class="form-control" value="@DateTime.Now" type="hidden" />
+
+                </div>
+                <div class="form-group" style="float:right">
+                    <input type="button" value="Demo" class="btn btn-warning" style="font-weight:900" id="demoBtn" />
+                    <input type="submit" value="新增資料" class="btn btn-warning" style="font-weight:900;" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script>
+        //勾選時段改變name 讓值可以丟給Action
+        $('#skillInput input').change(function () {
+
+            if ($(this).attr('checked', true)) {
+                $(this).attr('name', 'skillAry')
+            }
+            else {
+                $(this).attr('name', 'divide[]')
+            }
+
+        })
+    </script>
+
+    <script>
+        //DEMO
+        $("#demoBtn").click(function () {
+            $("#form input").eq(0).val("sandy521521");
+            $("#form input").eq(1).val("sandy781225");
+            $("#form input").eq(2).val("陳瑞莎");
+            $("#form input").eq(3).val("F225841523");
+            $("#form input").eq(5).attr("checked", true);
+            $("#form input").eq(6).val("1989-12-25");
+            $("#form input").eq(7).val("0952141852");
+            $("#form input").eq(8).val("sandy521@gmail.com");
+            $("#form input").eq(9).val("台北市中山區朱崙街20號5樓");
+            $("#form input").eq(11).val("163");
+            $("#form input").eq(12).val("50");
+            $("#skill1").prop("checked", true);
+            $("#skill1").attr('name', 'skillAry');
+
+            $("#skill3").prop("checked", true);
+            $("#skill3").attr('name', 'skillAry');
+
+            $("#form input").eq(19).val("3");
+            $("#form input").eq(20).val("競技體操C級教練");
+
+        })
+
+    </script>
+
+}

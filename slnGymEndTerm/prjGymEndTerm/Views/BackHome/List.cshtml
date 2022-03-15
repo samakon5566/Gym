@@ -1,0 +1,220 @@
+﻿@model prjGymEndTerm.Models.CBackHome
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+
+<style>
+    .backBody {
+        padding: 50px 0 0 150px;
+        width: 110%
+    }
+
+    .homeTitle {
+        font-size: 50px;
+        width: 1280px;
+        text-align: center;
+        padding: 30px 0 50px 0;
+        font-weight: 900;
+    }
+
+    body {
+        background-color: #efeff6
+    }
+
+    #flotcontainer {
+        width: 500px;
+        height: 400px;
+    }
+    .row1{
+        margin-bottom:40px
+    }
+    .card-header {
+        background-color: rgb(208,208,208,0.3)
+    }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+@{
+    string moneyTotal = Model.moneyTotal.ToString("#,#");
+
+    string todayClassMoney = "";
+    if (Model.todayClassMoney==0)
+    {
+        todayClassMoney = "0";
+    }
+    else
+    {
+        todayClassMoney = Model.todayClassMoney.ToString("#,#");
+    }
+
+}
+
+
+
+<div class="backBody">
+    <h1 class="homeTitle">歡迎進入Fitness House後台</h1>
+    @*<img class="imgGym" src="~/assets/images/back.png" />*@
+
+<div class="row row1" style="display:flex;justify-content:center">
+
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
+        <div class="card ">
+            <div class="card-header bg-primary text-center p-3 ">
+                <h4 class="mb-0 text-white">當日新增會員數</h4>
+            </div>
+            <div class="card-body text-center">
+                <h1 class="mb-1">@Html.DisplayFor(model => model.todayMemberCount) 位</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header bg-info text-center p-3">
+                <h4 class="mb-0 text-white">當日訂單筆數</h4>
+            </div>
+            <div class="card-body text-center">
+                <h1 class="mb-1">@Html.DisplayFor(model => model.todayOrderCount) 筆</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header  text-center p-3" style="background-color: #FFA500 ">
+                <h4 class="mb-0 text-white" >當日銷售金額</h4>
+            </div>
+            <div class="card-body text-center">
+                <h1 class="mb-1">@todayClassMoney 元</h1>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="row row2">
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"> 當月新增會員數： @Html.DisplayFor(model => model.memberTotal) 人</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="memberChart" height="280"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"> 當月開班課程數： @Html.DisplayFor(model => model.classTotal) 班</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="classChart" height="280"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-12 col-md-6 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"> 當月銷售金額： @moneyTotal 元</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="moneyChart" height="280"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+    var ctx = document.getElementById('memberChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['男性', '女性'],
+            datasets: [{
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255,99,132,1)',
+                ],
+                borderWidth: 1,
+                label: '人數',
+                data: [@Html.DisplayFor(model => model.maleCount), @Html.DisplayFor(model => model.femaleCount), 0]
+            }]
+        }
+    });
+
+    var ctx = document.getElementById('classChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['有氧', '拳擊', '瑜珈', '重量訓練', '飛輪','TRX'],
+            datasets: [{
+                backgroundColor: [
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255,99,132,1)',
+                ],
+                borderWidth: 1,
+                label: '人數',
+                data: [@Html.DisplayFor(model => model.category1Count), @Html.DisplayFor(model => model.category2Count),@Html.DisplayFor(model => model.category3Count),
+                    @Html.DisplayFor(model => model.category4Count),@Html.DisplayFor(model => model.category5Count),@Html.DisplayFor(model => model.category6Count)
+                ]
+            }]
+        }
+    });
+
+    var ctx = document.getElementById('moneyChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'polarArea',
+        data: {
+            labels: ['有氧', '拳擊', '瑜珈', '重量訓練', '飛輪','TRX'],
+            datasets: [{
+                backgroundColor: [
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255,99,132,1)',
+                ],
+                borderWidth: 1,
+                label: '人數',
+                data: [@Html.DisplayFor(model => model.category1Money), @Html.DisplayFor(model => model.category2Money),@Html.DisplayFor(model => model.category3Money),
+                    @Html.DisplayFor(model => model.category4Money),@Html.DisplayFor(model => model.category5Money),@Html.DisplayFor(model => model.category6Money)
+                ]
+            }]
+        }
+    });
+
+</script>

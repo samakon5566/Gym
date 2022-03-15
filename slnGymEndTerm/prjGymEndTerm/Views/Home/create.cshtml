@@ -1,0 +1,328 @@
+﻿@model prjGymEndTerm.Models.LogIn
+
+@{
+    ViewData["Title"] = "create";
+
+}
+
+
+<style>
+    label {
+        color: white
+    }
+
+    .card-body {
+        color: white
+    }
+
+    input[type="date"] {
+        position: relative;
+        padding: 10px;
+    }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            color: transparent;
+            background: none;
+            z-index: 1;
+        }
+
+        input[type="date"]:before {
+            color: transparent;
+            background: none;
+            display: block;
+            font-family: 'FontAwesome';
+            content: '\f073';
+            /* This is the calendar icon in FontAwesome */
+            width: 15px;
+            height: 20px;
+            position: absolute;
+            top: 12px;
+            right: 6px;
+            color: #999;
+        }
+</style>
+
+
+
+<div class="row" style="width: 100%; margin:150px auto; ">
+    <div class="col-lg-6" style="margin:80px auto">
+        <div class="section-title chart-calculate-title" style="margin-bottom:10px">
+            <span style="color:#FFA500">　Creat Member</span>
+            <h2><i class="fas fa-user-plus"></i> 加入會員</h2>
+        </div>
+        <div style="display:flex">
+            <h2 id="showflag1" style="height:20px;color:white;margin:20px 10px;font-size:20px"></h2>
+            <h2 id="showflag2" style="height:20px;color:white;margin:20px 10px;font-size:20px"></h2>
+        </div>
+        <div class="chart-calculate-form">
+            <form id="form" name="member">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <input type="text" id="Account" name="LogInAccount" placeholder="帳號" asp-for="LogInAccount" style="border: 1px solid #8E8E8E">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="password" placeholder="密碼" asp-for="LogInPassword" style="border: 1px solid #8E8E8E">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" placeholder="姓名" asp-for="LogInName" style="border: 1px solid #8E8E8E" id="name">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" id="IdNum" name="LogInIdNumber" placeholder="身分證字號" asp-for="LogInIdNumber" style="border: 1px solid #8E8E8E">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" placeholder="性別/male or female" asp-for="LogInGender" style="border: 1px solid #8E8E8E">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="date" placeholder="生日" asp-for="LogInBrithDay" style="border: 1px solid #8E8E8E">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" placeholder="手機" asp-for="LogInPhone" style="border: 1px solid #8E8E8E">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" placeholder="Email" asp-for="LogInEmail" style="border: 1px solid #8E8E8E">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" placeholder="身高/cm" asp-for="LogInHeight" style="border: 1px solid #8E8E8E">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" placeholder="體重/kg" asp-for="LogInWeight" style="border: 1px solid #8E8E8E">
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="LogInRegisterTime" class="form-control" type="date" hidden />
+                    </div>
+                    <div class="col-lg-12 m-t-20" style="display:flex;margin:20px auto">
+                        <button type="button" style="background-color: #FFA500; color: #151515; width: 30%; margin:20px auto 0 auto;font-size:15px" id="submitBtn">註冊</button>
+                    </div>
+                </div>
+            </form>
+            <div style="display:flex;padding:0 300px">
+                <button style="background-color: #FFA500; color: #151515; width: 30%; margin:20px auto 0 auto;font-size:15px" id="demoAccountBtn">DEMO帳號</button>
+                <button style="background-color: #FFA500; color: #151515; width: 30%; margin:20px auto 0 auto;font-size:15px" id="demoBtn">DEMO</button>
+            </div>
+        </div>
+    </div>
+    <img src="~/img/16img/tdeeback1.jpg" style="margin-top: 200px; position: absolute; opacity: 0.3; height: 100%; width: 100%; z-index: -1; top: -200px " />
+
+</div>
+
+
+
+
+@section Scripts {
+    <script>
+        var txtAccount = document.querySelector("#Account");
+        var txtIdNum = document.querySelector("#IdNum");
+        var showFlag = document.querySelector("#showflag1");
+        var showFlag2 = document.querySelector("#showflag2");
+
+
+
+        txtAccount.addEventListener('keyup', async function () {
+
+            var Account = txtAccount.value
+            var IdNum = txtIdNum.value
+            console.log(Account)
+
+            const accountResponse = await fetch('@Url.Content("~/BackApi/accountAndMemberidInput?txtAccount=")' + Account + '&txtIdNum=' + IdNum)
+            const accountData = await accountResponse.json()
+            console.log(accountData)
+
+            if (accountData =="重複")
+            {
+                showFlag.innerHTML = ' X  該帳號已被使用'
+                $('#submitBtn').attr("disabled", true)
+                $('#submitBtn').css("background-color", "#D0D0D0")
+            }
+            if (accountData == "OK")
+            {
+                $('#showflag1')[0].innerHTML = ""
+                $('#submitBtn').attr("disabled", false)
+                $('#submitBtn').css("background-color", "#FFA500")
+
+            }
+
+        })
+
+
+        txtIdNum.addEventListener('keyup', async function () {
+
+            var Account = txtAccount.value
+            var IdNum = txtIdNum.value
+            //console.log(Account)
+
+            if (IdNum != "")
+            {
+                const accountResponse = await fetch('@Url.Content("~/BackApi/accountAndMemberidInput?txtAccount=")' + Account + '&txtIdNum=' + IdNum)
+                const accountData = await accountResponse.json()
+                console.log(accountData)
+
+                if (accountData == "重複")
+                {
+                    showFlag2.innerHTML = ' X  該身分證字號已存在'
+                    $('#submitBtn').attr("disabled", true)
+                    $('#submitBtn').css("background-color","#D0D0D0" )
+                }
+                if (accountData == "OK")
+                {
+                    $('#showflag2')[0].innerHTML = ""
+                    $('#submitBtn').attr("disabled", false)
+                    $('#submitBtn').css("background-color", "#FFA500")
+
+                }
+            }
+
+
+        })
+
+
+        txtAccount.addEventListener('focus', function ()
+        {
+            $('#showflag1')[0].innerHTML = ""
+            $('#submitBtn').attr("disabled", false)
+        })
+
+        txtIdNum.addEventListener('focus', function ()
+        {
+            $('#showflag2')[0].innerHTML = ""
+            $('#submitBtn').attr("disabled", false)
+        })
+
+        //txtAccount.addEventListener("keyup", function () {
+        //    //開AJAX object
+        //    var XHR = new XMLHttpRequest();
+        //    //傳送資料
+        //    XHR.open("post", "/Home/Validation");
+        //    XHR.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        //    XHR.send(`txtAcount=${txtAccount.value}`);
+        //    //讀取response資料
+        //    XHR.addEventListener("load", function () {
+        //        console.log(XHR.responseText);
+        //        var flag = XHR.responseText;
+        //        showFlag.innerHTML = flag;
+        //    })
+        //})
+
+        //txtIdNum.addEventListener("keyup", function () {
+        //    //開AJAX object
+        //    var XHR = new XMLHttpRequest();
+        //    //傳送資料
+        //    XHR.open("post", "/Home/Validation");
+        //    XHR.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        //    XHR.send(`txtIdNum=${txtIdNum.value}`);
+        //    //讀取response資料
+        //    XHR.addEventListener("load", function () {
+        //        var flag = this.responseText;
+        //        showFlag2.innerHTML = flag;
+        //    })
+        //})
+
+    </script>
+
+    <script>
+
+        //DEMO帳號重複
+        $("#demoAccountBtn").click(function () {
+            $("#form input").eq(0).val("aaa1111");
+        })
+
+        //DEMO
+    $("#demoBtn").click(function () {
+        $("#form input").eq(0).val("lulu125474");
+        $("#form input").eq(1).val("lu125474");
+        $("#form input").eq(2).val("林露西");
+        $("#form input").eq(3).val("F227415637");
+        $("#form input").eq(4).val("female");
+        $("#form input").eq(5).val("1992-11-15");
+        $("#form input").eq(6).val("0952741852");
+        $("#form input").eq(7).val("ade524155@gmail.com");
+        $("#form input").eq(8).val("163");
+        $("#form input").eq(9).val("52");
+
+        //取得今天日期
+        $(document).ready(function () {
+            var date = new Date();
+
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+
+            var today = year + "-" + month + "-" + day;
+
+            $("#form input").eq(10).val(today);
+        });
+
+
+    })
+
+        //註冊按鈕
+        $("#submitBtn").click(function () {
+
+            if ($("#form input").eq(0).val() == "" || $("#form input").eq(1).val() == "" ||
+                $("#form input").eq(2).val() == "" || $("#form input").eq(3).val() == "" ||
+                $("#form input").eq(4).val() == "" || $("#form input").eq(5).val() == "" ||
+                $("#form input").eq(6).val() == "" || $("#form input").eq(7).val() == "" ||
+                $("#form input").eq(8).val() == "" || $("#form input").eq(9).val() == ""  )
+            {
+                alert("您有資料尚未輸入完畢!")
+            }
+            else
+            {
+
+                $.ajax({
+                    url: '@Url.Content("~/BackApi/createMember")',
+                    type: 'POST',
+                    data: {
+                        'LogInAccount': $("#form input").eq(0).val(),
+                        'LogInTypeId':2,
+                        'LogInPassword': $("#form input").eq(1).val(),
+                        'LogInName': $("#form input").eq(2).val(),
+                        'LogInIdNumber': $("#form input").eq(3).val(),
+                        'LogInGender': $("#form input").eq(4).val(),
+                        'LogInBrithDay': $("#form input").eq(5).val(),
+                        'LogInPhone': $("#form input").eq(6).val(),
+                        'LogInEmail': $("#form input").eq(7).val(),
+                        'LogInHeight': $("#form input").eq(8).val(),
+                        'LogInWeight': $("#form input").eq(9).val(),
+                        'LogInRegisterTime': $("#form input").eq(10).val(),
+                    }
+                   // , async: false   //false為同步，這個Ajax請求將整個瀏覽器鎖死，只有url請求中後台的方法執行結束後，才可以執行其它操作。
+                })                                 
+                    .done(function (data) {
+
+                        const name = $("#form input").eq(2).val();
+
+                        if (data =="帳號已被使用")
+                        {
+                            //confirm(data + "，請重新輸入其他帳號。")
+                        }
+
+                        if (data == name)
+                        {
+                            confirm(data + " 先生/小姐　帳戶註冊成功，為您導入登入畫面。")
+
+                            if (confirm)
+                            {
+                                window.location.href = '@Url.Content("~/Home/Login")'
+                            }
+                        }
+
+                        //confirm(data + " 先生/小姐　帳戶註冊成功，為您導入登入畫面。")
+
+                        @*if (confirm)
+                        {
+                            //將點擊button按鈕 type="button" 即可正常跳轉
+                            window.location.href='@Url.Content("~/Home/Login")'
+                        }*@
+
+                        //原文網址：https://kknews.cc/code/qgv8pxo.html
+            })
+            }
+        })
+
+    </script>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

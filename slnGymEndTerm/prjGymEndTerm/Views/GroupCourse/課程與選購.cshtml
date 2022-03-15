@@ -1,0 +1,323 @@
+﻿
+@{
+    ViewData["Title"] = "課程與選購";
+}
+
+@section Style{
+
+    <link href="~/css/calendar/reset.css" rel="stylesheet" />
+    <link href="~/css/calendar/jquery-ui-1.8.11.custom.css" rel="stylesheet" />
+    <link href="~/css/calendar/jquery.weekcalendar.css" rel="stylesheet" />
+    <link href="~/css/calendar/demo.css" rel="stylesheet" />
+    <link href="~/css/calendar/default.css" rel="stylesheet" />
+}
+<style>
+    * {
+        box-sizing: content-box;
+    }
+
+    body {
+        background: rgb(0 0 0) url(../img/16img/background/pg-0319.jpg);
+        background-attachment: fixed;
+        background-size: contain;
+        background-position: bottom;
+    }
+
+    .class-outer-frame {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .class-filter-outer-frame {
+        display: flex;
+        justify-content: center;
+        height: 100px;
+        width: 95%;
+        margin: 50px;
+    }
+
+    .class-filter-block {
+        position: relative;
+        border-radius: 30px;
+        width: 60%;
+        background-color: rgba(255,255,255,.4);
+        padding: 20px;
+    }
+
+        .class-filter-block span {
+            padding: 15px;
+            border-radius: 15px;
+            background-color: orange;
+        }
+
+        .class-filter-block i {
+            background-color: gray;
+            padding: 5px;
+            border-radius: 30%;
+            margin: 5px;
+        }
+
+    #out-filterblock {
+        overflow: hidden;
+        display: flex;
+        width: 100%;
+        height: 0px;
+        justify-content: center;
+        background-color: transparent;
+        transition: 1s;
+        border-radius: 30px;
+        backdrop-filter: blur(50px);
+    }
+
+    .drop {
+        height: 100%;
+        width: 100%;
+        margin: 2% auto;
+        display: flex;
+        background-color: rgba(0,0,0,.2);
+        align-content: space-around;
+        justify-content: space-around;
+        grid-template-columns: repeat(auto-fit, minmax(100x,1fr));
+        flex-wrap: wrap;
+    }
+
+        .drop div {
+            width: 120px;
+        }
+
+    .card-header {
+        text-align: center;
+        color: black;
+    }
+
+    .courselesson-filter-outer-box {
+        margin-bottom: 50px;
+    }
+
+    .courselesson-filter-box {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .btn-CG {
+        font-size: 48px;
+        height: 100%;
+        width: 100%;
+    }
+
+    .div-btn-CG {
+        width: 10%;
+        height: 100%;
+    }
+
+    .list-group-item {
+        padding: 0;
+        text-align: center;
+        color:white;
+        height: 70%;
+        width: 80%;
+        margin: 2% auto;
+        background-color: rgba(0,0,0,.2);
+    }
+
+    .ui-dialog {
+        display: grid !important;
+        position: fixed !important;
+        height: 100% !important;
+        width: 70% !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%);
+        align-content: space-between;
+    }
+
+    #event_edit_container {
+        height: 100% !important;
+    }
+
+    .class-information {
+        height: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .ui-dialog-title {
+        font-size: 20px;
+    }
+    .div-Purchase-out .form-group{
+        position:absolute;
+    }
+
+</style>
+
+<section class="outer-frame">
+    <div class="div-container-out">
+        <div class="div-container">
+            <h2 class="topheader-title">詳　細　課　堂　排　程</h2>
+            <img src="~/img/topheader/TH-GC-Class.jpg" />
+        </div>
+    </div>
+</section>
+
+
+
+<div class="coach-secondary">
+</div>
+<div class="div-16Coach-all">
+    <div class="div-16Coach-window">
+        <button id="orderfilter" class="btn-16class-result"><i class="fas fa-filter"></i>課程篩選</button>
+    </div>
+</div>
+@*下拉區塊*@
+<div class="div-16Coach-filter-out" id="out-filterblock">
+    <div class="div-16Coach-filter">
+        <div class="filterblock div-16Coach-filter-filter7 bord-right-16">
+            <div type="button" style="background-color:rgb(0, 123, 255)" class="btn-secondary cate btn btn-16Coach-filter" data-type="1">有氧</div>
+            <div type="button" style="background-color:rgb(108, 117, 125)" class="btn-secondary cate btn btn-16Coach-filter" data-type="2">拳擊</div>
+            <div type="button" style="background-color:rgb(40, 167, 69)" class="btn-secondary cate btn btn-16Coach-filter" data-type="3">瑜珈</div>
+            <div type="button" style="background-color:rgb(220, 53, 69)" class="btn-secondary cate btn btn-16Coach-filter" data-type="4">重訓</div>
+            <div type="button" style="background-color:rgb(255, 193, 7)" class="btn-secondary cate btn btn-16Coach-filter" data-type="5">飛輪</div>
+            <div type="button" style="background-color:rgb(23, 162, 187)" class="btn-secondary cate btn btn-16Coach-filter" data-type="6">TRX</div>
+        </div>
+        <div id="filterdetail" class="filterblock div-16Coach-filter-class bord-right-16">
+        </div>
+        <div class="div-16Coach-filter-filter40">
+            <div id="drop" class="drop">
+            </div>
+        </div>
+        <div class="div-16Coach-filter-filter40-select">
+            <div class="div16-class-filter-word1">
+                <div class="filter-16Coach-title">課程關鍵字</div>
+                <input id="in_height" class="form-control " required /><i class="fas fa-info-circle i-16hover" style="font-size: 25px;"></i>
+                <div class="div16-class-filter-hint">關鍵字可以輸入教練姓名或是課程名稱</div>
+                <button class="btn-16Coach-filter" id="search" style="background-color:black">搜尋</button>
+            </div>
+            <div class="div-range">
+                <p>
+                    <label for="amount" class="range-lbl">價格區間:　　</label>
+                    <input type="text" id="amount" readonly style="border: 0; text-align:center; color: #f6931f; font-weight: bold;">
+                </p>
+                <div id="slider-range" class="slider-range"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="calendar" class="class-calendar"></div>
+<div id="event_edit_container">
+    <form class="class-info class-information" asp-controller="Purchase" asp-action="OrderPurchaselistAll">
+        <input type="hidden" value="@ViewBag.catenum" class="storage" />
+        <div class="div-Purchase-out">
+            <div class="form-group col-4">
+                <input hidden="hidden" name="txtclassID" class="form-control" id="classID">
+            </div>
+            <div class="img-box-Purchase">
+                <img id="Purchase-img" src="" />
+            </div>
+            <div class="Purchase-title" id="class">春火你啊罵有氧</div>
+            <div class="Purchase-class-detail"><div>課程類型：</div><div id="detail"></div></div>
+
+            <div class="Purchase-class-detail"><div>授課教練：</div><div id="coach"></div></div>
+            
+            <div class="Purchase-class-detail"><div>課程金額：</div><div id="money">NT3000</div></div>
+            
+            <div class="Purchase-class-detail"><div>折扣方案：</div><div id="project">周末比基尼女郎0元折扣</div></div>
+            
+        </div>
+        <div class="div-Purchase-out1">
+            <div class="div-lesson-time">
+                <div class="div-lesson-title">課程時間</div>
+                <ul class="list-group list-group-flush">
+                </ul>
+            </div>
+            <div class="Purchase-class-detail-math" id="vacancy">剩餘名額：30</div>
+        </div>
+        @*<div class="card">
+                <div class="card-header">
+                    課堂時間表
+                </div>
+                <ul class="list-group list-group-flush">
+                </ul>
+            </div>
+            <div class="form-group col-4">
+                <input hidden="hidden" name="txtclassID" class="form-control" id="classID">
+            </div>
+            <div class="form-group col-4">
+                <label for="formGroupExampleInput">課程種類</label>
+                <input type="text" name="txtCourseDetail" disabled="disabled" class="form-control" id="category">
+            </div>
+            <div class="form-group col-4">
+                <label for="formGroupExampleInput2">課程班別</label>
+                <input type="text" name="txtCourseClass" disabled="disabled" class="form-control" id="class">
+            </div>
+            <div class="form-group col-4">
+                <label for="formGroupExampleInput2">折扣方案</label>
+                <input type="text" name="txtDiscountPlan" disabled="disabled" class="form-control" id="project">
+            </div>
+            <div class="form-group col-4">
+                <label for="formGroupExampleInput2">剩餘名額</label>
+                <input type="text" name="txtDiscountvacancy" disabled="disabled" class="form-control" id="vacancy">
+            </div>*@
+    </form>
+</div>
+
+@*排程日曆*@
+
+@section Scripts{
+
+    <script src="~/js/calendar/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="~/js/calendar/jquery-ui-1.8.11.custom.min.js"></script>
+    <script type="text/javascript" charset="big5" src="~/js/calendar/date.js"></script>
+    <script type="text/javascript" charset="big5" src="~/js/calendar/jquery.weekcalendar.js"></script>
+    <script type="text/javascript" charset="big5" src="~/js/calendar/demo.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+
+    //slider
+        //initialize
+
+    const url = `@Url.Action("InitailzePriceRange", "GroupCourse")`;
+    $.getJSON(url,function(data){
+        const rangeCeiling = Math.max.apply(Math, data);
+        const rangefloor = Math.min.apply(Math, data);
+        $(function () {
+            $("#slider-range").slider({
+                orientation: "horizontal",
+                range: true,
+                min:rangefloor,
+                max:rangeCeiling,
+                values: [rangefloor, rangeCeiling],
+                slide: function (event, ui) {
+                    $("#amount").val("$NT" + ui.values[0] + " ~ $NT" + ui.values[1]);
+                }
+            });
+            $("#amount").val("$NT" + $("#slider-range").slider("values", 0) +
+                " ~ $NT" + $("#slider-range").slider("values", 1));
+        });
+    })
+
+    //課表建立
+    var strJson = '@ViewBag.evtJson'
+    var strReplace = strJson.replaceAll("&quot;", '"');
+    function getEventData() {
+        return {
+
+            events: JSON.parse(strReplace)
+        };
+    }
+
+    $(".i-16hover").hover(function () {
+        $(".div16-class-filter-hint").css("opacity", "1");
+    }, function () {
+        $(".div16-class-filter-hint").css("opacity", "0");
+    });
+</script>
+
+
+

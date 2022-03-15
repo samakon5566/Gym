@@ -1,0 +1,224 @@
+﻿.cust-introduce-outer-frame{
+    height:1100px;
+    width:100%;
+    display:flex;
+    padding:10%;
+}
+
+.cust-introduce-outer-frame .cust-introduce-pic-frame {
+    width: 65%;
+    background-image: url(https://envato-shoebox-0.imgix.net/4400/420c-2e1e-4aa0-996e-2d12cf8c07f0/33-02172.jpg?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=800&s=e3c6ca3f311934cf1a5d214948247e5c);
+    height: 100%;
+    background-color: white;
+    background-size: cover;
+    background-blend-mode: multiply;
+    position: relative;
+}
+.cust-introduce-pic-frame h2{
+    text-align:center;
+    height:50px;
+    color:orange;
+}
+
+.cust-introduce-pic-frame .cust-introduce-pic-inner-frame{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    padding:5%;
+    width:100%;
+    position:absolute;
+    top:50px;
+    bottom:0;
+}
+
+.cust-introduce-pic-inner-frame .procedure {
+    width: 25%;   
+    height: 100px;
+    border-radius:15px;
+    border:2px solid orange; 
+    background-color:rgba(255,255,255,.5);    
+    display:flex;
+    align-content:center;
+    justify-content:center;
+}
+
+.procedure div {
+    display: flex;
+    justify-content: center;
+    align-content:center;
+}
+
+.procedure a{
+    display: flex;
+    align-content: center;
+}
+
+.procedure p {
+    font-size: 1.5em;
+    margin: auto;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+}
+
+.cust-introduce-pic-inner-frame .point1{
+    position:absolute;
+    width:10%;   
+    
+}
+
+.cust-introduce-pic-inner-frame .point2 {
+    position: absolute;
+    right:10%;
+    align-self:center;
+    width: 10%;
+    transform: rotate(90deg);
+}
+
+.cust-introduce-pic-inner-frame .list{
+    position:absolute;
+    align-self:center;
+    border:2px dashed black;
+    padding:5%;
+    border-radius:30%;
+}
+
+
+.cust-introduce-pic-inner-frame .point3 {
+    position: absolute;
+    align-self: end;
+    width: 10%;
+    transform: rotate(180deg);
+}
+
+.procedure-1 {
+    justify-self: flex-start;
+    align-self: start;
+    margin-right: 25%;
+}
+
+.procedure-2 {
+    justify-self: flex-end;
+    align-self:flex-start;
+    margin-left: 25%;
+}
+
+.procedure-3 {
+    justify-self: flex-start;
+    align-self: flex-end;
+    margin-right: 25%;
+}
+
+.procedure-4 {
+    justify-self: flex-end;
+    align-self: flex-end;
+    margin-left: 25%;
+}
+
+.cust-introduce-outer-frame .cust-introduce-text-frame {
+    width: 35%;
+    background-color: #9dd3a8;
+    height: 100%;
+    padding: 1%;
+}
+
+.introduce-text-title{
+    height:15%;
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.introduce-text-title h2{
+    align-self:center;
+}
+
+.introduce-text-content {
+    height: 85%;
+    width: 100%;
+    background-color: #ceefe4;
+    padding:1%;
+    border-radius:15px;
+    position:relative;
+}
+
+.introduce-text-content p {
+    color: #57D1C9;
+    font-size: 2em;
+    line-height: 40px;
+}
+
+.introduce-text-content .buybtn{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+/*客製化顧客購買*/
+
+
+.Customization-form {
+    background-color: white;
+    border: 2px solid rgba(0,0,0,.2);
+    padding: 5%;
+}
+
+.Customization-form h2 {
+    border-bottom: 2px solid rgba(0,0,0,.2);
+    margin:20px;
+}
+
+.Customization-form .form-row {
+    display: flex;
+    justify-content: space-around;
+    align-content: space-around;
+    flex-wrap: wrap;
+}
+
+.Customization-form .form-row.form-block1 {
+    border-bottom: 5px solid rgba(0,0,0,.2);
+}
+
+.btn-calculate {
+    width: 250px;
+    border: 2px solid black;
+}
+
+.Customization-form .btn-div {
+    display:flex;   
+}
+
+.btn-recalculate {
+    width: 200px;
+    border: 2px solid black;
+    align-self:center;
+    
+}
+
+.course-set-up-block-outer-frame {
+    width: 100%;
+    height: 400px; 
+    margin:2%;
+}
+
+.course-set-up-block {
+    width: 100%;
+    border: 2px solid orange;
+    border-radius: 15px;
+    height:80%;
+    padding:2%;
+    justify-self:start;
+}
+
+.course-set-up-block table{
+    text-align:center;
+}
+
+.cutomization-course-check {
+    justify-self:end;
+    align-self:center;
+    width:100%;
+    height:20%;
+    display:flex;
+    justify-content:space-around;
+}

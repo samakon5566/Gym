@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewData["Title"] = "ContactInformation";
+
+}
+<style>
+    .div_window {
+        display: flex;
+        height: 100%;
+        width: 100%;
+    }
+
+    .div1 {
+        display: flex;
+        width: 90%;
+        height: 650px;
+        margin: 0 auto;
+        align-items: flex-start;
+        justify-content: space-around;
+    }
+
+    .div_detailwindow {
+        width: 30%;
+        color: coral;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .div_detailwindow p,h3{
+        width:100%;
+        text-align:center;
+    }
+
+    .p {
+        width: 310px;
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: underline;
+        color: skyblue;
+        line-height: 3em;
+    }
+
+    .p_title {
+        font-size: 20px;
+        font-weight: bold;
+        color: lightpink;
+    }
+
+    .p_text {
+        width: 380px;
+        font-size: 16px;
+        color: white;
+    }
+    .ccc {
+        width: 100%;
+    }
+</style>
+
+<section class="outer-frame">
+    <div>
+        <div class="container">
+            <h2 class="topheader-title">聯絡資訊</h2>
+            <img src="~/img/new infomation.jpg" />
+        </div>
+    </div>
+</section>
+<div class="div_window">
+    <div class="div1">
+        <div class="div_detailwindow">
+            <h3 class="p"><i class="fas fa-map-marker-alt"></i>交通資訊</h3>
+            <p class="p_title">FITNESS 地址:</p>
+            <p class="p_text">台北市大安區信義路三段153號</p>
+            <br />
+            <p class="p_title">BUS & MRT大眾運輸交通資訊</p>
+            <p class="p_text">
+                公車：<br />
+                20、22、38、41、226、1503、88--信義復興路口 <br />
+                74、278、685--大安高工站
+                <br />
+                <br />
+                捷運：
+                <br />
+                文湖線:大安站5號出口，步行約3分鐘
+                <br />
+                淡水信義線:大安站1號出口，步行約3分鐘
+            </p>
+            <br />
+        </div>
+        <div class="div_detailwindow">
+            <h3 class="p"><i class="fas fa-archive"></i>場館資訊</h3>
+            <p class="p_title"> 開館時間:</p>
+            <p class="p_text" style="width:500px">
+                08:00 ~ 22:00(本中心全年無休，農曆除夕及大年初一休館除外，如遇颱風等天災，依照台北市政府公告停止上班上課，暫時不對外開放。)
+            </p>
+            <div style="display: contents;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.007868247852!2d121.54039791544696!3d25.0338070444521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abd482268405%3A0xe6e4ff4b920b8195!2zMTA25Y-w5YyX5biC5aSn5a6J5Y2A5L-h576p6Lev5LiJ5q61MTUz6JmfMQ!5e0!3m2!1szh-TW!2stw!4v1638941234307!5m2!1szh-TW!2stw" height="350" style="border:0; width:100%;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+        <div class="div_detailwindow">
+            <h3 class="p"><i class="fas fa-phone"></i>聯絡資料</h3>
+            <p class="p_title">Email:</p>
+            <p class="p_text">happyeveryday@gmail.com</p>
+            <br />
+            <p class="p_title">電話:</p>
+            <p class="p_text">02-2266-5566</p>
+        </div>
+    </div>
+</div>
+

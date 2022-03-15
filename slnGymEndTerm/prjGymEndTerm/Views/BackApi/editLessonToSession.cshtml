@@ -1,0 +1,97 @@
+﻿@model IEnumerable<prjGymEndTerm.ViewModels.CLessonViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>editLessonToSession</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LessonClassId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LessonId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LessonTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseCategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseDetailName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseClassName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseClassCoach)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassroomName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassroomId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LessonClassId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LessonId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LessonTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseCategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseDetailName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseClassName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseClassCoach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassroomName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassroomId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

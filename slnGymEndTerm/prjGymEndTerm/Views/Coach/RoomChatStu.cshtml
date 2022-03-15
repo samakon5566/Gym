@@ -1,0 +1,275 @@
+﻿@{
+    Layout = null;
+}
+<style>
+    body, html {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: url(https://i.imgur.com/8yUOwhm.jpg);
+        background-size: cover;
+    }
+
+    #im {
+        position: relative;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 600px;
+        height: 90%;
+        box-sizing: border-box;
+        background: rgba(0,0,0,.4);
+    }
+
+    #input {
+        position: absolute;
+        z-index: 2;
+        height: 150px;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        margin: 0;
+        padding: 15px;
+        box-sizing: border-box;
+        background: #222;
+        color: #fff;
+    }
+
+    #input {
+        color: white;
+        font-size: 18px;
+    }
+
+        #input input, #input span {
+            display: inline-block;
+            margin: 5px 0;
+        }
+
+        #input input {
+            width: 75%;
+            border: none;
+            padding: 5px;
+        }
+
+        #input span {
+            width: 15%;
+            min-width: 50px;
+        }
+
+        #input div {
+            width: 80%;
+            float: left;
+        }
+
+        #input button {
+            float: right;
+            height: 90%;
+            width: 20%;
+            margin: 5px 0;
+            border: none;
+            padding: 0;
+            background: #369;
+            font-size: 16px;
+            color: #fff;
+            cursor: grab;
+        }
+
+    #show {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        padding: 20px;
+        height: 71%;
+        width: 93%;
+        overflow: auto;
+    }
+
+    .myMsg {
+        width: 95%;
+        color: white;
+        margin-top: 10px;
+    }
+
+    .otherMsg {
+        width: 95%;
+        margin-top: 10px;
+    }
+
+    .myMsg .Msg {
+        margin-top: 10px;
+        color: black;
+        border-radius: 10px;
+        font-size: 20px;
+        padding: 10px;
+        background-color: #C4F69D;
+    }
+
+    .otherMsg .Msg {
+        margin-top: 10px;
+        color: black;
+        border-radius: 10px;
+        font-size: 20px;
+        padding: 10px;
+        background-color: #F0F0F0;
+    }
+
+    .people {
+        color: white;
+        font-size: 12px;
+    }
+
+    .photo {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+
+    .contro-19 {
+        padding: 0 20px;
+        border-radius: 10px;
+        background-color: #100C22;
+        font-size: 20px;
+        color: white;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        cursor: grab;
+    }
+
+        .contro-19:hover {
+            color: #FFA500;
+            background-color: black;
+        }
+
+    .back-19 {
+        position: absolute;
+        text-align: left;
+        font-size: 38px;
+        top: 10px;
+        left: 10px;
+        color: white;
+    }
+
+        .back-19:hover {
+            color: #FFA500;
+        }
+</style>
+@*<div>
+        <select id="group" style="font-size:20px;">
+            <option>有氧</option>
+            <option>拳擊</option>
+            <option>瑜珈</option>
+            <option>重量訓練</option>
+            <option>飛輪</option>
+            <option>TRX</option>
+        </select>
+        <button type="button" id="AddGroupBtn" style="font-size:20px;">加入群組</button>
+        <button type="button" id="LeaveGroupBtn" style="font-size:20px;">離開群組</button>
+    </div>*@
+
+<div style="width:100%;height:50px;display:flex">
+    <a asp-controller="Coach" asp-action="ChatIndex" class="back-19"><i class="fas fa-arrow-circle-left"></i></a>
+    <a id="ChatGroupSelect" class="contro-19"><i class="fas fa-cog"></i>　設定聊天室群組</a>
+</div>
+<div id="dialog" title="加入聊天室">
+    <label style="font-size: 20px; margin: 10px;">房號:</label>
+    <input style="font-size: 20px; margin: 10px;" type="text" id="group" /><br>
+    <label style="font-size: 20px; margin: 10px;">密碼:</label>
+    <input style="font-size: 20px; margin: 10px;" type="text" id="Pwd" /><br>
+    <button type="button" id="CheckPwd" style="font-size:20px;">驗證密碼</button>
+    <label style="font-size:12px;color:red;" id="hinet"></label>
+    <br><br>
+    <button type="button" id="Demo" style="font-size:20px;">Demo</button>
+    <button type="button" id="AddGroupBtn" style="font-size:20px;">加入房間</button>
+    <button type="button" id="LeaveGroupBtn" style="font-size:20px;">離開房間</button>
+</div>
+
+<input type="hidden" value=@ViewBag.Id id="userId" />
+<input type="hidden" value=@ViewBag.TypeId id="userTypeId" />
+<input type="hidden" value=@ViewBag.Figure id="userFigure" />
+
+<div style="width: 100%;text-align:center;">
+    @{
+        <input type="button" id="demo1" value="Demo1" />
+    }
+</div>
+
+<div id="im">
+    <div id="input">
+        <div>
+            <span>姓名：</span><label id="name">@ViewBag.Name</label><br />
+            <span style="vertical-align: top">內容：</span><textarea type="text" id="messageInput" style="height: 78px; width: 344px;font-size:20px;"></textarea>
+        </div>
+        <button type="Button" id="submitGroupBtn">送出訊息</button>
+    </div>
+    <div id="show">
+        <div id="messagesList"></div>
+    </div>
+</div>
+
+<script src="~/js/jquery-3.3.1.min.js"></script>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
+
+<link href="~/js/CoachCourse/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/js/CoachCourse/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+<script>
+    $(function () {
+        $("#dialog").hide();
+        $("#submitGroupBtn").attr("disabled", false);
+        $("#submitGroupBtn").css("background-color", "#D0D0D0");
+        $("#submitGroupBtn").css("color", "#000");
+        $("#AddGroupBtn").attr("disabled", true);
+    });
+    $("#Demo").click(function () {
+        $("#group").val("15660");
+        $("#Pwd").val("1566");
+    })
+
+    $("#demo1").click(function () {
+        $("#messageInput").val("為何我上完課體重和體脂沒什麼變化??");
+    })
+
+    $("#ChatGroupSelect").click(function () {
+        $("#dialog").dialog({
+            height: 300,
+            width: 365
+        });
+    })
+    $("#CheckPwd").click(async function () {
+        var group = $("#group").val();
+        var pwd = $("#Pwd").val();
+        let response = await fetch('@Url.Content("~/Api/CheckChatPwd?pwd=")' + pwd + "&group=" + group);
+        let Check = await response.text();
+        if (Check == 1) {
+            $("#hinet").text("密碼正確");
+            $("#AddGroupBtn").attr("disabled", false);
+        }
+        else {
+            $("#hinet").text("密碼錯誤");
+            $("#AddGroupBtn").attr("disabled", true);
+        }
+    })
+
+    $("#AddGroupBtn").click(async function () {
+        $("#dialog").dialog("destroy");
+        $("#submitGroupBtn").attr("disabled", false);
+        $("#submitGroupBtn").css("background-color", "#369");
+        $("#submitGroupBtn").css("color", "#FFF");
+    })
+    $("#LeaveGroupBtn").click(function () {
+        $("#dialog").dialog("destroy");
+        $("#LeavaGroup").text("您已離開聊天");
+        $("#submitGroupBtn").attr("disabled", true);
+        $("#submitGroupBtn").css("background-color", "#D0D0D0");
+        $("#submitGroupBtn").css("color", "#000");
+    })
+
+</script>

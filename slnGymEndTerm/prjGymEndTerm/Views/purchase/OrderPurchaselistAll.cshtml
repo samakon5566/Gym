@@ -1,0 +1,270 @@
+﻿@model List<prjGymEndTerm.ViewModels.CNormalPurchase>
+
+@{
+    ViewData["Title"] = "OrderPurchaselistAll";
+}
+@section Style{
+<style>
+    .btn:focus{
+        box-shadow:none;
+    }
+    .modal-content .modal-body .each-comment{
+            height:25px;
+    }
+    .form-group th,td{
+        text-align:center;
+    }
+    #purch-list td {
+        line-height: 200px;
+    }
+    .modal-header {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: stretch;
+        flex-wrap: wrap;
+        flex-direction: column;
+        font-size:18px;
+        margin-bottom:5px;
+    }
+    .modal-title {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-content: flex-start;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: 900;
+        margin-bottom: -20px;
+    }
+    .modal-title div, span {
+        text-align: center;
+        width: 100%;
+        font-size: 18px;
+        font-weight: 500;
+        margin-top: 5px;
+    }
+    .modal-header a.close {
+        bottom: 60px;
+        left: -10px;
+        width: 50px;
+        height: 50px;
+        float: right;
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        opacity: .5;
+        border-radius: 50%;
+        position: relative;
+    }
+    a.close i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .btn-pay-close{
+        position:relative;
+    }
+    .btn-pay-close span{
+        position: absolute;
+        font-size: 50px;
+        right: 28px;
+        top: -33px;
+    }
+    }
+</style>
+}
+
+
+
+<div class="outer-purchase-frame">
+    <div class="purchase-frame">
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 style="text-align:center" class="mb-0">課　程　結　帳</h2>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <form class="purchase-form" id="formCreditCard" method="post" accept-charset="UTF-8" action="https://payment-stage.opay.tw/Cashier/AioCheckOut/V5">
+                                <table class="table" id="classtable">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">課程照片</th>
+                                        <th scope="col">課程種類</th>
+                                        <th scope="col">課程類型</th>
+                                        <th scope="col">課程班名</th>
+                                        <th scope="col">課程資訊</th>
+                                        <th scope="col">折扣方案</th>
+                                        <th scope="col">金額</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="purch-list">
+                                        @{
+                                            int count = 0;
+                                            foreach(var item in Model)
+                                            {
+                                                count++;
+                                                <tr>
+                                                    <td hidden="hidden" class="classID">@item.txtclassID</td>
+                                                    <td>@count</td>
+                                                    <td align="center"><div class="img-bx-16-pay img-invert"><img src="~/img/CourseDetail/@item.txtClassPic" /></div></td>
+                                                    <td>@item.txtCourseCategory</td>
+                                                    <td>@item.txtCourseDetail</td>
+                                                    <td class="courseclassname">@item.txtCourseClassName</td>
+                                                    <td><a href="#exampleModal" class="btn btn-primary lesson-btn" data-toggle="modal">點選這裡</a></td>
+                                                    <td>@item.txtDiscountPlan</td>
+                                                    <td>@item.txtMoney</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                                <div class="form-group">
+                                    <table class="table" id="price">
+                                        <tbody>
+                                            @{
+                                                decimal initialmoney = 0;
+                                                decimal discountmoney = 0;
+                                                foreach(var item in Model)
+                                                {
+                                                    initialmoney += item.txtinitailMoney;
+                                                    discountmoney += item.txtdiscountMoney;
+                                                }
+                                                decimal totalpaid = initialmoney - discountmoney;
+
+                                            <tr><td>總課程金額:</td><td>NT$@initialmoney.00</td></tr>
+                                            <tr><td>折扣金額:</td><td>NT$@discountmoney</td></tr>
+                                            <tr><td>總應付金額:</td><td id="paidmoney">NT$@totalpaid</td></tr>
+                                            <tr><td><i class="fas fa-money-bill-wave">付款方式</i></td><td><a data-toggle="modal" href="#paidwayModal" id="current-paid-way" class="btn btn-light"><i class="fas fa-sort-down">請選擇</i></a></td></tr>
+                                        }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="form-group" hidden>
+                                    MerchantID 商店代號:
+                                    <input type="text" name="MerchantID" value="2000132" /><br />
+
+                                    MerchantTradeNo 商店交易編號:
+                                    <input type="text" id="merchantTradeNo" name="MerchantTradeNo" value="" /><br />
+
+                                    MerchantTradeDate 商店交易時間:
+                                    <input type="text" id="dealtime" name="MerchantTradeDate" value="" /><br />
+
+                                    PaymentType 交易類型:
+                                    <input type="text" name="PaymentType" value="aio" /><br />
+
+                                    TotalAmount 交易金額:
+                                    <input type="text" id="dealmoney" name="TotalAmount" value="" /><br />
+
+                                    TradeDesc 交易描述:
+                                    <input type="text" name="TradeDesc" value="建立信用卡測試訂單" /><br />
+
+                                    ItemName 商品名稱:
+                                    <input type="text" id="itemName" name="ItemName" value="aaa" /><br />
+
+                                    ReturnURL 付款完成通知回傳網址:
+                                    <input type="text" name="ReturnURL" id="returnURL" value="" /><br />
+
+                                    ChoosePayment 預設付款方式:
+                                    <input type="text" id="choosePayment" name="ChoosePayment" value="Credit" /><br />
+
+                                    會員商店代碼:
+                                    <input type="text" name="StoreID" value="" /><br />
+
+                                    ClientBackURL Client端返回廠商網址:
+                                    <input type="text" name="ClientBackURL" id="clientBackURL" value="" /><br />
+
+                                    CreditInstallment 刷卡分期期數:
+                                    <input type="text" name="CreditInstallment" value="" /><br />
+
+                                    InstallmentAmount 使用刷卡分期的付款金額:
+                                    <input type="text" name="InstallmentAmount" value="" /><br />
+
+                                    Redeem 信用卡是否使用紅利折抵:
+                                    <input type="text" name="Redeem" value="" /><br />
+
+                                    CheckMacValue 簽章類型:
+                                    <input type="text" name="EncryptType" value="1" /><br />
+
+                                    CheckMacValue 檢查碼:
+                                    <input type="text" id="CheckMacValue" name="CheckMacValue" value="" /><br />
+                                </div>
+                                <div class="form-group" id="check-out">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                                        <label class="form-check-label" for="gridCheck">
+                                            確認請點選
+                                        </label>
+                                    </div>
+                                    <input type="submit" style=" margin-left: 70px; margin-right: 40px;" disabled="disabled" class="btn btn-primary 1st-save" value="送出訂單">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>                       
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="exampleModalLabel">
+                    <div>課程名稱：</div>
+                    <div>剩餘人數：</div>
+                    <div>授課教練：</div>
+                </div>
+                @*<div class="modal-title" id="exampleModalLabel">課程名稱(ex:戰繩有氧)</div>*@
+                @*<h5 id="vacancy" style="margin:0 20px;"></h5>*@
+                <a class="close" data-dismiss="modal"><i class="fas fa-times"></i></a>
+            </div>
+            <div class="modal-body" style="padding:0;">
+                <div class="each-comment">
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal">關閉</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="paidwayModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">付款方式</h5>>
+        <button type="button" class="close btn-pay-close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group">
+          <a class="list-group-item list-group-item-action" data-payway="cash">
+            現金
+          </a>
+          <a class="list-group-item list-group-item-action" data-payway="Credit" >信用卡</a>          
+          <a class="list-group-item list-group-item-action" data-payway="CVS">超商代碼繳費</a>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="confirm-paidway" data-dismiss="modal" class="btn btn-primary">確認</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+@section Scripts{ 
+    <script src="~/js/Purchase.js"></script>
+}

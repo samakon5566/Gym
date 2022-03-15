@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewData["Title"] = "List";
+}
+<style>
+    .classroom_image {
+        width: 1200px;
+        height: 400px;
+        overflow: hidden;
+    }
+
+    .classroom_image {
+        transform: scale(1,1);
+        transition: all 1s ease-out;
+    }
+
+        .classroom_image:hover {
+            transform: scale(1.2,1.2)
+        }
+
+    .pic img:hover {
+        transform: scale(1.2,1.2);
+    }
+
+    .div_all {
+        width: 100%;
+        height: 2500px;
+    }
+
+    .div_window {
+        width: 70%;
+        margin: 0 auto;
+        height: 2000px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .div_image {
+        width: 50%;
+        height: 30%;
+        padding: 5%;
+    }
+
+    .text_title {
+        font-size: 20px;
+        font-weight: bold;
+        text-decoration: underline;
+        color: aqua;
+    }
+
+    .text_image {
+        font-size: 16px;
+        color: bisque;
+    }
+</style>
+<section class="outer-frame">
+    <div class="div-container-out">
+        <div class="div-container">
+            <h2 class="topheader-title object-fit: cove">設備環境</h2>
+            <img src="~/img/new equiment.jpeg" />
+        </div>
+    </div>
+</section>
+
+
+<div class="div_all">
+    <div class="div_window">
+        <div class="div_image">
+            <a href="https://msit132gym.azurewebsites.net/GroupCourse/%E8%AA%B2%E7%A8%8B%E4%BB%8B%E7%B4%B9TRX"><img src="~/img/TRX.jpg" class="classroom_image"></a>
+            <br>
+            <br>
+            <p class="text_title">
+                TRX教室
+            </p>
+            <p class="text_image">教室容納人數:20人<br />此教室設備TRX懸吊式訓練繩20條，各項TRX課程</p>
+        </div>
+        <div class="div_image">
+            <a href="https://msit132gym.azurewebsites.net/OneCourse/OneCourse_benefit"><img src="~/img/Retrain.jpg" class="classroom_image"></a>
+            <br>
+            <br>
+            <p class="text_title">
+                重訓教室
+            </p>
+            <p class="text_image">教室容納人數:30人<br />採一對一教學,此教室設備有槓鈴、啞鈴、壺鈴、多功能健身架.....等等，多元化器材提供學員上課</p>
+        </div>
+        <div class="div_image">
+            <a href="https://msit132gym.azurewebsites.net/GroupCourse/%E8%AA%B2%E7%A8%8B%E4%BB%8B%E7%B4%B9%E6%8B%B3%E6%93%8A"><img src="~/img/boxing.jpg" class="classroom_image"></a>
+            <br>
+            <br>
+            <p class="text_title">
+                拳擊教室
+            </p>
+            <p class="text_image">教室容納人數:20人<br />各項拳擊有氧課程</p>
+        </div>
+        <div class="div_image">
+            <a href="https://msit132gym.azurewebsites.net/GroupCourse/%E8%AA%B2%E7%A8%8B%E4%BB%8B%E7%B4%B9%E7%91%9C%E7%8F%88"><img src="~/img/yogaclassroom.jpg" class="classroom_image"></a>
+            <br>
+            <br>
+            <p class="text_title">
+                瑜珈教室
+            </p>
+            <p class="text_image">教室容納人數:30人<br />此教室設備瑜珈墊20個，各項瑜珈課程</p>
+        </div>
+        <div class="div_image">
+            <a href="https://msit132gym.azurewebsites.net/GroupCourse/%E8%AA%B2%E7%A8%8B%E4%BB%8B%E7%B4%B9%E9%A3%9B%E8%BC%AA"><img src="~/img/flywheel.jpg" class="classroom_image"></a>
+            <br>
+            <br>
+            <p class="text_title">
+                飛輪教室
+            </p>
+            <p class="text_image">教室容納人數:20人<br />此教室設備飛輪器材20台，各項飛輪課程</p>
+        </div>
+        <div class="div_image">
+            <a href="https://msit132gym.azurewebsites.net/GroupCourse/%E8%AA%B2%E7%A8%8B%E4%BB%8B%E7%B4%B9%E6%9C%89%E6%B0%A7"><img src="~/img/Aerobic.jpg" class="classroom_image"></a>
+            <br>
+            <br>
+            <p class="text_title">
+                有氧教室
+            </p>
+            <p class="text_image">教室容納人數:30人<br />各項有氧運動課程</p>
+        </div>
+        <div class="div_image">
+            <img src="~/img/washroom.jpg" class="classroom_image"><
+            <br>
+            <br>
+            <p class="text_title">
+                淋浴間
+            </p>
+            <p class="text_image">
+                場內設有淋浴空間，並且內建洗髮精以及沐浴乳，梳化區也提供吹風機可自行使用
+            </p>
+        </div>
+        <div class="div_image">
+            <img src="~/img/locker-room.jpg" class="classroom_image"><
+            <br>
+            <br>
+            <p class="text_title">
+                更衣間
+            </p>
+            <p class="text_image">
+                場內設有更衣間，提供置物櫃可放私人物品，但須自備鎖頭
+            </p>
+        </div>
+    </div>
+</div>
+
+

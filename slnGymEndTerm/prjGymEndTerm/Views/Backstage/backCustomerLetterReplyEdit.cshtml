@@ -1,0 +1,166 @@
+﻿@model prjGymEndTerm.ViewModels.CCustomerLetterViewModel
+
+@{
+    ViewData["Title"] = "backCustomerLetterReplyEdit";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<style>
+    CCoachTitle {
+        /*text-align: center;*/
+        text-decoration: underline
+    }
+
+    .backCBody {
+        padding: 50px 0 0 200px;
+        margin-left: 150px;
+        width: 80%
+    }
+
+    body {
+        background-color: #efeff6
+    }
+
+    .form-group {
+        margin: 0 20px 20px 0
+    }
+
+    .page-breadcrumb {
+        margin-bottom: 40px
+    }
+
+    .breadcrumb-item {
+        font-size: 15px
+    }
+</style>
+
+
+
+<div class="backCBody">
+
+    <h1 class="CCoachTitle" style="font-weight:800;display:inline"><i class="fab fa-replyd"></i> 信件回覆</h1>
+
+    <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb" style="border-top: 1px solid #ADADAD ">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href=@Url.Action("List", "BackHome") class="breadcrumb-link">首頁</a></li>
+                <li class="breadcrumb-item"><a href=@Url.Action("backCustomerLetterList", "Backstage") class="breadcrumb-link">客服信件管理</a></li>
+                <li class="breadcrumb-item active" aria-current="page">信件回覆</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row" style="width: 320%; vertical-align: middle; ">
+        <div class="col-md-4" style="width:880px" >
+            <form asp-action="backCustomerLetterReplyEdit" id="demoForm">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" name="LetterId" value="@Model.LetterId" />
+                <div style="display:flex">
+                    <div class="form-group w-25">
+                        <label asp-for="LetterName" class="control-label"></label>
+                        <input asp-for="LetterName" class="form-control" readonly="readonly" />
+                        <span asp-validation-for="LetterName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group w-50">
+                        <label asp-for="LetterEmail" class="control-label"></label>
+                        <input asp-for="LetterEmail" class="form-control" readonly="readonly" />
+                        <span asp-validation-for="LetterEmail" class="text-danger"></span>
+                    </div>
+                    <div class="form-group w-50">
+                        <label asp-for="LetterTime" class="control-label"></label>
+                        <input asp-for="LetterTime" class="form-control" readonly="readonly" disabled="disabled" />
+                        <span asp-validation-for="LetterTime" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label asp-for="LetterContent" class="control-label"></label>
+                    <textarea asp-for="LetterContent" class="form-control" id="exampleFormControlTextarea1" rows="3" style="width:835px" readonly="readonly" disabled="disabled"></textarea>
+                    <span asp-validation-for="LetterContent" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LetterStatusId" class="control-label" style="display:block"></label>
+
+                    <input value="1" asp-for="LetterStatusId" type="radio" class="btn-check" id="success-outlined" autocomplete="off" checked>
+                    <label class="btn btn-outline-success m-r-10" for="success-outlined">已處理</label>
+                    <input value="2" asp-for="LetterStatusId" type="radio" class="btn-check " id="danger-outlined" autocomplete="off">
+                    <label class="btn btn-outline-danger " for="danger-outlined">處理中</label>
+
+                    <span asp-validation-for="LetterStatusId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LetterManagerName" class="control-label"></label>
+                    <input asp-for="LetterManagerName" class="form-control" style="width: 835px" value="@ViewBag.name" readonly="readonly"/>
+                    <span asp-validation-for="LetterManagerName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LetterManergerContent" class="control-label"></label>
+                    <textarea asp-for="LetterManergerContent" class="form-control" id="textarea" rows="3" style="width: 835px"></textarea>
+                    <span asp-validation-for="LetterManergerContent" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" style="float:right">
+                    <input type="submit" value="儲存" class="btn btn-primary " />
+                </div>
+
+            </form>
+            <form id="form" style="display:block">
+                <input asp-for="LetterName" class="form-control" readonly="readonly" name="LetterName" hidden />
+                <input asp-for="LetterEmail" class="form-control" readonly="readonly" name="LetterEmail" hidden />
+                <textarea asp-for="LetterManergerContent" class="form-control " id="mailContent" rows="3" style="width: 835px" name="LetterManergerContent" hidden></textarea>
+
+                <input type="submit" value="回覆信件" class="btn btn-success m-r-20" id="button" style="float:right" />
+                <input type="button" id="demoBtn" value="Demo" class="btn btn-warning m-r-20" style="font-weight: 900; float: right" />
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script type="text/javascript">emailjs.init('user_bPwkeJvMOntP9asXPUyOe')</script>
+
+    <script>
+
+        //Demo
+        $("#demoBtn").click(function () {
+            $("#demoForm textarea").eq(1).val("Fitness House提供六種健身課程，有氧、拳擊、瑜珈、重量訓練、飛輪、TRX，並有客製化課程的服務，歡迎親臨健身房參觀與詢問，謝謝您!");
+        })
+
+
+        document.querySelector('#button').addEventListener('click', function (event) {
+            const content = $("#textarea").val()
+            $("#mailContent").val(content);
+        })
+    </script>
+
+    <script>
+
+        const btn = document.getElementById('button');
+
+        document.getElementById('form')
+            .addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                btn.value = '寄送中...';
+
+                const serviceID = 'default_service';
+                const templateID = 'template_ai3ndqu';
+
+                emailjs.sendForm(serviceID, templateID, this)
+                    .then(() => {
+                        btn.value = '寄送成功';
+                        alert('信件已寄出');
+                    }, (err) => {
+                        btn.value = '寄送失敗';
+                        alert(JSON.stringify(err));
+                    });
+            });
+    </script>
+}

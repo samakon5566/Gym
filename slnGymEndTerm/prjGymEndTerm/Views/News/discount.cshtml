@@ -1,0 +1,208 @@
+﻿@model IEnumerable<prjGymEndTerm.Models.News>
+@*@model List<prjGymEndTerm.ViewModels.News_ViewModels.CNewsViewModel>*@
+@{
+    ViewData["Title"] = "discount";
+}
+<style>
+    .carousel-inner {
+        margin: 0 auto;
+    }
+</style>
+
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active" style="text-align: center">
+            <img src="~/img/news/16.jpg" alt="新會員課程優惠" height="300">
+        </div>
+        <div class="carousel-item" style="text-align: center">
+            <img src="~/img/news/4.jpg" alt="加入優惠" height="300">
+        </div>
+        <div class="carousel-item" style="text-align: center">
+            <img src="~/img/news/9.jpg" alt="會員免費體態檢測" height="300">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev" style="text-align: center; display: block;">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next" style="text-align: center; display: block;">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+
+<section class="services-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    @*<span>What we do?</span>*@
+                    <h2>優惠方案</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 order-lg-1 col-md-6 p-0">
+                <div class="ss-pic">
+                    <button style="background-color: transparent; border: 0px; " type="button"
+                            class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
+                        <img src="~/img/news/11.jpg" alt="">
+                    </button>
+                    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content" style="background-color:black;">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel" style="color:white;">買兩門送一門 </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="~/img/news/11.jpg" alt="">
+                                </div>
+                                <div class="modal-footer; text-align:center;">
+                                    @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>*@
+                                    <div style="color: white; text-align: center;">現在購買課程可享買兩門送一門 請洽公司櫃檯!!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 order-lg-2 col-md-6 p-0">
+                <div class="ss-text">
+                    <h4>買兩門送一門 </h4>
+                    <p>
+                        現在購買課程可享買兩門送一門 請洽公司櫃檯!!
+                    </p>
+                    @*<a href="#">Explore</a>*@
+                </div>
+            </div>
+            <div class="col-lg-3 order-lg-3 col-md-6 p-0">
+                <div class="ss-pic">
+                    <button style="background-color: transparent; border: 0px; " type="button"
+                            class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <img src="~/img/news/16.jpg" alt="">
+                    </button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content" style="background-color:black;">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel" style="color:white;">5倍劵優惠</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="~/img/news/16.jpg" alt="">
+                                </div>
+                                <div class="modal-footer; text-align:center;">
+                                    @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>*@
+                                    <div style="color: white; text-align: center;">5倍劵教練課程優惠 詳情請洽教練或櫃檯!!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 order-lg-4 col-md-6 p-0">
+                <div class="ss-text">
+                    <h4>5倍劵優惠</h4>
+                    <p>5倍劵教練課程優惠 詳情請洽教練或櫃檯!!</p>
+                    @*<a href="#">Explore</a>*@
+                </div>
+            </div>
+            @*///*@
+            <div class="col-lg-3 order-lg-8 col-md-6 p-0">
+                <div class="ss-pic">
+                    <button style="background-color: transparent; border: 0px; " type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal3">
+                        <img src="~/img/news/9.jpg" alt="">
+                    </button>
+                    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content" style="background-color:black;">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel" style="color:white;">買十送十</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="~/img/news/9.jpg" alt="">
+                                </div>
+                                <div class="modal-footer; text-align:center;">
+                                    <div style="color: white; text-align: center;"> 購買十堂課程即送十堂課程，詳情請洽教練或櫃檯!!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 order-lg-7 col-md-6 p-0">
+                <div class="ss-text second-row">
+                    <h4>買十送十</h4>
+                    <p>
+                        購買十堂課程即送十堂課程，詳情請洽教練或櫃檯!!
+                    </p>
+                    @*<a href="#">Explore</a>*@
+                </div>
+            </div>
+
+            @*///*@
+            <div class="col-lg-3 order-lg-6 col-md-6 p-0">
+                <div class="ss-pic">
+                    <button style="background-color: transparent; border: 0px; " type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal5">
+                        <img src="~/img/news/4.jpg" alt="">
+                    </button>
+                    <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content" style="background-color:black;">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel" style="color:white;">振興五倍劵</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="~/img/news/4.jpg" alt="">
+                                </div>
+                                <div class="modal-footer; text-align:center;">
+                                    <div style="color: white; text-align: center;"> 振興五倍劵活動，購買課程享有優惠，詳細內容請洽教練或櫃檯!!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 order-lg-5 col-md-6 p-0">
+                <div class="ss-text second-row">
+                    <h4>振興五倍劵</h4>
+                    <p>
+                        振興五倍劵活動，購買課程享有優惠，詳細內容請洽教練或櫃檯!!
+                    </p>
+                    @*<a href="#">Explore</a>*@
+                </div>
+            </div>
+            @*///*@
+        </div>
+    </div>
+
+
+
+
+    <div class="blog-pagination" style="text-align: center">
+        <a href="./discount">1</a>
+        <a href="./discount2">2</a>
+        <a href="./discount2">Next</a>
+    </div>
+</section>
+<!-- Blog Section End -->

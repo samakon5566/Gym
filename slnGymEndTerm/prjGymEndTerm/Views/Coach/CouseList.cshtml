@@ -1,0 +1,27 @@
+﻿@model List<prjGymEndTerm.ViewModels.CoachArea.CCouseListViewModel>
+
+
+@{
+    foreach (var item in Model)
+    {
+        if (item.StudentAttend == 1)
+        {
+            <p style="color:red">
+                @Html.DisplayFor(modelItem => item.StudentName) (請假)
+            </p>
+        }
+        else if (item.StudentAttend == 3)
+        {
+            <p style="color:blue">
+                @Html.DisplayFor(modelItem => item.StudentName) (已打卡)
+            </p>
+        }
+        else
+        {
+            <p>
+                @Html.DisplayFor(modelItem => item.StudentName)
+            </p>
+        }
+    }
+
+}

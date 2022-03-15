@@ -1,0 +1,170 @@
+﻿@model IEnumerable<prjGymEndTerm.ViewModels.CLessonViewModel>
+
+@{
+    ViewData["Title"] = "addLessonView";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+
+<style>
+    .coachTitle {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        font-weight: 800;
+        /*margin:0 0 0 500px*/
+    }
+
+    #myTable {
+        margin: 15px 0;
+        /*border: 1px solid #D0D0D0;*/
+        /*padding:10px 0 0 0*/
+    }
+    /*    tr {
+        border-bottom: 2px solid gray;
+    }*/
+    th {
+        text-align: center;
+        width: 100px;
+        /*background-color: #FBFBFF;*/
+        height: 40px
+    }
+
+    .page-breadcrumb {
+        margin: 60px 0 15px 0;
+    }
+
+    .breadcrumb-item {
+        font-size: 15px
+    }
+
+    td {
+        text-align: center;
+    }
+
+    .table {
+        width: 1300px;
+        border: 1px solid #D0D0D0;
+        background-color: #FCFCFC
+    }
+
+    .backTh {
+        width: 100px
+    }
+
+    .backCBody {
+        padding: 50px 0 0 80px;
+        width: 1280px
+    }
+
+    .frame {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .form {
+        display: inline;
+        position: absolute;
+        right: 0;
+    }
+
+    body {
+        background-color: #efeff6
+    }
+
+    .divnone {
+        height: 40px
+    }
+
+    .addbtn {
+        margin: 10px 10px 0 0
+    }
+
+    .thCount {
+        width: 7%
+    }
+
+    .thbtn {
+        width: 15%
+    }
+
+    .th10 {
+        width: 10%
+    }
+
+    .th5 {
+        width: 5%
+    }
+</style>
+
+<script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
+<script src='//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js'></script>
+<link href='//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css' rel='stylesheet' />
+
+
+
+<div class="backCBody">
+
+    <div class="frame">
+        <h1 class="coachTitle">新增課程時段</h1>
+    </div>
+
+    <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb" style="border-top: 1px solid #ADADAD ">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href=@Url.Action("List", "BackHome") class="breadcrumb-link">首頁</a></li>
+                <li class="breadcrumb-item"><a href=@Url.Action("backLessonList", "Backstage") class="breadcrumb-link">課程安排</a></li>
+                <li class="breadcrumb-item active" aria-current="page">新增課程時段</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4" style=" padding: 5px 0;">
+
+                    <div id="lessonDiv">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div style="float:right">
+        <a class="btn btn-danger rounded-pill" href="@Url.Action("cleanLessonView", "Backstage")" onclick="return confirm ('確定要清除嗎?')"><i class="fas fa-trash"></i> 全部清除</a>
+        　<a class="btn btn-warning rounded-pill" style="margin-right:20px" href="@Url.Action("backLessonCreate", "Backstage")" ><i class="fas fa-plus-square"></i> 確定新增</a>
+    </div>
+</div>
+
+
+<script>
+    $('#myTable').DataTable({
+        language: {
+            "emptyTable": "無資料...",
+            "processing": "處理中...",
+            "loadingRecords": "載入中...",
+            "lengthMenu": "每頁 _MENU_ 筆資料",
+            "zeroRecords": "無搜尋結果",
+            "info": "_START_ 至 _END_ / 共 _TOTAL_ 筆",
+            "infoEmpty": "尚無資料",
+            "infoFiltered": "(從 _MAX_ 筆資料過濾)",
+            "infoPostFix": "",
+            "search": "搜尋:",
+            "paginate": {
+                "first": "首頁",
+                "last": "末頁",
+                "next": "下一頁",
+                "previous": "上一頁"
+            },
+            "aria": {
+                "sortAscending": ": 升冪",
+                "sortDescending": ": 降冪"
+            }
+        }
+    });
+</script>
+
+<script>
+                $('#lessonDiv').load('@Url.Content("~/BackApi/addLessonView")' )
+</script>

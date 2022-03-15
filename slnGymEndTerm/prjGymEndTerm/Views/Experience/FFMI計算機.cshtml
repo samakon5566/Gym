@@ -1,0 +1,342 @@
+﻿
+@{
+    ViewData["Title"] = "Tdee計算機";
+}
+<style>
+    .div_all {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        display: inline-block;
+        justify-content: center;
+        background: url(../../wwwroot/img/topheader/TH-FFMI.jpg)
+    }
+
+    .div_window {
+        width: 75%;
+        margin: auto;
+        height: 1130px;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: start;
+    }
+    /*-------------標題--------------------*/
+    .div_title {
+        width: 100%;
+        margin: 10px auto 10px auto;
+        height: 30%;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 72px;
+        font-weight: 700;
+        color: #ceefe4;
+    }
+
+    .div_content1 {
+        width: 100%;
+        margin: 10px auto 10px auto;
+        height: 20%;
+        padding: 10px 25%;
+        font-family: Microsoft YaHei;
+        font-size: 30px;
+        color: #9dd3a8;
+    }
+
+    .div_content2 {
+        width: 100%;
+        margin: 10px auto 10px auto;
+        height: 20%;
+        padding: 10px 10%;
+        font-family: SimSun;
+        font-size: 30px;
+        color: #9dd3a8;
+    }
+    /*-------------標題--------------------*/
+    /*--------------計算機---------------------*/
+    .div_TDEEcomputer1 {
+        width: 50%;
+        margin: 0 auto;
+        height: 350px;
+        border-radius: 20px;
+        background-color: transparent;
+    }
+
+    .div_TDEEcomputer2 {
+        width: 50%;
+        background-color: transparent;
+        margin: 0 auto;
+        height: 350px;
+        border-radius: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 5% 2.5%;
+        z-index: 7;
+    }
+    /*------------計算機1------------------------*/
+    .div_TDEE_Form1 {
+        margin: 0 auto;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        background-color: transparent;
+        z-index: 7;
+    }
+
+    .div_TDEE_Form div {
+        padding: 1em;
+    }
+
+    .div_FFMI_element {
+        padding: 2% 5%;
+        width: 50%;
+        height: 30%;
+    }
+    /*----------*/
+    .div_TDEE_submit {
+        width: 50%;
+        height: 30%;
+        text-align: center;
+        line-height: 200px;
+    }
+
+    .div_TDEE_Form label {
+        padding: 1em;
+        font-weight: 900;
+        color: white;
+        margin: 0 0 20% 0;
+        line-height: 20px;
+        font-weight: 700;
+    }
+
+    .div_TDEE_Form button {
+        font-size: 20px;
+        font-weight: 900;
+        color: black;
+    }
+
+    .div_TDEE_Form input:focus {
+        border: 5px white solid;
+    }
+    /*------------計算機1------------------------*/
+    /*------------計算機2------------------------*/
+    .div_result_out {
+        margin: 0 auto;
+        width: 100%;
+        height: 10%;
+    }
+
+    .div_result_table {
+        margin: 0 auto;
+        width: 70%;
+        height: 300px;
+    }
+
+    .div_result {
+        padding: 2%;
+        text-align: center;
+        background-color: #d9d9f3;
+        border-radius: 10px;
+    }
+
+    .h3_output {
+        padding: 2px;
+        width: 100%;
+        height: 50%;
+        font-size: 24px;
+    }
+
+    .output_TDEE {
+        padding: 2px;
+        width: 100%;
+        height: 50%;
+        font-size: 36px;
+    }
+
+    h3 {
+        font-weight: 700;
+    }
+
+    .td_text {
+        color: white;
+        font-size: 24px;
+    }
+
+    .td_title {
+        color: white;
+        font-size: 36px;
+    }
+
+    .FFMI_table {
+        width: 100%;
+        height: 100%
+    }
+    /*------------計算機2------------------------*/
+</style>
+
+@*section頂層標頭*@
+<section class="outer-frame">
+    <div class="div-container-out">
+        <div class="div-container">
+            <h2 class="topheader-title">F　F　M　I　計　算　機</h2>
+            <img src="~/img/topheader/TH-FFMI.jpg" />
+        </div>
+    </div>
+</section>
+
+@*到目前網頁的網站路徑*@
+<section class="web-path">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="breadcrumb-text">
+                <div class="bt-option">
+                    <a asp-controller="Home" asp-action="Index">主頁</a>
+                    <span>FFMI計算機</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="div_all">
+    <img src="~/img/16img/tdeeback1.jpg" style="margin-top: 200px; position: absolute; opacity: 0.3; height: 100%; width: 100%; z-index: -1; top: 700px " />
+    <div class="div_window">
+        <div class="div_title">
+            <h6 class="title">FFMI</h6>
+            <div class="div_content1">
+                Fat Free Mass Index
+            </div>
+            <div class="div_content2">
+                白話翻譯是無脂肪質量指數，FFMI和BMI都是人體體重指數的類別，但是BMI不準確的地方，因為它並沒有加入體脂肪率，所以對運動員來說，BMI完全不準確，而FFMI加入體脂肪的判斷，讓這個指數更有公信力。
+            </div>
+        </div>
+        <div class="div_TDEEcomputer1">
+            <form class="div_TDEE_Form1" id="FFMI-from">
+                <div class="div_FFMI_element">
+                    <label for="in_height" style="font-size:24px; color:white">身　高</label>
+                    <input id="in_height" style="background-color: #ceefe4;margin-top:20px;" class="form-control" placeholder="身　高" type="number" required />
+                </div>
+                <div class="div_FFMI_element">
+                    <label for="in_weight" style="font-size:24px; color:white">體　重</label>
+                    <input id="in_weight" style="background-color: #ceefe4;margin-top:20px;" class="form-control" placeholder="體　重" type="number" required />
+                </div>
+                <div class="div_FFMI_element">
+                    <label for="in_FatPercentage" style="font-size:24px; color:white">體　脂　肪(%)</label>
+                    <input id="in_FatPercentage" style="background-color: #ceefe4;margin-top:20px;" class="form-control" placeholder="體　脂" type="number" required />
+                </div>
+                <div class="div_TDEE_submit">
+                    <button id="TDEEsubmit" type="button" style="background-color: #ceefe4; font-size: 20px; " class="btn btn-light">計　算　結　果</button>
+                    <input type="button" value="Demo" name="demo" id="FFMIDemo"  style="line-height: 40px; background-color: #ceefe4;margin-left:50px;"/>
+                </div>
+            </form>
+        </div>
+        <div class="div_TDEEcomputer2">
+            <div class="div_result_out">
+                <div class="div_result">
+                    <h3 class="h3_output">您的FFMI</h3>
+                    <div id="output_FFMI" class="output_TDEE">0</div>
+                </div>
+            </div>
+        </div>
+        <div class="div_result_table">
+            <table class="FFMI_table" border="1" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td colspan="3" class="td_title">
+                            FFMI 看出你的增肌潛力表
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text">
+                            女
+                        </td>
+                        <td class="td_text">
+                            增肌淺力
+                        </td>
+                        <td class="td_text">
+                            男
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text">
+                            13~14
+                        </td>
+                        <td class="td_text">
+                            大
+                        </td>
+                        <td class="td_text">
+                            16~17
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text">
+                            15~16
+                        </td>
+                        <td class="td_text">
+                            普通
+                        </td>
+                        <td class="td_text">
+                            18~19
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text">
+                            17~18
+                        </td>
+                        <td class="td_text">
+                            小
+                        </td>
+                        <td class="td_text">
+                            20~21
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_text">
+                            19~21
+                        </td>
+                        <td class="td_text">
+                            難
+                        </td>
+                        <td class="td_text">
+                            22~25
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    let height;
+    let weight;
+    let FatPercentage;
+    let FFMI;
+    let FFMI1;
+
+    $("#TDEEsubmit").on("click", function () {
+        height = $("#in_height").val();
+        weight = $("#in_weight").val();
+        FatPercentage = $("#in_FatPercentage").val();
+        FFMI = (weight * ((100 - FatPercentage) / 100)) / ((height / 100) * (height / 100));
+        FFMI1 = parseFloat(FFMI).toFixed(2);
+        $("#output_FFMI").text(FFMI1);
+        console.log("height = " + height);
+        console.log("weight = " + weight);
+        console.log("FatPercentage = " + FatPercentage);
+        console.log("FFMI = " + FFMI);
+    });
+
+
+
+      $("#FFMIDemo").click(function () {
+          $("#FFMI-from input").eq(0).val("155");
+          $("#FFMI-from input").eq(1).val("60");
+          $("#FFMI-from input").eq(2).val("34");
+         
+        })
+</script>
+
+

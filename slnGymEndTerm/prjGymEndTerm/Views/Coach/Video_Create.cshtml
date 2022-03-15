@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewData["Title"] = "Video_Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Style{
+    <style>
+        #test input {
+            font-size: 20px;
+        }
+
+        .container > div > a {
+            color: #FFA500;
+        }
+
+            .container > div > a:visited {
+                color: #FFA500;
+            }
+    </style>
+}
+
+<section class="contact-section spad-3">
+    <div class="container">
+        <div>
+            <a asp-controller="Coach" asp-action="List" style="color:#FFF">
+                教練首頁
+            </a>
+            <label style="color:#FFF">
+                >
+            </label>
+            <a asp-controller="Coach" asp-action="Video_List" style="color:#FFF">
+                影片列表
+            </a>
+            <label style="color:#FFF">
+                >
+            </label>
+            <a href="#">
+                目前頁面
+            </a>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="leave-comment">
+                    <form name="Video" id="VideoForm">
+                        @*<fieldset>
+        <legend style="color:#F36100;font-size:30px">影片資料</legend>*@
+                        <label style="color:white">影片標題:</label><input type="text"  name="Video_Title" style="background-color:black;color:white"/>
+                        <label style="color:white">影片描述:</label><input type="text"  name="Vido_Content" style="background-color:black;color:white" />
+                        <label style="color:white">影片連結:</label><input type="text"  name="Video_Url"  style="background-color:black;color:white"/>
+                        <label style="color:white">影片分類:</label><select style="width:200px;font-size:20px" name="Video_Category">
+                            <option value="0">請選擇</option>
+                            <option value="1">有氧</option>
+                            <option value="2">拳擊</option>
+                            <option value="3">瑜珈</option>
+                            <option value="4">重量訓練</option>
+                            <option value="5">飛輪</option>
+                            <option value="6">TRX</option>
+                        </select>
+                        <br />
+                        @*</fieldset>*@
+                        <div style="margin-top:30px;">
+                            <button type="button" id="demo" style="width: 100px; background-color: #FFA500 ">Demo</button>
+                            <button type="button" id="submit" style="width: 100px; background-color: #FFA500 ">送出</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script>
+        $("#submit").click(function () {
+              const formData = new FormData(document.Video)
+                    fetch('@Url.Content("~/api/InsertVideo")', {
+                        method: 'POST',  //GET、POST、PUT、DELETE
+                        body: formData    //json string
+                    }).then(async function (response) {
+                    if (response.ok) {
+                        alert("修改成功");
+                        window.location.href = '@Url.Action("Video_List", "Coach")';  
+                    }
+                    else {
+                        alert("失敗");
+                    }
+                })
+        })
+        $("#demo").click(function () {
+            $("#VideoForm input").eq(0).val("10分鐘啞鈴練全身");
+            $("#VideoForm input").eq(1).val("今天我們的訓練加入啞鈴\
+                如果家中閒置很久\
+                要重不重要輕不輕的啞鈴\
+                現在派上用場了\
+                平時都做徒手訓練的朋友藉由啞鈴來增加阻力\
+                也能做到更多徒手做不到的上肢訓練\
+                跟著影片利用啞鈴從頭練到腳\
+                ");
+            $("#VideoForm input").eq(2).val("https://www.youtube.com/embed/bJhp-NmBTMw");
+            $("#VideoForm select").eq(0).val("4");
+        })
+    </script>
+}

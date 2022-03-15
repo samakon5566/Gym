@@ -1,0 +1,157 @@
+﻿@model prjGymEndTerm.ViewModels.CCourseDetailViewmodel
+
+@{
+    ViewData["Title"] = "backCourseDetailCreate";
+    Layout = "~/Views/Shared/_BackstageLayout.cshtml";
+}
+
+<style>
+    CCoachTitle {
+        /*text-align: center;*/
+        text-decoration: underline
+    }
+
+    .backCBody {
+        padding: 50px 0 0 200px
+    }
+
+    .control-label {
+        font-weight: 900
+    }
+
+    body {
+        background-color: #efeff6
+    }
+
+    .page-breadcrumb {
+        margin-bottom: 30px;
+    }
+
+    .breadcrumb-item {
+        font-size: 15px
+    }
+</style>
+<script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
+
+
+<div class="backCBody">
+    <h1 class="CCoachTitle" style="font-weight:800"><i class="fas fa-boxes"></i>   新增課程分類</h1>
+
+    <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb" style="border-top: 1px solid #ADADAD ">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href=@Url.Action("List", "BackHome") class="breadcrumb-link">首頁</a></li>
+                <li class="breadcrumb-item"><a href=@Url.Action("backDetailList", "Backstage") class="breadcrumb-link">課程分類</a></li>
+                <li class="breadcrumb-item active" aria-current="page">新增課程分類</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row" style="margin:auto 20px;">
+        <form asp-action="backCourseDetailCreate" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <table>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label asp-for="CourseCategoryId" class="control-label">課程種類</label>
+                            <select asp-for="CourseCategoryId" class="form-select" aria-label="Default select example" style="width:400px;height:38px">
+                                <option selected>請選擇</option>
+                                <option value="1">有氧</option>
+                                <option value="2">拳擊</option>
+                                <option value="3">瑜珈</option>
+                                <option value="4">重量訓練</option>
+                                <option value="5">飛輪</option>
+                                <option value="6">TRX</option>
+                            </select>
+                            <span asp-validation-for="CourseCategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CourseDetailName" class="control-label">課程分類名稱</label>
+                            <input asp-for="CourseDetailName" class="form-control" style="border: 1px solid #5B5B5B; width: 400px; height: 38px " />
+                            <span asp-validation-for="CourseDetailName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="CourseDetailTime" class="control-label">課程所需時間</label>
+                            <input asp-for="CourseDetailTime" class="form-control" style="border: 1px solid #5B5B5B ;width:400px; height: 38px" />
+                            <span asp-validation-for="CourseDetailTime" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CourseDetailCal" class="control-label">總消耗卡路里</label>
+                            <input asp-for="CourseDetailCal" class="form-control" style="border: 1px solid #5B5B5B; width: 400px; height: 38px " />
+                            <span asp-validation-for="CourseDetailCal" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CourseDetailMoney" class="control-label">課程分類價格</label>
+                            <input asp-for="CourseDetailMoney" class="form-control" style="border: 1px solid #5B5B5B; width: 400px; height: 38px" />
+                            <span asp-validation-for="CourseDetailMoney" class="text-danger"></span>
+                        </div>
+                    </td>
+
+                    <td style="vertical-align: bottom; padding-left: 50px" class="p-t-10">
+
+
+                        <div class="form-group">
+                            <label asp-for="DetailPicture" class="control-label" style="font-weight: 900">課程分類圖片</label>
+
+                            <div>
+                                <img id="preview_img" src="#" style="width:400px; height:300px;margin-bottom:20px" />
+                            </div>
+
+                            <div class="mb-3">
+                                <input asp-for="DetailPicture" name="DetailPicture" class="form-control" type="file" onchange="openFile(event)" id="formFile" style="width:400px;height:45px">
+                            </div>
+
+                            <span asp-validation-for="DetailPicture" class="text-danger"></span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="form-group">
+                <label asp-for="CourseDetailIntroduce" class="control-label" style="font-weight: 900">課程分類介紹</label>
+                <textarea name="editor1" asp-for="CourseDetailIntroduce" id="textarea"></textarea>
+                <textarea asp-for="CourseDetailIntroduce" class="form-control"  id="textareaMVC" hidden></textarea>
+                <span asp-validation-for="CourseDetailIntroduce" class="text-danger"></span>
+            </div>
+
+            <div class=" p-t-20 pull-right" style="float:right">
+                <input type="submit" value="新增課程分類" class="btn btn-warning" style="font-weight:900" id="btn"/>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+
+        function openFile(event) {
+            var input = event.target; //取得上傳檔案
+            var reader = new FileReader(); //建立FileReader物件
+
+            reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
+
+            reader.onload = function () { //FileReader取得上傳檔案後執行以下內容
+                var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
+                $('#preview_img').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
+            };
+        }
+    </script>
+
+    <script>CKEDITOR.replace("editor1");</script>
+
+    <script>
+        $("#btn").mouseenter(function () {
+
+            var content = CKEDITOR.instances.textarea.getData();
+            content = content.replace("<p>", "");
+            content = content.replace("</p>", "");
+
+        $("#textareaMVC").val(content);
+        })
+    </script>
+}

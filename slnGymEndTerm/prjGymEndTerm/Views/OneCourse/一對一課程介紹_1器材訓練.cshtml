@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewData["Title"] = "一對一課程介紹_1器材訓練";
+}
+<style>
+    .div_all {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .div_window {
+        width: 70%;
+        height: 1440px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: start;
+    }
+
+    .div_section {
+        margin-top: 100px;
+        width: 100%;
+        height: 600px;
+        display: flex;
+    }
+
+    .div_introduce1 {
+        width: 70%;
+        height: auto;
+    }
+
+    .div_pic {
+        width: 30%;
+        height: 100%;
+        justify-content: center;
+        padding: 0 10px 0 0;
+    }
+
+    .introduce_img1 {
+        padding: 20% 0;
+    }
+
+    .introduce1_title {
+        text-align: center;
+        color: white;
+        font-size: 48px;
+        border-bottom: 2px outset #ffd800;
+        margin: 0 3em;
+        padding-bottom: 15px;
+    }
+
+    .introduce {
+        color: white;
+        font-size: 20px;
+        margin: 1em 10% 10% 2em;
+        line-height: 48px;
+    }
+
+        .introduce > li:hover {
+            font-size: 36px;
+            color: orange;
+        }
+
+    /*---------------------------------------------*/
+</style>
+
+<section class="outer-frame">
+    <div class="div-container-out">
+        <div class="div-container">
+            <h2 class="topheader-title">器　材　訓　練</h2>
+            <img src="~/img/16img/background/backgroundeq2.jpg" />
+        </div>
+    </div>
+</section>
+
+<section class="web-path">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="breadcrumb-text">
+                <div class="bt-option">
+                    <a asp-controller="BackHome" asp-action="List">主頁</a>
+                    <a asp-controller="OneCourse" asp-action="一對一課程介紹">一對一課程介紹</a>
+                    <span>器材訓練</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@*------------------導覽---------------------------------------------------------------------------------*@
+
+
+<div class="div_all">
+    <div class="div_window">
+        <div class="div_section">
+            <div class="div_pic">
+                <img class="introduce_img1" src="~/img/16img/eq1.jpg" />
+            </div>
+            <div class="div_introduce1">
+                <h6 class="introduce1_title">定　義</h6>
+                <h3 class="introduce">　　在健身房裡，需要大型重量訓練器材來進行的動作，像是划船機、擴胸肌、拉背肌等等。由於現在健身器械都做得非常精良，可以根據每個人的不同體態和肌力調整訓練強度，適合所有不同程度的人，對個別部位的肌肉做集中訓練。剛到健身房，建議先從固定式器材訓練。學會正確做動作後，再嘗試操作自由重量，像是槓鈴、啞鈴。當動作較熟悉後，課表可再從自由重量做到固定式器械，每次訓練一開始，體力充足的情況下，執行自由重量的訓練相對較為安全。建議剛接觸重訓可多嘗試不一樣的器材，依當日的訓練部位挑選4∼6種器械或動作操作，每一個動作做3∼4組，每一組的重量做12∼20下。這階段訓練首要重點應該要放在能夠「安全」、「正確」的做好每一個動作。基礎打好，未來提升訓練強度時，才不會因為錯誤的姿勢而被侷限。</h3>
+            </div>
+        </div>
+        <div class="div_section">
+            <div class="div_introduce1">
+                <h6 class="introduce1_title">優　點</h6>
+                <ul class="introduce">
+                    <li><i class="far fa-thumbs-up"></i>　固定式機器通常軌道是固定的,比自由重量較適合初學者使用</li>
+                    <li><i class="far fa-thumbs-up"></i>　依照個人的身型，作適當的調整，提供訓練者身體的接觸較多的面積。</li>
+                    <li><i class="far fa-thumbs-up"></i>　幫助訓練時的穩定性。</li>
+                    <li><i class="far fa-thumbs-up"></i>　在訓練的過程中，降低身體的代償，減少不必要的訓練傷害。</li>
+                    <li><i class="far fa-thumbs-up"></i>　固定的移動軌道，你只需要依照個人的訓練強度，做重量插槽的調整。</li>
+                    <li><i class="far fa-thumbs-up"></i>　訓練的特定肌群部位，操作過程符合力線方向(固定的移動軌道)。</li>
+                </ul>
+            </div>
+            <div class="div_pic">
+                <img class="introduce_img1" src="~/img/16img/eq3.jpg" />
+            </div>
+        </div>
+    </div>
+</div>

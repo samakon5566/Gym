@@ -1,0 +1,265 @@
+﻿@model List<prjGymEndTerm.ViewModels.CFitnessVideoViewModel>
+
+@{
+    ViewData["Title"] = "OnlineVideo";
+}
+
+<style>
+    .div_all {
+        display: flex;
+    }
+
+    .section_title {
+        margin: 50px 50px 50px 50px;
+        padding: 40px;
+    }
+
+    .select_choose {
+        background-color: #151515;
+        font-size: 25px;
+        color: dimgray;
+        font-weight: bold;
+        font-family: monospace;
+    }
+
+    .video_title {
+        position: absolute;
+        color: orange;
+        font-size: 22px;
+        font-weight: bold;
+        text-decoration: underline;
+        padding-left: 600px;
+        margin: auto;
+        margin-top: -450px;
+    }
+
+    .video_text {
+        width: 800px;
+        position: absolute;
+        font-size: 18px;
+        padding-left: 200px;
+        margin-left: 400px;
+        padding-top: 50px;
+        margin-top: -450px;
+    }
+
+        .video_text:hover {
+            width: 800px;
+            position: absolute;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 35px;
+            color: lightyellow;
+            padding-left: 200px;
+            margin-left: 400px;
+            padding-top: 50px;
+            margin-top: -450px;
+        }
+
+    .ul_title {
+        font-size: 14px;
+        color: white;
+        text-align: right;
+    }
+
+    .coach_text {
+        position: absolute;
+        color: lightblue;
+        font-size: 22px;
+        font-weight: bold;
+        text-decoration: underline;
+        margin-top: -180px;
+        margin-left: 1050px;
+    }
+
+    .select_option {
+        font-weight: bold;
+        font-family: monospace;
+    }
+
+
+
+    /*  .span_total {
+        color:white;
+        font-size: 25px;
+        font-weight: bold;
+        margin-left: 100px;
+    }*/
+</style>
+
+
+<section class="outer-frame">
+    <div class="div-container-out">
+        <div class="div-container">
+            <h2 class="topheader-title object-fit: cover;">線上影片專區</h2>
+            <img src="~/img/online.jpg" />
+        </div>
+    </div>
+</section>
+
+<div class="container" style="margin-top: 40px;margin-left:700px">
+    <select class="select_choose" id="CategorySelect">
+        <option value="0" class="select_option">請選擇課程種類</option>
+    </select>
+    <select class="select_choose" style="margin-left:40px" id="CoachSelect">
+        <option value="0" class="select_option">請選擇教練</option>
+    </select>
+    @*<span class="span_total" id="count">共/筆</span>*@
+</div>
+
+
+
+
+<section class="section_title">
+    <div class="div_all">
+        <div class="container">
+            <div class="row">
+                <div class="blog-item" id="Video">
+
+                    @{
+                        int count = 0;
+                        foreach (var item in Model)
+                        {
+                            count++;
+                            <div style="line-height:300px">
+                                <iframe width="560" height="315" src=@Html.DisplayFor(modelItem => item.FitnessVideoUrl) title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <p class="video_title">@Html.DisplayFor(modelItem => item.FitnessVideoTitle)</p>
+                                <a href="https://msit132gym.azurewebsites.net/GroupCourse/%E6%8E%88%E8%AA%B2%E6%95%99%E7%B7%B4%E4%BB%8B%E7%B4%B9"><p class="coach_text">@Html.DisplayFor(modelItem => item.FitnessVideoCoachName) 教練</p></a>
+                                <p class="video_text">@Html.DisplayFor(modelItem => item.FitnessVideoContent) </p>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script async src="https://www.youtube.com/iframe_api"></script>
+    <script>
+
+        const categorySelect = document.querySelector('#CategorySelect')
+        const coachSelect = document.querySelector('#CoachSelect')
+
+        $(function () {
+
+            $('#Video').DataTable({
+                language: {
+                    "emptyTable": "無資料...",
+                    "processing": "處理中...",
+                    "loadingRecords": "載入中...",
+                    "lengthMenu": "每頁 _MENU_ 筆資料",
+                    "zeroRecords": "無搜尋結果",
+                    "info": "_START_ 至 _END_ / 共 _TOTAL_ 筆",
+                    "infoEmpty": "尚無資料",
+                    "infoFiltered": "(從 _MAX_ 筆資料過濾)",
+                    "infoPostFix": "",
+                    "search": "搜尋:",
+                    "paginate": {
+                        "first": "首頁",
+                        "last": "末頁",
+                        "next": "下一頁",
+                        "previous": "上一頁"
+                    },
+                    "aria": {
+                        "sortAscending": ": 升冪",
+                        "sortDescending": ": 降冪"
+                    }
+                }
+            });
+        });
+
+
+
+
+        async function Load() {
+
+            //categorySelect
+            const category = await fetch('/OnlineCourse/categoryselect')
+            rendercategorySelect(await category.json())
+        }
+        Load();
+
+
+        //categorySelect-change
+        categorySelect.addEventListener('change', async function () {
+            const categoryIndex = categorySelect.selectedIndex
+            const coachResponse = await fetch(('/OnlineCourse/coachSelect?SkillCourseCategoryId=') + categoryIndex)
+            rendercoachSelect(await coachResponse.json())
+            //Videodisplay
+            const VideoResponse = await fetch(('/OnlineCourse/coachvideodisplay?SkillCourseCategoryId=') + categoryIndex)
+            const Videodatas = await VideoResponse.json();
+            rendervideo(await Videodatas);
+
+            coachSelect.addEventListener('change', async function () {
+                const categoryIndex = categorySelect.selectedIndex;
+                const coachIndex = coachSelect.selectedIndex;
+                const coachValue = coachSelect.options[coachIndex].value;
+                console.log("---" + categoryIndex + "---" + coachValue);
+                //Videodisplay
+                const VideoResponse = await fetch(('/OnlineCourse/videodisplay?SkillCourseCategoryId=') + coachValue + "&categoryid=" + categoryIndex)
+                const Videodatas = await VideoResponse.json();
+                rendervideo(await Videodatas);
+            })
+
+
+        })
+
+
+        function rendercategorySelect(datas) {
+            datas.forEach((item) => {
+                //console.log(item)
+                const opt = new Option(item.courseCategoryName, item.courseCategoryId)
+                categorySelect.options.add(opt)
+            })
+        }
+
+        function rendercoachSelect(datas) {
+            coachSelect.options.length = 0;
+            coachSelect.options.add(new Option("請選擇教練", "0"))
+            datas.forEach((item) => {
+                console.log(item)
+                const opt = new Option(item.logInName, item.fitnessVideoCoachId)
+                coachSelect.options.add(opt)
+            })
+        }
+
+        function rendervideo(datas) {
+            var videoblock = $("#Video");
+            $("#Video").empty();
+            datas.forEach((item) => {
+                console.log(item)
+
+                const videoiframe = $("<iframe/>").attr({
+                    width: 560,
+                    height: 315,
+                    src: item.videourl,
+                    title: "YouTube video player",
+                    frameborder: 0,
+                    allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+                });
+                const videotitle = $("<p/>").addClass("video_title").text(item.videoname);
+                const coachnamehyperlink = $("<a/>").attr("href", "https://msit132gym.azurewebsites.net/GroupCourse/授課教練介紹");
+                const videocoachname = $("<p/>").addClass("coach_text").text(`${item.coachname}    教練`);
+                coachnamehyperlink.append(videocoachname);
+                const videocontent = $("<p/>").addClass("video_text").text(item.videocontent);
+                const divblock = $("<div/>").css("line-height", "300px").append([videoiframe, videotitle, coachnamehyperlink, videocontent]);
+                videoblock.append(divblock);
+            })
+        }
+
+
+        $("#CategorySelect").click(function () {
+            $("#CategorySelect").css("background-color", "#F0F0F0");
+        })
+
+        $("#CoachSelect").click(function () {
+            $("#CoachSelect").css("background-color", "	#FFFFFF");
+        })
+    </script>
+
+}
+
